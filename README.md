@@ -7,7 +7,7 @@ The Autobahn Network employs the most sophisticated technologies to have emerged
 
 ### Setup
 This wallet app is developed on the basis of [Expo](https://expo.io/).
-If you want to contribute to the project, you can [read here](https://expo.io/learn) how to set up Expo. Once you have installed Expo and cloned this repository, you can start the app in the project directory via ``expo start``.
+If you want to contribute to the project, you can [read here](https://expo.io/learn) how to set up Expo. Once you have installed Expo and cloned this repository, you can start the app in the project directory via ``yarn start``.
 
 ### Developed by Tixl gGmbH
 Tixl is a non-profit FinTech company based in Hamburg, Germany. Tixl is the company behind the "Autobahn Network" project, a next-generation payment network. MTXLT (later TXL) is a token issued by Tixl, and the flagship asset of the Autobahn Network, which can be transferred with zero fees. The Autobahn Network allows Bitcoin, and other digital assets, to be transferred quickly and privately with low transaction fees.
