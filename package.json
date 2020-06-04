@@ -19,6 +19,7 @@
     }
   },
   "dependencies": {
+    "@expo/vector-icons": "^10.2.0",
     "@react-native-community/masked-view": "0.1.6",
     "@react-navigation/native": "^5.5.0",
     "@typescript-eslint/eslint-plugin": "^3.1.0",
@@ -26,6 +27,8 @@
     "eslint": "^7.1.0",
     "eslint-config-prettier": "^6.11.0",
     "expo": "~37.0.3",
+    "expo-font": "^8.1.1",
+    "expo-splash-screen": "^0.2.3",
     "husky": "^4.2.5",
     "i18next": "^19.4.5",
     "prettier": "^2.0.5",
