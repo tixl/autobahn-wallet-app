@@ -1,12 +1,45 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+// https://github.com/software-mansion/react-native-gesture-handler/issues/320#issuecomment-443815828
+import 'react-native-gesture-handler';
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import * as React from 'react';
+import {
+  Platform,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+  YellowBox,
+} from 'react-native';
+import { AppearanceProvider } from 'react-native-appearance';
+import { enableScreens } from 'react-native-screens';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Provider, connect } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+
+import useCachedResources from './src/hooks/useCachedResources';
+import './src/i18n';
+
+YellowBox.ignoreWarnings([]);
+
+const Stack = createStackNavigator();
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-    </View>
-  );
+  const isLoadingComplete = useCachedResources();
+
+  if (!isLoadingComplete) {
+    return null;
+  } else {
+    return (
+      <View style={styles.container}>
+        {Platform.OS === 'ios' && <StatusBar barStyle="dark-content" />}
+        <View style={styles.container}>
+          <Text>Open up App.tsx to start working on your app!</Text>
+        </View>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -17,3 +50,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+/*
+
+import BottomTabNavigator from './navigation/BottomTabNavigator';
+import LinkingConfiguration from './navigation/LinkingConfiguration';
+
+<NavigationContainer linking={LinkingConfiguration}>
+          <Stack.Navigator>
+            <Stack.Screen name="Root" component={BottomTabNavigator} />
+          </Stack.Navigator>
+        </NavigationContainer>
+ */
