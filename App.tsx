@@ -1,7 +1,6 @@
 // https://github.com/software-mansion/react-native-gesture-handler/issues/320#issuecomment-443815828
 import 'react-native-gesture-handler';
 
-import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
 import {
@@ -16,10 +15,23 @@ import { AppearanceProvider } from 'react-native-appearance';
 import { enableScreens } from 'react-native-screens';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Provider, connect } from 'react-redux';
+// @ts-ignore
 import { PersistGate } from 'redux-persist/integration/react';
+import QuickActions from 'react-native-quick-actions';
 
+// import AppNavigator from './src/navigation/AppNavigator';
+import { persistor, store } from './src/redux/store';
 import useCachedResources from './src/hooks/useCachedResources';
 import './src/i18n';
+
+/**
+ * Expose native navigation container components to React Native
+ * https://github.com/kmagiera/react-native-screens
+ */
+
+enableScreens();
+
+// QuickActions.clearShortcutItems();
 
 YellowBox.ignoreWarnings([]);
 
@@ -32,12 +44,20 @@ export default function App() {
     return null;
   } else {
     return (
-      <View style={styles.container}>
-        {Platform.OS === 'ios' && <StatusBar barStyle="dark-content" />}
-        <View style={styles.container}>
-          <Text>Open up App.tsx to start working on your app!</Text>
-        </View>
-      </View>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <AppearanceProvider>
+            <SafeAreaProvider>
+              <View style={styles.container}>
+                {Platform.OS === 'ios' && <StatusBar barStyle="dark-content" />}
+                <View style={styles.container}>
+                  <Text>Open up App.tsx to start working on your app!</Text>
+                </View>
+              </View>
+            </SafeAreaProvider>
+          </AppearanceProvider>
+        </PersistGate>
+      </Provider>
     );
   }
 }
@@ -52,13 +72,12 @@ const styles = StyleSheet.create({
 });
 
 /*
-
 import BottomTabNavigator from './navigation/BottomTabNavigator';
 import LinkingConfiguration from './navigation/LinkingConfiguration';
 
 <NavigationContainer linking={LinkingConfiguration}>
-          <Stack.Navigator>
-            <Stack.Screen name="Root" component={BottomTabNavigator} />
-          </Stack.Navigator>
-        </NavigationContainer>
+  <Stack.Navigator>
+    <Stack.Screen name="Root" component={BottomTabNavigator} />
+  </Stack.Navigator>
+</NavigationContainer>
  */
