@@ -17,7 +17,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Provider, connect } from 'react-redux';
 // @ts-ignore
 import { PersistGate } from 'redux-persist/integration/react';
-import QuickActions from 'react-native-quick-actions';
+// import QuickActions from 'react-native-quick-actions';
 
 // import AppNavigator from './src/navigation/AppNavigator';
 import { persistor, store } from './src/redux/store';
