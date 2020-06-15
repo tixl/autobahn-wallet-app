@@ -3,6 +3,7 @@
     "name": "Autobahn",
     "slug": "autobahn-wallet-app",
     "platforms": ["ios", "android", "web"],
+    "scheme": "autobahn",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./src/assets/icon.png",
