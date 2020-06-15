@@ -3,14 +3,7 @@ import 'react-native-gesture-handler';
 
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
-import {
-  Platform,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-  YellowBox,
-} from 'react-native';
+import { StyleSheet, YellowBox } from 'react-native';
 import { AppearanceProvider } from 'react-native-appearance';
 import { enableScreens } from 'react-native-screens';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -56,23 +49,3 @@ export default function App() {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
-
-/*
-import BottomTabNavigator from './navigation/BottomTabNavigator';
-import LinkingConfiguration from './navigation/LinkingConfiguration';
-
-<NavigationContainer linking={LinkingConfiguration}>
-  <Stack.Navigator>
-    <Stack.Screen name="Root" component={BottomTabNavigator} />
-  </Stack.Navigator>
-</NavigationContainer>
- */
