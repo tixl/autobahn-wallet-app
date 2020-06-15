@@ -1,22 +1,19 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 import { NativeModules } from 'react-native';
-import Constants from 'expo-constants';
-import * as Localization from 'expo-localization';
+// import Constants from 'expo-constants';
+// import * as Localization from 'expo-localization';
 
 import currentVersion from '../config/legal.json';
+// import Analytics from '../utils/analytics';
+// import Messaging from '../utils/messaging';
+// import Crashlytics from '../utils/crashlytics';
+// import Authentication from '../utils/authentication';
+// import Firestore from '../utils/firestore';
+// import { isAndroid } from '../constants';
+
 import LinkingConfiguration from './LinkingConfiguration';
-// import { connectToStore, addPurchaseListener, disconnectFromStore } from '../utils/payment'
-// import Analytics from '../utils/analytics'
-// import Messaging from '../utils/messaging'
-
 import { IntroStackScreen, RootStackScreen } from './stacks';
-
-// import Crashlytics from '../utils/crashlytics'
-// import Authentication from '../utils/authentication'
-// import Firestore from '../utils/firestore'
-// import { isAndroid } from '../constants'
 
 const ProdChecker = NativeModules.ProdChecker;
 

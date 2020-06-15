@@ -1,9 +1,8 @@
 // https://github.com/software-mansion/react-native-gesture-handler/issues/320#issuecomment-443815828
 import 'react-native-gesture-handler';
 
-import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
-import { StyleSheet, YellowBox } from 'react-native';
+import { YellowBox } from 'react-native';
 import { AppearanceProvider } from 'react-native-appearance';
 import { enableScreens } from 'react-native-screens';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -28,24 +27,22 @@ enableScreens();
 
 YellowBox.ignoreWarnings([]);
 
-const Stack = createStackNavigator();
-
 export default function App() {
   const isLoadingComplete = useCachedResources();
 
   if (!isLoadingComplete) {
     return null;
-  } else {
-    return (
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <AppearanceProvider>
-            <SafeAreaProvider>
-              <AppNavigator />
-            </SafeAreaProvider>
-          </AppearanceProvider>
-        </PersistGate>
-      </Provider>
-    );
   }
+
+  return (
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <AppearanceProvider>
+          <SafeAreaProvider>
+            <AppNavigator />
+          </SafeAreaProvider>
+        </AppearanceProvider>
+      </PersistGate>
+    </Provider>
+  );
 }
