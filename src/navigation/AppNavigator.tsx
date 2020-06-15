@@ -6,6 +6,7 @@ import Constants from 'expo-constants';
 import * as Localization from 'expo-localization';
 
 import currentVersion from '../config/legal.json';
+import LinkingConfiguration from './LinkingConfiguration';
 // import { connectToStore, addPurchaseListener, disconnectFromStore } from '../utils/payment'
 // import Analytics from '../utils/analytics'
 // import Messaging from '../utils/messaging'
@@ -88,7 +89,11 @@ const AppNavigator = () => {
 
   return (
     // @ts-ignore
-    <NavigationContainer ref={navigationRef} onStateChange={onStateChange}>
+    <NavigationContainer
+      ref={navigationRef}
+      linking={LinkingConfiguration}
+      onStateChange={onStateChange}
+    >
       {showOnboarding ? (
         <IntroStackScreen initialRouteName={initialRoute} />
       ) : (

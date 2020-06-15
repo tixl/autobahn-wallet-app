@@ -34,6 +34,7 @@
     "eslint-config-prettier": "^6.11.0",
     "expo": "~37.0.3",
     "expo-font": "^8.1.1",
+    "expo-linking": "^1.0.1",
     "expo-localization": "^8.1.0",
     "expo-splash-screen": "^0.2.3",
     "husky": "^4.2.5",
