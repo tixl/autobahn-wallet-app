@@ -19,7 +19,7 @@ import { Provider, connect } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 // import QuickActions from 'react-native-quick-actions';
 
-// import AppNavigator from './src/navigation/AppNavigator';
+import AppNavigator from './src/navigation/AppNavigator';
 import { persistor, store } from './src/redux/store';
 import useCachedResources from './src/hooks/useCachedResources';
 import './src/i18n';
@@ -48,12 +48,7 @@ export default function App() {
         <PersistGate loading={null} persistor={persistor}>
           <AppearanceProvider>
             <SafeAreaProvider>
-              <View style={styles.container}>
-                {Platform.OS === 'ios' && <StatusBar barStyle="dark-content" />}
-                <View style={styles.container}>
-                  <Text>Open up App.tsx to start working on your app!</Text>
-                </View>
-              </View>
+              <AppNavigator />
             </SafeAreaProvider>
           </AppearanceProvider>
         </PersistGate>

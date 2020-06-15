@@ -1,5 +1,8 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import * as React from 'react';
 import { Icon, iconName } from '../../../components';
+import SettingsStackScreen from './tabs/SettingsStack';
+import WalletStackScreen from './tabs/WalletStack';
 
 const Tab = createBottomTabNavigator();
 
