@@ -7,9 +7,9 @@ import WalletStackScreen from './tabs/WalletStack';
 const Tab = createBottomTabNavigator();
 
 const getTabBarVisible = (route: any) => {
-  if (route && route.state && route.state.index) {
-    return !(route.state.index > 0);
-  }
+  // if (route && route.state && route.state.index) {
+  //   return !(route.state.index > 0);
+  // }
   return true;
 };
 
