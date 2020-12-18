@@ -2,9 +2,9 @@
 import 'react-native-gesture-handler';
 
 import * as React from 'react';
-import { YellowBox } from 'react-native';
+import { LogBox } from 'react-native';
 import { AppearanceProvider } from 'react-native-appearance';
-import { enableScreens } from 'react-native-screens';
+// import { enableScreens } from 'react-native-screens';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Provider, connect } from 'react-redux';
 // @ts-ignore
@@ -21,11 +21,11 @@ import './src/i18n';
  * https://github.com/kmagiera/react-native-screens
  */
 
-enableScreens();
+// enableScreens();
 
 // QuickActions.clearShortcutItems();
 
-YellowBox.ignoreWarnings([]);
+LogBox.ignoreLogs([]);
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
