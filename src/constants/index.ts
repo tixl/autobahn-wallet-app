@@ -1,3 +1,4 @@
+export { animationFade, animationSelect, animationSelectShadow, animationSlide } from './animation';
 export { default as colors } from './colors';
 export {
   isAndroid,
