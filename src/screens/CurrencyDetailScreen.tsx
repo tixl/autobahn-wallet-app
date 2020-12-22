@@ -26,7 +26,6 @@ const ContentContainer = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
-  background-color: ${colors.neutral400};
 `;
 
 const CenterText = styled.Text`
