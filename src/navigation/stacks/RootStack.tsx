@@ -10,7 +10,12 @@ import TabNavigator from './root/TabNavigator';
 // Screen imports
 import { CurrencyDetailScreen } from '../../screens';
 
-const RootStack = createStackNavigator();
+type RootStackParamList = {
+  Tab: undefined;
+  CurrencyDetail: { currency: string };
+};
+
+const RootStack = createStackNavigator<RootStackParamList>();
 
 const RootStackScreen = () => (
   <RootStack.Navigator
@@ -19,7 +24,7 @@ const RootStackScreen = () => (
     screenOptions={({ route, navigation }) => ({
       headerShown: false,
       gestureEnabled: true,
-      // Activate iOS style modal presentation
+      // Activate iOS style modal presentation (could be adapted for Android)
       ...TransitionPresets.ModalPresentationIOS,
     })}
   >

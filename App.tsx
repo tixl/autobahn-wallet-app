@@ -20,7 +20,6 @@ import './src/i18n';
  * Expose native navigation container components to React Native
  * https://github.com/kmagiera/react-native-screens
  */
-
 enableScreens();
 
 // QuickActions.clearShortcutItems();
