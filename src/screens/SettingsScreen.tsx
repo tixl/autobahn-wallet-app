@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components/native';
 import { HeaderBar } from '../components';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { colors, textSize } from '../constants';
 
 type Props = {
   children?: string;
@@ -28,11 +29,11 @@ const ContentContainer = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
-  background-color: grey;
+  background-color: ${colors.neutral400};
 `;
 
 const CenterText = styled.Text`
-  color: white;
+  font-size: ${textSize.l}px;
 `;
 
 const NavigationButton = styled.Button`

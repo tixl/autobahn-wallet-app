@@ -10,10 +10,9 @@ type Props = {
 };
 
 export const WalletScreen: React.FC<Props> = (props) => {
-  const insets = useSafeAreaInsets();
-
   const navigation = useNavigation();
   const route = useRoute();
+  const insets = useSafeAreaInsets();
 
   const onButtonPress = () => {
     console.log('Button pressed');
@@ -28,7 +27,7 @@ export const WalletScreen: React.FC<Props> = (props) => {
       <ContentContainer>
         <CenterText>Wallet</CenterText>
         <NavigationButton
-          title="Button"
+          title="Open Modal"
           onPress={onButtonPress}
         ></NavigationButton>
       </ContentContainer>
@@ -44,11 +43,11 @@ const ContentContainer = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
-  background-color: grey;
+  background-color: ${colors.neutral400};
 `;
 
 const CenterText = styled.Text`
-  color: white;
+  font-size: ${textSize.l}px;
 `;
 
 const NavigationButton = styled.Button`
