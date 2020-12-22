@@ -15,7 +15,6 @@ export const WalletScreen: React.FC<Props> = (props) => {
   const insets = useSafeAreaInsets();
 
   const onButtonPress = () => {
-    console.log('Button pressed');
     navigation.navigate('CurrencyDetail');
   };
 
