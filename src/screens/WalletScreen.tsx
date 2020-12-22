@@ -2,8 +2,8 @@ import * as React from 'react';
 import styled from 'styled-components/native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { HeaderBar } from '../components';
-import { textSize, colors } from '../constants';
+import { AssetCard, HeaderBar } from '../components';
+import { textSize, colors, spacing } from '../constants';
 
 type Props = {
   children?: string;
@@ -22,11 +22,17 @@ export const WalletScreen: React.FC<Props> = (props) => {
 
   return (
     <Container style={{ paddingTop: insets.top }}>
-      <HeaderBar type="value" />
+      <HeaderBar type="value" title="Assets" />
       <ContentContainer>
+        <AssetCard
+          name="Asset1"
+          onPress={() => navigation.navigate('CurrencyDetail')}
+          amount="100.00"
+          amountUsd="100.00"
+        />
         <CenterText>Wallet</CenterText>
         <NavigationButton
-          title="Open Modal"
+          title="Open Asset Modal"
           onPress={onButtonPress}
         ></NavigationButton>
       </ContentContainer>
@@ -38,14 +44,15 @@ const Container = styled.View`
   flex: 1;
 `;
 
-const ContentContainer = styled.View`
+const ContentContainer = styled.ScrollView`
   flex: 1;
-  align-items: center;
-  justify-content: center;
+  padding: ${spacing.m}px ${spacing.s}px 0px;
 `;
 
 const CenterText = styled.Text`
+  margin-top: 30px;
   font-size: ${textSize.l}px;
+  text-align: center;
 `;
 
 const NavigationButton = styled.Button`
