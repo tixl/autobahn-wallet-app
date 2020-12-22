@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components/native';
+import { HeaderBar } from '../components';
 
 type Props = {
   children?: string;
@@ -8,16 +9,23 @@ type Props = {
 const CurrencyDetailScreen: React.FC<Props> = (props) => {
   return (
     <Container>
-      <CenterText>Currency Detail </CenterText>
+      <HeaderBar title="Detail" type="close" />
+      <ContentContainer>
+        <CenterText>Currency Detail </CenterText>
+      </ContentContainer>
     </Container>
   );
 };
 
-const Container = styled.SafeAreaView`
+const Container = styled.View`
+  flex: 1;
+`;
+
+const ContentContainer = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
-  background-color: blue;
+  background-color: grey;
 `;
 
 const CenterText = styled.Text`

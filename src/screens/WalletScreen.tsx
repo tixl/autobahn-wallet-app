@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components/native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { HeaderBar } from '../components';
 import { textSize, colors } from '../constants';
 
@@ -8,17 +9,22 @@ type Props = {
   children?: string;
 };
 
-const WalletScreen: React.FC<Props> = (props) => {
+export const WalletScreen: React.FC<Props> = (props) => {
+  const insets = useSafeAreaInsets();
+
   const navigation = useNavigation();
+  const route = useRoute();
 
   const onButtonPress = () => {
     console.log('Button pressed');
     navigation.navigate('CurrencyDetail');
   };
 
+  console.log(insets.top);
+
   return (
-    <Container>
-      <HeaderBar title="Wallet" portfolioValue={23.3} />
+    <Container style={{ paddingTop: insets.top }}>
+      <HeaderBar type="value" />
       <ContentContainer>
         <CenterText>Wallet</CenterText>
         <NavigationButton
@@ -30,8 +36,7 @@ const WalletScreen: React.FC<Props> = (props) => {
   );
 };
 
-const Container = styled.SafeAreaView`
-background-color: ${colors.neutral300}
+const Container = styled.View`
   flex: 1;
 `;
 
@@ -39,7 +44,7 @@ const ContentContainer = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
-  background-color: red;
+  background-color: grey;
 `;
 
 const CenterText = styled.Text`
