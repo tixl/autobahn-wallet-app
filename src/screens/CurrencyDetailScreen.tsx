@@ -13,7 +13,7 @@ const CurrencyDetailScreen: React.FC<Props> = (props) => {
   );
 };
 
-const Container = styled.View`
+const Container = styled.SafeAreaView`
   flex: 1;
   align-items: center;
   justify-content: center;
