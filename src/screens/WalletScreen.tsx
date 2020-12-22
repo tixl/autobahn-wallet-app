@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components/native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { AssetCard, HeaderBar } from '../components';
+import { AssetCard, Button, HeaderBar } from '../components';
 import { textSize, colors, spacing } from '../constants';
 
 type Props = {
@@ -18,8 +18,6 @@ export const WalletScreen: React.FC<Props> = (props) => {
     navigation.navigate('CurrencyDetail');
   };
 
-  console.log(insets.top);
-
   return (
     <Container style={{ paddingTop: insets.top }}>
       <HeaderBar type="value" title="Assets" />
@@ -31,10 +29,6 @@ export const WalletScreen: React.FC<Props> = (props) => {
           amountUsd="100.00"
         />
         <CenterText>Wallet</CenterText>
-        <NavigationButton
-          title="Open Asset Modal"
-          onPress={onButtonPress}
-        ></NavigationButton>
       </ContentContainer>
     </Container>
   );
