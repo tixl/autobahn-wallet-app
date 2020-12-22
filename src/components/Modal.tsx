@@ -4,17 +4,17 @@ import { Modal as RNModal } from 'react-native-modal';
 import { colors } from '../constants';
 
 const Modal = ({
-   children,
-   visible,
-   animationIn = 'slideInUp',
-   animationOut = 'slideOutDown',
-   animationInTiming = 200,
-   animationOutTiming = 200,
-   swipeDirection = null,
-   onBackdropPress,
-   onSwipeComplete,
-   backdropOpacity = 0.5,
- }) => {
+  children,
+  visible,
+  animationIn = 'slideInUp',
+  animationOut = 'slideOutDown',
+  animationInTiming = 200,
+  animationOutTiming = 200,
+  swipeDirection = null,
+  onBackdropPress,
+  onSwipeComplete,
+  backdropOpacity = 0.5,
+}) => {
   const handleBackdropPress = () => {
     onBackdropPress && onBackdropPress();
   };
@@ -42,7 +42,7 @@ const Modal = ({
     >
       {children}
     </RNModal>
-  )
+  );
 };
 
 export default Modal;

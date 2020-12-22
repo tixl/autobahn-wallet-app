@@ -5,10 +5,10 @@ type Props = {
   children?: string;
 };
 
-const SettingsScreen: React.FC<Props> = (props) => {
+const CurrencyDetailScreen: React.FC<Props> = (props) => {
   return (
     <Container>
-      <CenterText>Settings</CenterText>
+      <CenterText>Currency Detail </CenterText>
     </Container>
   );
 };
@@ -24,4 +24,4 @@ const CenterText = styled.Text`
   color: white;
 `;
 
-export default SettingsScreen;
+export default CurrencyDetailScreen;

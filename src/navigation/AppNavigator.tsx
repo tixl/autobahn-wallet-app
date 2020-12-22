@@ -32,13 +32,6 @@ const AppNavigator = () => {
   const [showOnboarding, setShowOnboarding] = useState(!isIntroFinished);
   const [initialRoute, setInitialRoute] = useState('Intro');
 
-  /*
-  const [firebaseConfig, setFirebaseConfig] = useState({
-    environment: undefined,
-    uid: undefined
-  });
-   */
-
   const navigationRef = useRef();
   const routeNameRef = useRef();
 

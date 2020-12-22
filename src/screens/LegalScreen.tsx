@@ -1,26 +1,27 @@
 import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import styled from 'styled-components/native';
 
-export default function LegalScreen() {
+type Props = {
+  children?: string;
+};
+
+const LegalScreen: React.FC<Props> = (props) => {
   return (
-    <View style={styles.container}>
-      <ScrollView
-        style={styles.container}
-        contentContainerStyle={styles.contentContainer}
-      >
-        <Text>Legal</Text>
-      </ScrollView>
-    </View>
+    <Container>
+      <CenterText>Legal</CenterText>
+    </Container>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  contentContainer: {
-    paddingTop: 30,
-  },
-});
+const Container = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  background-color: orange;
+`;
+
+const CenterText = styled.Text`
+  color: white;
+`;
+
+export default LegalScreen;

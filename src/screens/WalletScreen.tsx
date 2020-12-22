@@ -1,26 +1,43 @@
 import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import styled from 'styled-components/native';
+import { useNavigation } from '@react-navigation/native';
 
-export default function WalletScreen() {
+type Props = {
+  children?: string;
+};
+
+const WalletScreen: React.FC<Props> = (props) => {
+  const navigation = useNavigation();
+
+  const onButtonPress = () => {
+    console.log('Button pressed');
+    navigation.navigate('CurrencyDetail');
+  };
+
   return (
-    <View style={styles.container}>
-      <ScrollView
-        style={styles.container}
-        contentContainerStyle={styles.contentContainer}
-      >
-        <Text>Wallet</Text>
-      </ScrollView>
-    </View>
+    <Container>
+      <CenterText>Wallet</CenterText>
+      <NavigationButton
+        title="Button"
+        onPress={onButtonPress}
+      ></NavigationButton>
+    </Container>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  contentContainer: {
-    paddingTop: 30,
-  },
-});
+const Container = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  background-color: red;
+`;
+
+const CenterText = styled.Text`
+  color: white;
+`;
+
+const NavigationButton = styled.Button`
+  height: 30px;
+`;
+
+export default WalletScreen;

@@ -29,6 +29,7 @@
     "@types/react-redux": "^7.1.9",
     "@types/redux-persist": "^4.3.1",
     "@types/styled-components": "^5.1.7",
+    "@types/styled-components-react-native": "^5.1.0",
     "@typescript-eslint/eslint-plugin": "^3.1.0",
     "@typescript-eslint/parser": "^3.1.0",
     "eslint": "^7.1.0",
