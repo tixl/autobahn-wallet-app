@@ -25,16 +25,18 @@ export const HeaderBar: React.FC<Props> = (props) => {
   return (
     <Container>
       {/* <Title>{props.title ? props.title : route.name}</Title> */}
-      <Text fontWeight="semiBold" fontSize={textSize.xxl}>
+      <Text fontWeight="semiBold" fontSize={textSize.xxl} alignToBottom>
         {props.title}
       </Text>
       <RightContainer>
         {props.type == 'value' && (
           <PortfolioValueContainer>
-            <PortfolioValueTitle>Portfolio Value</PortfolioValueTitle>
-            <PortfolioValueAmount>
+            <Text fontWeight="light" fontSize={textSize.s} alignToBottom>
+              Portfolio Value
+            </Text>
+            <Text fontWeight="semiBold" fontSize={textSize.s} alignToBottom>
               ${props.portfolioValue ? props.portfolioValue : portfolioValue}
-            </PortfolioValueAmount>
+            </Text>
           </PortfolioValueContainer>
         )}
         {props.type == 'close' && (

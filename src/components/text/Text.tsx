@@ -13,6 +13,7 @@ type Props = {
   fontColor?: string;
   fontSize?: number;
   textAlign?: TextAlignTypes;
+  alignToBottom?: boolean;
   numberOfLines?: number;
   style?: TextStyle | TextStyle[];
   onPress?(): void;
@@ -28,6 +29,7 @@ export const Text: React.FC<Props> = ({
   fontColor = 'black',
   numberOfLines = 1,
   textAlign = 'center',
+  alignToBottom = false,
 }) => {
   // Get font family
   var font: string = fonts.regular;
@@ -56,6 +58,8 @@ export const Text: React.FC<Props> = ({
         fontSize: fontSize,
         color: fontColor,
         textAlign: textAlign,
+        // Vertically align text to bottom (workaround, as textAlignVertical only works on Android devices)
+        bottom: alignToBottom ? -(0.25 * fontSize) : 0,
       }}
       numberOfLines={numberOfLines}
     >
