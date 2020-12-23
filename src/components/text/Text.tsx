@@ -5,11 +5,14 @@ import { textSize, colors, fonts } from '../../constants';
 
 type FontWeightTypes = 'regular' | 'bold' | 'semiBold' | 'light';
 
+type TextAlignTypes = 'left' | 'right' | 'center';
+
 type Props = {
   children: React.ReactNode | undefined;
   fontWeight?: FontWeightTypes;
   fontColor?: string;
   fontSize?: number;
+  textAlign?: TextAlignTypes;
   numberOfLines?: number;
   style?: TextStyle | TextStyle[];
   onPress?(): void;
@@ -24,6 +27,7 @@ export const Text: React.FC<Props> = ({
   // Define default text color
   fontColor = 'black',
   numberOfLines = 1,
+  textAlign = 'center',
 }) => {
   // Get font family
   var font: string = fonts.regular;
@@ -47,7 +51,12 @@ export const Text: React.FC<Props> = ({
 
   return (
     <RNText
-      style={{ fontFamily: font, fontSize: fontSize, color: fontColor }}
+      style={{
+        fontFamily: font,
+        fontSize: fontSize,
+        color: fontColor,
+        textAlign: textAlign,
+      }}
       numberOfLines={numberOfLines}
     >
       {children}
