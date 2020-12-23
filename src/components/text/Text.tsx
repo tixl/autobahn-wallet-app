@@ -30,7 +30,9 @@ export const Text: React.FC<Props> = ({
   numberOfLines = 1,
   textAlign = 'center',
   alignToBottom = false,
+  style = {},
 }) => {
+  console.log(style);
   // Get font family
   var font: string = fonts.regular;
   switch (fontWeight) {
@@ -53,14 +55,17 @@ export const Text: React.FC<Props> = ({
 
   return (
     <RNText
-      style={{
-        fontFamily: font,
-        fontSize: fontSize,
-        color: fontColor,
-        textAlign: textAlign,
-        // Vertically align text to bottom (workaround, as textAlignVertical only works on Android devices)
-        bottom: alignToBottom ? -(0.25 * fontSize) : 0,
-      }}
+      style={[
+        {
+          fontFamily: font,
+          fontSize: fontSize,
+          color: fontColor,
+          textAlign: textAlign,
+          // Vertically align text to bottom (workaround, as textAlignVertical only works on Android devices)
+          bottom: alignToBottom ? -(0.25 * fontSize) : 0,
+        },
+        style,
+      ]}
       numberOfLines={numberOfLines}
     >
       {children}

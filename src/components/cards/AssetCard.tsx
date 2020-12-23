@@ -14,6 +14,7 @@ import {
   fonts,
 } from '../../constants';
 import fireHapticFeedback from '../../utils/hapticFeedback';
+import { Text } from '../text/Text';
 
 type Props = {
   name: string;
@@ -68,11 +69,13 @@ export const AssetCard: React.FC<Props> = (props) => {
       >
         <AssetInformationContainer>
           <AssetLogo></AssetLogo>
-          <AssetName>{props.name}</AssetName>
+          <AssetName fontSize={textSize.s}>{props.name}</AssetName>
         </AssetInformationContainer>
         <AssetAmountContainer>
-          <AssetAmountValue>TXL {props.amount}</AssetAmountValue>
-          <AssetAmountValueDollar>
+          <AssetAmountValue fontWeight="semiBold" fontSize={textSize.s}>
+            TXL {props.amount}
+          </AssetAmountValue>
+          <AssetAmountValueDollar fontWeight="light" fontSize={textSize.xs}>
             USD ${props.amountUsd}
           </AssetAmountValueDollar>
         </AssetAmountContainer>
@@ -108,21 +111,12 @@ const AssetLogo = styled.View`
   margin-right: 10px;
 `;
 
-const AssetName = styled.Text`
-  font-family: ${fonts.regular};
-  font-size: ${textSize.s}px;
-`;
+const AssetName = styled(Text)``;
 
 const AssetAmountContainer = styled.View`
   align-items: flex-end;
 `;
 
-const AssetAmountValue = styled.Text`
-  font-family: ${fonts.semiBold};
-  font-size: ${textSize.s}px;
-`;
+const AssetAmountValue = styled(Text)``;
 
-const AssetAmountValueDollar = styled.Text`
-  font-family: ${fonts.light};
-  font-size: ${textSize.xs}px;
-`;
+const AssetAmountValueDollar = styled(Text)``;

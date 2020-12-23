@@ -24,19 +24,26 @@ export const HeaderBar: React.FC<Props> = (props) => {
 
   return (
     <Container>
-      {/* <Title>{props.title ? props.title : route.name}</Title> */}
-      <Text fontWeight="semiBold" fontSize={textSize.xxl} alignToBottom>
-        {props.title}
-      </Text>
+      <Title fontWeight="semiBold" fontSize={textSize.xxl} alignToBottom>
+        {props.title ? props.title : route.name}
+      </Title>
       <RightContainer>
         {props.type == 'value' && (
           <PortfolioValueContainer>
-            <Text fontWeight="light" fontSize={textSize.s} alignToBottom>
+            <PortfolioValueTitle
+              fontWeight="light"
+              fontSize={textSize.s}
+              alignToBottom
+            >
               Portfolio Value
-            </Text>
-            <Text fontWeight="semiBold" fontSize={textSize.s} alignToBottom>
+            </PortfolioValueTitle>
+            <PortfolioValueAmount
+              fontWeight="semiBold"
+              fontSize={textSize.s}
+              alignToBottom
+            >
               ${props.portfolioValue ? props.portfolioValue : portfolioValue}
-            </Text>
+            </PortfolioValueAmount>
           </PortfolioValueContainer>
         )}
         {props.type == 'close' && (
@@ -57,7 +64,7 @@ const Container = styled.View`
   height: 45px;
 `;
 
-const Title = styled.Text`
+const Title = styled(Text)`
   font-family: ${fonts.semiBold};
   font-size: ${textSize.xxl}px;
 `;
@@ -71,11 +78,11 @@ const PortfolioValueContainer = styled.View`
   align-items: flex-end;
 `;
 
-const PortfolioValueTitle = styled.Text`
+const PortfolioValueTitle = styled(Text)`
   font-family: ${fonts.light};
   font-size: ${textSize.s}px;
 `;
-const PortfolioValueAmount = styled.Text`
+const PortfolioValueAmount = styled(Text)`
   font-family: ${fonts.semiBold};
   font-size: ${textSize.s}px;
 `;
