@@ -2,9 +2,14 @@ import React from 'react';
 import styled, { css } from 'styled-components/native';
 import Animated from 'react-native-reanimated';
 
-import { colors } from '../constants'
+import { colors } from '../../constants';
 
 const { multiply, divide } = Animated;
+
+// type Props = {
+//   fontSize: string;
+//   fontColor: 
+// };
 
 const Text = (props) => {
   const {
@@ -19,11 +24,12 @@ const Text = (props) => {
     ellipsizeMode = 'tail',
     style,
     children,
-    onPress
+    onPress,
   } = props;
 
   const lineHeightFactor = fontSize > 24 ? 1.2 : 1.4;
-  const lineHeight = fontHeight || multiply(divide(multiply(fontSize, lineHeightFactor), 4), 4);
+  const lineHeight =
+    fontHeight || multiply(divide(multiply(fontSize, lineHeightFactor), 4), 4);
 
   const handlePress = () => {
     onPress && onPress();
@@ -43,7 +49,7 @@ const Text = (props) => {
       >
         {children}
       </StyledText>
-    )
+    );
   }
 
   return (
@@ -57,7 +63,7 @@ const Text = (props) => {
     >
       {children}
     </StyledText>
-  )
+  );
 };
 
 export default Text;
@@ -66,17 +72,17 @@ export default Text;
  * Styled Component
  */
 const StyledText = styled(Animated.Text)`
-  font-family: "Poppins-Regular";
+  font-family: 'Poppins-Regular';
   color: ${(props) => props.fontColor || colors.neutral900};
   text-align: ${(props) => props.textAlign && props.textAlign};
   ${({ weight }) =>
-  weight === 'bold' &&
-  css`
-      font-family: "Poppins-Bold";
+    weight === 'bold' &&
+    css`
+      font-family: 'Poppins-Bold';
     `};
   ${({ weight }) =>
-  weight === 'semiBold' &&
-  css`
-      font-family: "Poppins-SemiBold";
+    weight === 'semiBold' &&
+    css`
+      font-family: 'Poppins-SemiBold';
     `};
 `;

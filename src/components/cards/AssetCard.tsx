@@ -11,6 +11,7 @@ import {
   textSize,
   colors,
   spacing,
+  fonts,
 } from '../../constants';
 import fireHapticFeedback from '../../utils/hapticFeedback';
 
@@ -103,7 +104,9 @@ const AssetLogo = styled.View`
   margin-right: 10px;
 `;
 
-const AssetName = styled.Text``;
+const AssetName = styled.Text`
+  font-family: ${fonts.poppins};
+`;
 
 const AssetAmountContainer = styled.View`
   align-items: flex-end;

@@ -2,10 +2,9 @@ import React from 'react';
 import { Animated, ActivityIndicator } from 'react-native';
 import styled from 'styled-components/native';
 import { LinearGradient } from 'expo-linear-gradient';
-
 import { animationSelect, animationSelectShadow, isSmallDevice, textSize, colors, spacing } from '../../constants';
 import fireHapticFeedback from '../../utils/hapticFeedback';
-import Text from '../Text';
+import Text from '../text/Text';
 
 const Button = ({
   borderRadius,
