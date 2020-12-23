@@ -17,10 +17,10 @@ export default function useCachedResources() {
         await Font.loadAsync({
           ...Ionicons.font,
           [fonts.poppins]: require('../assets/fonts/Poppins-Regular.ttf'),
-          [fonts.poppinsRegular]: require('../assets/fonts/Poppins-Regular.ttf'),
-          [fonts.poppinsSemiBold]: require('../assets/fonts/Poppins-SemiBold.ttf'),
-          [fonts.poppinsBold]: require('../assets/fonts/Poppins-Bold.ttf'),
-          [fonts.poppinsLight]: require('../assets/fonts/Poppins-Light.ttf'),
+          [fonts.regular]: require('../assets/fonts/Poppins-Regular.ttf'),
+          [fonts.semiBold]: require('../assets/fonts/Poppins-SemiBold.ttf'),
+          [fonts.bold]: require('../assets/fonts/Poppins-Bold.ttf'),
+          [fonts.light]: require('../assets/fonts/Poppins-Light.ttf'),
         });
       } catch (e) {
         // We might want to provide this error information to an error reporting service

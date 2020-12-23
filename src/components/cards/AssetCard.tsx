@@ -28,6 +28,8 @@ export const AssetCard: React.FC<Props> = (props) => {
     if (props.onPress) {
       fireHapticFeedback('selection');
       props.onPress();
+    } else {
+      fireHapticFeedback('notificationError');
     }
   };
 
@@ -59,18 +61,20 @@ export const AssetCard: React.FC<Props> = (props) => {
         style={{
           shadowOpacity,
           shadowRadius: 12,
-          shadowOffset: { width: 0, height: 4 },
+          shadowOffset: { width: 0, height: 3 },
           shadowColor: colors.neutral900,
           transform: [{ scale }],
         }}
       >
         <AssetInformationContainer>
           <AssetLogo></AssetLogo>
-          <AssetName>Name</AssetName>
+          <AssetName>{props.name}</AssetName>
         </AssetInformationContainer>
         <AssetAmountContainer>
-          <AssetAmountValue>TXL 0.00</AssetAmountValue>
-          <AssetAmountValueDollar>USD $0.00</AssetAmountValueDollar>
+          <AssetAmountValue>TXL {props.amount}</AssetAmountValue>
+          <AssetAmountValueDollar>
+            USD ${props.amountUsd}
+          </AssetAmountValueDollar>
         </AssetAmountContainer>
       </Container>
     </TouchContainer>
@@ -105,15 +109,20 @@ const AssetLogo = styled.View`
 `;
 
 const AssetName = styled.Text`
-  font-family: ${fonts.poppins};
+  font-family: ${fonts.regular};
+  font-size: ${textSize.s}px;
 `;
 
 const AssetAmountContainer = styled.View`
   align-items: flex-end;
 `;
 
-const AssetAmountValue = styled.Text``;
+const AssetAmountValue = styled.Text`
+  font-family: ${fonts.semiBold};
+  font-size: ${textSize.s}px;
+`;
 
 const AssetAmountValueDollar = styled.Text`
-  color: grey;
+  font-family: ${fonts.light};
+  font-size: ${textSize.xs}px;
 `;

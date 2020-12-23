@@ -1,8 +1,9 @@
 import React, { useRef, useState, useEffect } from 'react';
 import styled from 'styled-components/native';
-import { textSize, colors, spacing } from '../../constants';
+import { textSize, colors, spacing, fonts } from '../../constants';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import Icon, { iconName } from '../Icon';
+import { Text } from '../text/Text';
 
 type HeaderBarType = 'value' | 'back' | 'close';
 
@@ -23,7 +24,10 @@ export const HeaderBar: React.FC<Props> = (props) => {
 
   return (
     <Container>
-      <Title>{props.title ? props.title : route.name}</Title>
+      {/* <Title>{props.title ? props.title : route.name}</Title> */}
+      <Text fontWeight="semiBold" fontSize={textSize.xxl}>
+        {props.title}
+      </Text>
       <RightContainer>
         {props.type == 'value' && (
           <PortfolioValueContainer>
@@ -52,8 +56,8 @@ const Container = styled.View`
 `;
 
 const Title = styled.Text`
-  font-size: ${textSize.xl}px;
-  font-weight: bold;
+  font-family: ${fonts.semiBold};
+  font-size: ${textSize.xxl}px;
 `;
 
 const RightContainer = styled.View`
@@ -66,11 +70,12 @@ const PortfolioValueContainer = styled.View`
 `;
 
 const PortfolioValueTitle = styled.Text`
+  font-family: ${fonts.light};
   font-size: ${textSize.s}px;
 `;
 const PortfolioValueAmount = styled.Text`
+  font-family: ${fonts.semiBold};
   font-size: ${textSize.s}px;
-  font-weight: bold;
 `;
 
 const IconContainer = styled.TouchableOpacity``;

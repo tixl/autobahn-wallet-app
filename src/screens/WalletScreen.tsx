@@ -33,13 +33,12 @@ export const WalletScreen: React.FC<Props> = (props) => {
       <HeaderBar type="value" title="Assets" />
       <ContentContainer>
         <AssetCard
-          name="Asset1"
-          onPress={() => navigation.navigate('CurrencyDetail')}
+          name="TXL (coming soon)"
           amount="100.00"
           amountUsd="100.00"
         />
         <AssetCard
-          name="Asset1"
+          name="BTC"
           onPress={() => navigation.navigate('CurrencyDetail')}
           amount="100.00"
           amountUsd="100.00"

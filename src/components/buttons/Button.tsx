@@ -2,9 +2,16 @@ import React from 'react';
 import { Animated, ActivityIndicator } from 'react-native';
 import styled from 'styled-components/native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { animationSelect, animationSelectShadow, isSmallDevice, textSize, colors, spacing } from '../../constants';
+import {
+  animationSelect,
+  animationSelectShadow,
+  isSmallDevice,
+  textSize,
+  colors,
+  spacing,
+} from '../../constants';
 import fireHapticFeedback from '../../utils/hapticFeedback';
-import Text from '../text/Text';
+import { Text } from '../text/Text';
 
 const Button = ({
   borderRadius,
@@ -14,7 +21,7 @@ const Button = ({
   hapticTypePress,
   disabled = false,
   loading = false,
-  style
+  style,
 }) => {
   let gradientColors;
   let fontColor;
@@ -75,33 +82,37 @@ const Button = ({
             shadowRadius: 12,
             shadowOffset: { width: 0, height: 4 },
             shadowColor: colors.neutral900,
-            transform: [{ scale }]
+            transform: [{ scale }],
           },
-          style
+          style,
         ]}
       >
         <Gradient
           colors={gradientColors}
           start={[0, 1]}
           end={[1, 0]}
-          pointerEvents='none'
+          pointerEvents="none"
           style={{
             height: isSmallDevice ? 48 : 56,
             borderRadius: borderRadius || 8,
-            opacity: disabled ? 0.5 : 1
+            opacity: disabled ? 0.5 : 1,
           }}
         >
           {loading ? (
-            <ActivityIndicator color={fontColor} size='small' />
+            <ActivityIndicator color={fontColor} size="small" />
           ) : (
-            <Text fontColor={fontColor} fontSize={textSize.l} fontWeight='semiBold'>
+            <Text
+              fontColor={fontColor}
+              fontSize={textSize.l}
+              fontWeight="semiBold"
+            >
               {label}
             </Text>
           )}
         </Gradient>
       </Container>
     </Touch>
-  )
+  );
 };
 
 export default Button;

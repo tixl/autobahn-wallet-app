@@ -1,88 +1,56 @@
-import React from 'react';
-import styled, { css } from 'styled-components/native';
-import Animated from 'react-native-reanimated';
+import React, { useRef, useState, useEffect } from 'react';
+import { StyleSheet, TextStyle, Text as RNText } from 'react-native';
+import styled from 'styled-components/native';
+import { textSize, colors, fonts } from '../../constants';
 
-import { colors } from '../../constants';
+type FontWeightTypes = 'regular' | 'bold' | 'semiBold' | 'light';
 
-const { multiply, divide } = Animated;
+type Props = {
+  children: React.ReactNode | undefined;
+  fontWeight?: FontWeightTypes;
+  fontColor?: string;
+  fontSize?: number;
+  numberOfLines?: number;
+  style?: TextStyle | TextStyle[];
+  onPress?(): void;
+};
 
-// type Props = {
-//   fontSize: string;
-//   fontColor: 
-// };
-
-const Text = (props) => {
-  const {
-    fontSize,
-    fontColor,
-    fontWeight,
-    fontHeight,
-    textAlign = 'left',
-    allowFontScaling = false,
-    numberOfLines,
-    adjustsFontSizeToFit = false,
-    ellipsizeMode = 'tail',
-    style,
-    children,
-    onPress,
-  } = props;
-
-  const lineHeightFactor = fontSize > 24 ? 1.2 : 1.4;
-  const lineHeight =
-    fontHeight || multiply(divide(multiply(fontSize, lineHeightFactor), 4), 4);
-
-  const handlePress = () => {
-    onPress && onPress();
-  };
-
-  if (onPress === undefined) {
-    return (
-      <StyledText
-        fontColor={fontColor}
-        weight={fontWeight}
-        textAlign={textAlign}
-        style={[{ fontSize, lineHeight }, style]}
-        allowFontScaling={allowFontScaling}
-        adjustsFontSizeToFit={adjustsFontSizeToFit}
-        numberOfLines={numberOfLines}
-        ellipsizeMode={ellipsizeMode}
-      >
-        {children}
-      </StyledText>
-    );
+export const Text: React.FC<Props> = ({
+  children,
+  // Define default font family
+  fontWeight = fonts.regular,
+  // Define default text size
+  fontSize = textSize.m,
+  // Define default text color
+  fontColor = 'black',
+  numberOfLines = 1,
+}) => {
+  // Get font family
+  var font: string = fonts.regular;
+  switch (fontWeight) {
+    case 'regular':
+      font = fonts.regular;
+      break;
+    case 'bold':
+      font = fonts.bold;
+      break;
+    case 'semiBold':
+      font = fonts.semiBold;
+      break;
+    case 'light':
+      font = fonts.light;
+      break;
+    default:
+      font = fonts.regular;
+      break;
   }
 
   return (
-    <StyledText
-      onPress={handlePress}
-      suppressHighlighting
-      fontColor={fontColor}
-      weight={fontWeight}
-      textAlign={textAlign}
-      style={[{ fontSize, lineHeight }, style]}
+    <RNText
+      style={{ fontFamily: font, fontSize: fontSize, color: fontColor }}
+      numberOfLines={numberOfLines}
     >
       {children}
-    </StyledText>
+    </RNText>
   );
 };
-
-export default Text;
-
-/**
- * Styled Component
- */
-const StyledText = styled(Animated.Text)`
-  font-family: 'Poppins-Regular';
-  color: ${(props) => props.fontColor || colors.neutral900};
-  text-align: ${(props) => props.textAlign && props.textAlign};
-  ${({ weight }) =>
-    weight === 'bold' &&
-    css`
-      font-family: 'Poppins-Bold';
-    `};
-  ${({ weight }) =>
-    weight === 'semiBold' &&
-    css`
-      font-family: 'Poppins-SemiBold';
-    `};
-`;
