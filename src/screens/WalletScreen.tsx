@@ -4,6 +4,16 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AssetCard, Button, HeaderBar } from '../components';
 import { textSize, colors, spacing } from '../constants';
+import { Image } from 'react-native-svg';
+
+// type Asset = {
+//   name: string;
+//   amount: string;
+//   amountUsd: string;
+//   logo?: Image;
+// };
+
+// const testAssets: Asset[] = [];
 
 type Props = {
   children?: string;
@@ -28,7 +38,12 @@ export const WalletScreen: React.FC<Props> = (props) => {
           amount="100.00"
           amountUsd="100.00"
         />
-        <CenterText>Wallet</CenterText>
+        <AssetCard
+          name="Asset1"
+          onPress={() => navigation.navigate('CurrencyDetail')}
+          amount="100.00"
+          amountUsd="100.00"
+        />
       </ContentContainer>
     </Container>
   );

@@ -49,7 +49,7 @@ export const AssetCard: React.FC<Props> = (props) => {
   };
 
   return (
-    <Touch
+    <TouchContainer
       onPress={handlePress}
       onPressIn={handleOnPressIn}
       onPressOut={handleOnPressOut}
@@ -67,30 +67,50 @@ export const AssetCard: React.FC<Props> = (props) => {
           <AssetLogo></AssetLogo>
           <AssetName>Name</AssetName>
         </AssetInformationContainer>
-        <AssetAmountContainer></AssetAmountContainer>
+        <AssetAmountContainer>
+          <AssetAmountValue>TXL 0.00</AssetAmountValue>
+          <AssetAmountValueDollar>USD $0.00</AssetAmountValueDollar>
+        </AssetAmountContainer>
       </Container>
-    </Touch>
+    </TouchContainer>
   );
 };
 
-const Touch = styled.TouchableWithoutFeedback`
+const TouchContainer = styled.TouchableWithoutFeedback`
   overflow: visible;
 `;
 
 const Container = styled(Animated.View)`
-  height: 100px;
-  background-color: lightgray;
+  height: 112px;
+  background-color: white;
   border-radius: 10px;
   padding: ${spacing.s}px;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 20px;
 `;
 
-const AssetInformationContainer = styled.View``;
+const AssetInformationContainer = styled.View`
+  align-items: center;
+  flex-direction: row;
+`;
 
-const AssetLogo = styled.View``;
+const AssetLogo = styled.View`
+  width: 40px;
+  height: 40px;
+  background-color: blue;
+  margin-right: 10px;
+`;
 
 const AssetName = styled.Text``;
 
-const AssetAmountContainer = styled.View``;
+const AssetAmountContainer = styled.View`
+  align-items: flex-end;
+`;
+
+const AssetAmountValue = styled.Text``;
+
+const AssetAmountValueDollar = styled.Text`
+  color: grey;
+`;
