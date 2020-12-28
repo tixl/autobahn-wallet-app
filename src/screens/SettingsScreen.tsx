@@ -35,8 +35,4 @@ const CenterText = styled.Text`
   font-size: ${textSize.l}px;
 `;
 
-const NavigationButton = styled.Button`
-  height: 30px;
-`;
-
 export default SettingsScreen;

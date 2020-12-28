@@ -8,7 +8,7 @@ import {
 import TabNavigator from './root/TabNavigator';
 
 // Screen imports
-import { CurrencyDetailScreen } from '../../screens';
+import { AssetDetailScreen } from '../../screens';
 
 type RootStackParamList = {
   Tab: undefined;
@@ -29,7 +29,7 @@ const RootStackScreen = () => (
     })}
   >
     <RootStack.Screen name="Tab" component={TabNavigator} />
-    <RootStack.Screen name="CurrencyDetail" component={CurrencyDetailScreen} />
+    <RootStack.Screen name="CurrencyDetail" component={AssetDetailScreen} />
   </RootStack.Navigator>
 );
 
