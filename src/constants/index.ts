@@ -14,3 +14,4 @@ export {
 export { default as spacing } from './spacing';
 export { default as textSize } from './textSize';
 export { default as fonts } from './fonts';
+export { default as shapes } from './shapes';

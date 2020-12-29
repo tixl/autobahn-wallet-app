@@ -12,6 +12,7 @@ import {
   colors,
   spacing,
   fonts,
+  shapes,
 } from '../../constants';
 import fireHapticFeedback from '../../utils/hapticFeedback';
 import { Text } from '../text/Text';
@@ -91,7 +92,7 @@ const TouchContainer = styled.TouchableWithoutFeedback`
 const Container = styled(Animated.View)`
   height: 112px;
   background-color: white;
-  border-radius: 10px;
+  border-radius: ${shapes.borderRadius}px;
   padding: ${spacing.s}px;
   flex-direction: row;
   justify-content: space-between;
