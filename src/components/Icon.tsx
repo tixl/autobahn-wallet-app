@@ -1,10 +1,21 @@
 import React from 'react';
+import { TextStyle } from 'react-native';
 import Svg, { SvgXml, Circle, Path, Rect } from 'react-native-svg';
 import { colors } from '../constants';
 
-const Icon = (props: any) => {
-  const { color = colors.neutral000, name, size = 24, style } = props;
+type Props = {
+  name: string;
+  size?: number;
+  color?: string;
+  style?: TextStyle | TextStyle[];
+};
 
+const Icon: React.FC<Props> = ({
+  name,
+  color = colors.neutral000,
+  size = 24,
+  style,
+}) => {
   const CAMERA_ADD_XML = `
     <svg width=${size} height=${size} viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0001 11C11.0001 9.52728 12.194 8.33337 13.6667 8.33337H24.3334C25.8062 8.33337 27.0001 9.52728 27.0001 11H29.6667C31.1395 11 32.3334 12.1939 32.3334 13.6667V27C32.3334 28.4728 31.1395 29.6667 29.6667 29.6667H8.33342C6.86066 29.6667 5.66675 28.4728 5.66675 27V13.6667C5.66675 12.1939 6.86066 11 8.33341 11L11.0001 11ZM24.3334 20.3334C24.3334 23.2789 21.9456 25.6667 19.0001 25.6667C16.0546 25.6667 13.6667 23.2789 13.6667 20.3334C13.6667 17.3879 16.0546 15 19.0001 15C21.9456 15 24.3334 17.3879 24.3334 20.3334ZM28.3334 16.3334C29.0698 16.3334 29.6667 15.7364 29.6667 15C29.6667 14.2637 29.0698 13.6667 28.3334 13.6667C27.597 13.6667 27.0001 14.2637 27.0001 15C27.0001 15.7364 27.597 16.3334 28.3334 16.3334Z" fill=${color}/>
