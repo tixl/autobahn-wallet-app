@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { composeInitialProps } from 'react-i18next/*';
 import { StyleSheet, TextStyle, Text as RNText } from 'react-native';
 import styled from 'styled-components/native';
 import { textSize, colors, fonts } from '../../constants';
@@ -15,6 +16,7 @@ type Props = {
   textAlign?: TextAlignTypes;
   alignToBottom?: boolean;
   numberOfLines?: number;
+  maxWidth?: number;
   style?: TextStyle | TextStyle[];
   onPress?(): void;
 };
@@ -31,6 +33,7 @@ export const Text: React.FC<Props> = ({
   textAlign = 'center',
   alignToBottom = false,
   style = {},
+  ...props
 }) => {
   console.log(style);
   // Get font family
@@ -64,6 +67,7 @@ export const Text: React.FC<Props> = ({
           // Vertically align text to bottom (workaround, as textAlignVertical only works on Android devices)
           bottom: alignToBottom ? -(0.25 * fontSize) : 0,
         },
+        props.maxWidth ? { maxWidth: props.maxWidth } : {},
         style,
       ]}
       numberOfLines={numberOfLines}

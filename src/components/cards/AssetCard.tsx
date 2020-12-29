@@ -23,7 +23,7 @@ type Props = {
   logo?: Image;
   amount: string;
   amountUsd: string;
-  onPress?(): void;
+  onPress?(): () => void;
 };
 
 export const AssetCard: React.FC<Props> = (props) => {

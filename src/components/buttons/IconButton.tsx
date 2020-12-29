@@ -4,13 +4,18 @@ import styled from 'styled-components/native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 import Icon, { iconName as name } from '../Icon';
-import { animationSelect, animationSelectShadow, colors, isSmallDevice } from '../../constants';
+import {
+  animationSelect,
+  animationSelectShadow,
+  colors,
+  isSmallDevice,
+} from '../../constants';
 import fireHapticFeedback from '../../utils/hapticFeedback';
 
 const DEFAULT_SIZE = isSmallDevice ? 48 : 56;
 const DEFAULT_RADIUS = isSmallDevice ? 24 : 28;
 
-const IconButton = ({
+export const IconButton = ({
   size = DEFAULT_SIZE,
   radius = DEFAULT_RADIUS,
   iconSize = 24,
@@ -20,7 +25,7 @@ const IconButton = ({
   hapticTypePress,
   style,
   disabled = false,
-  loading = false
+  loading = false,
 }) => {
   let gradientColors;
   let iconColor;
@@ -90,24 +95,22 @@ const IconButton = ({
             borderRadius: radius || DEFAULT_RADIUS,
             height: size || DEFAULT_SIZE,
             width: size || DEFAULT_SIZE,
-            opacity: disabled ? 0.5 : 1
+            opacity: disabled ? 0.5 : 1,
           }}
           colors={gradientColors}
           start={[0, 1]}
           end={[1, 0]}
         >
           {loading ? (
-            <ActivityIndicator color={iconColor} size='small' />
+            <ActivityIndicator color={iconColor} size="small" />
           ) : (
             <Icon size={iconSize} name={iconName} color={iconColor} />
           )}
         </Gradient>
       </Container>
     </Touch>
-  )
+  );
 };
-
-export default IconButton;
 
 const Touch = styled.TouchableWithoutFeedback``;
 

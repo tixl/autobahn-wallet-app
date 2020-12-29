@@ -13,7 +13,7 @@ import {
 import fireHapticFeedback from '../../utils/hapticFeedback';
 import { Text } from '../text/Text';
 
-const Button = ({
+export const Button = ({
   borderRadius,
   onPress,
   type = 'primary',
@@ -114,8 +114,6 @@ const Button = ({
     </Touch>
   );
 };
-
-export default Button;
 
 const Container = styled(Animated.View)``;
 
