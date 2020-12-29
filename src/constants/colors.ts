@@ -26,4 +26,21 @@ export default {
   orange500: 'rgba(255,87,25,1)',
   orange600: 'rgba(214,57,0,1)',
   orange700: 'rgba(163,43,0,1)',
+
+  // Colors from Tixl Web App
+  BLACK: '#000000',
+  LIGHT_BLACK: '#3D434D',
+  DARK_BLUE: '#1434f7',
+  DARK_GRAY: '#aaaaaa',
+  LIGHT_GRAY: '#f3f3f3',
+  LIGHTER_GRAY: '#fcfcfc',
+  GREEN: '#2BA84A',
+  GREEN_WITH_OPACITY: 'rgba(43, 168, 74, 0.40)',
+  LIGHT_BLUE: '#1160fb',
+  ORANGE: '#E55E2E',
+  ORANGE_STRONG: '#FF561A',
+  ORANGE_WITH_OPACITY: 'rgba(229, 94, 46, 0.40)',
+  ORANGE_STRONG_WITH_OPACITY: 'rgba(255, 86, 26, 0.4)',
+  RED: '#CC0000',
+  WHITE: '#FFFFFF',
 };
