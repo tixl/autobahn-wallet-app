@@ -1,9 +1,15 @@
 import * as React from 'react';
 import { color } from 'react-native-reanimated';
 import styled from 'styled-components/native';
-import { HeaderBar, Icon, iconName, Text } from '../components';
-import { RoundButton } from '../components/buttons/RoundButton';
-import { AssetValueCard } from '../components/cards';
+import {
+  HeaderBar,
+  Icon,
+  iconName,
+  Text,
+  RoundButton,
+  AssetValueCard,
+} from '../components';
+
 import { colors, spacing, textSize, windowWidth } from '../constants';
 
 type Props = {
