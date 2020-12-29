@@ -16,6 +16,7 @@ import {
 } from '../../constants';
 import fireHapticFeedback from '../../utils/hapticFeedback';
 import { Text } from '../text/Text';
+import { color } from 'react-native-reanimated';
 
 type Props = {
   name: string;
@@ -69,7 +70,13 @@ export const AssetCard: React.FC<Props> = (props) => {
         }}
       >
         <AssetInformationContainer>
-          <AssetLogo></AssetLogo>
+          <AssetIconContainer>
+            <Icon
+              name={iconName.bug}
+              size={shapes.iconSize}
+              color={colors.DARK_GRAY}
+            ></Icon>
+          </AssetIconContainer>
           <AssetName fontSize={textSize.s}>{props.name}</AssetName>
         </AssetInformationContainer>
         <AssetAmountContainer>
@@ -105,10 +112,7 @@ const AssetInformationContainer = styled.View`
   flex-direction: row;
 `;
 
-const AssetLogo = styled.View`
-  width: 40px;
-  height: 40px;
-  background-color: blue;
+const AssetIconContainer = styled.View`
   margin-right: 10px;
 `;
 

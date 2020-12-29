@@ -3,6 +3,26 @@ import { TextStyle } from 'react-native';
 import Svg, { SvgXml, Circle, Path, Rect } from 'react-native-svg';
 import { colors } from '../constants';
 
+export const iconName = {
+  arrowLeft: 'arrowLeft',
+  arrowRight: 'arrowRight',
+  bug: 'bug',
+  cameraAdd: 'cameraAdd',
+  check: 'check',
+  chevronRight: 'chevronRight',
+  chevronLeft: 'chevronLeft',
+  close: 'close',
+  cross: 'cross',
+  feedback: 'feedback',
+  info: 'info',
+  legal: 'legal',
+  lock: 'lock',
+  more: 'more',
+  pulse: 'pulse',
+  settingsActive: 'settingsActive',
+  settingsInactive: 'settingsInactive',
+};
+
 type Props = {
   name: string;
   size?: number;
@@ -14,7 +34,7 @@ const Icon: React.FC<Props> = ({
   name,
   color = colors.neutral000,
   size = 24,
-  style,
+  style = {},
 }) => {
   const CAMERA_ADD_XML = `
     <svg width=${size} height=${size} viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -333,26 +353,6 @@ const Icon: React.FC<Props> = ({
         </Svg>
       );
   }
-};
-
-export const iconName = {
-  arrowLeft: 'arrowLeft',
-  arrowRight: 'arrowRight',
-  bug: 'bug',
-  cameraAdd: 'cameraAdd',
-  check: 'check',
-  chevronRight: 'chevronRight',
-  chevronLeft: 'chevronLeft',
-  close: 'close',
-  cross: 'cross',
-  feedback: 'feedback',
-  info: 'info',
-  legal: 'legal',
-  lock: 'lock',
-  more: 'more',
-  pulse: 'pulse',
-  settingsActive: 'settingsActive',
-  settingsInactive: 'settingsInactive',
 };
 
 export default Icon;

@@ -16,13 +16,17 @@ export const AssetValueCard: React.FC<Props> = (props) => {
   return (
     <Container>
       <TextContainer>
-        <Text fontWeight="light" fontSize={textSize.xs}>
+        <Text
+          fontWeight="light"
+          fontSize={textSize.xs}
+          fontColor={colors.LIGHT_BLACK}
+        >
           Amount in {props.name}
         </Text>
         <Text fontSize={textSize.l}>{props.value}</Text>
       </TextContainer>
       <LogoContainer>
-        <Icon name={iconName.close} color="black" style={{ width: 400 }}></Icon>
+        <Icon name={iconName.bug} color={colors.DARK_GRAY}></Icon>
       </LogoContainer>
     </Container>
   );
