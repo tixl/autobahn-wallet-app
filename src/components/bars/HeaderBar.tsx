@@ -4,6 +4,9 @@ import { textSize, colors, spacing, fonts } from '../../constants';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import Icon, { iconName } from '../Icon';
 import { Text } from '../text/Text';
+import { ExampleState } from '../../redux/reducer/example';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
 
 type HeaderBarType = 'value' | 'back' | 'close';
 
@@ -14,8 +17,9 @@ type Props = {
 };
 
 export const HeaderBar: React.FC<Props> = (props) => {
-  // Use Tixl SDK / Redux store to retrieve portfolio value later on
-  const [portfolioValue, setPortfolioValue] = useState<string>('23.30');
+  const portfolioValue = useSelector(
+    (state: RootState) => state.example.portfolioValue
+  );
 
   // Get navigation for back button usage
   const navigation = useNavigation();
@@ -42,7 +46,7 @@ export const HeaderBar: React.FC<Props> = (props) => {
               fontSize={textSize.s}
               alignToBottom
             >
-              ${props.portfolioValue ? props.portfolioValue : portfolioValue}
+              ${portfolioValue}
             </PortfolioValueAmount>
           </PortfolioValueContainer>
         )}

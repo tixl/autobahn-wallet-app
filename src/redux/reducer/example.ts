@@ -30,19 +30,19 @@ export type ExampleState = {
 const initialState: ExampleState = {
   assets: [
     {
-      name: 'Bitcoin',
-      prefix: 'BTC',
-      logo: 'bitcoin',
-      value: 984.54,
-      valueUsd: 100.82,
-      history: [],
-    },
-    {
       name: 'Tixl',
       prefix: 'TXL',
       logo: 'tixl',
       value: 34.29,
       valueUsd: 289.19,
+      history: [],
+    },
+    {
+      name: 'Bitcoin',
+      prefix: 'BTC',
+      logo: 'bitcoin',
+      value: 984.54,
+      valueUsd: 100.82,
       history: [],
     },
   ],

@@ -30,17 +30,17 @@ export const WalletScreen: React.FC<Props> = (props) => {
     <Container style={{ paddingTop: insets.top }}>
       <HeaderBar type="value" title="Assets" />
       <ContentContainer>
-        <AssetCard
-          name="TXL (coming soon)"
-          amount="100.00"
-          amountUsd="100.00"
-        />
-        <AssetCard
-          name="BTC"
-          onPress={() => onButtonPress(assets[1])}
-          amount="100.00"
-          amountUsd="100.00"
-        />
+        {assets.map((asset, index) => (
+          <AssetCard
+            key={index}
+            name={asset.name}
+            prefix={asset.prefix}
+            onPress={() => onButtonPress(asset)}
+            amount={asset.value.toString()}
+            amountUsd={asset.valueUsd.toString()}
+            disabled={asset.prefix == 'TXL'}
+          />
+        ))}
       </ContentContainer>
     </Container>
   );

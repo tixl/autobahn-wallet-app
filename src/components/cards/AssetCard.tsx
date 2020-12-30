@@ -22,6 +22,7 @@ type Props = {
   name: string;
   logo?: Image;
   amount: string;
+  prefix: string;
   amountUsd: string;
   disabled?: boolean;
   onPress?: () => void;
@@ -82,7 +83,7 @@ export const AssetCard: React.FC<Props> = (props) => {
         </AssetInformationContainer>
         <AssetAmountContainer>
           <AssetAmountValue fontWeight="semiBold" fontSize={textSize.s}>
-            TXL {props.amount}
+            {props.prefix} {props.amount}
           </AssetAmountValue>
           <AssetAmountValueDollar fontWeight="light" fontSize={textSize.xs}>
             USD ${props.amountUsd}
