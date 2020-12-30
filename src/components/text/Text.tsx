@@ -35,7 +35,6 @@ export const Text: React.FC<Props> = ({
   style = {},
   ...props
 }) => {
-  console.log(style);
   // Get font family
   var font: string = fonts.regular;
   switch (fontWeight) {

@@ -23,12 +23,13 @@ type Props = {
   logo?: Image;
   amount: string;
   amountUsd: string;
-  onPress?(): () => void;
+  disabled?: boolean;
+  onPress?: () => void;
 };
 
 export const AssetCard: React.FC<Props> = (props) => {
   const handlePress = () => {
-    if (props.onPress) {
+    if (props.onPress && !props.disabled) {
       fireHapticFeedback('selection');
       props.onPress();
     } else {

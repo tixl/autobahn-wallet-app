@@ -1,19 +1,12 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { AssetCard, Button, HeaderBar } from '../components';
+import { AssetCard, HeaderBar } from '../components';
 import { textSize, colors, spacing } from '../constants';
-import { Image } from 'react-native-svg';
-
-// type Asset = {
-//   name: string;
-//   amount: string;
-//   amountUsd: string;
-//   logo?: Image;
-// };
-
-// const testAssets: Asset[] = [];
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
+import { ExampleAsset, ExampleState } from '../redux/reducer/example';
 
 type Props = {
   children?: string;
@@ -24,7 +17,12 @@ export const WalletScreen: React.FC<Props> = (props) => {
   const route = useRoute();
   const insets = useSafeAreaInsets();
 
-  const onButtonPress = () => {
+  // Get example data from redux store
+  const { assets, portfolioValue }: ExampleState = useSelector(
+    (state: RootState) => state.example
+  );
+
+  const onButtonPress = (asset: ExampleAsset) => {
     navigation.navigate('CurrencyDetail');
   };
 
@@ -39,7 +37,7 @@ export const WalletScreen: React.FC<Props> = (props) => {
         />
         <AssetCard
           name="BTC"
-          onPress={() => navigation.navigate('CurrencyDetail')}
+          onPress={() => onButtonPress(assets[1])}
           amount="100.00"
           amountUsd="100.00"
         />

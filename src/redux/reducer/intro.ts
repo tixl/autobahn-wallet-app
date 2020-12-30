@@ -6,11 +6,17 @@ import { createSlice } from '@reduxjs/toolkit';
  * and automatically generates action creators, action types, and selectors ready to be used.
  */
 
+export type IntroState = {
+  appIntroFinished: boolean;
+};
+
+const initialState: IntroState = {
+  appIntroFinished: false,
+};
+
 const intro = createSlice({
   name: 'intro',
-  initialState: {
-    appIntroFinished: false,
-  },
+  initialState,
   reducers: {
     setIntroAppFinished: (state, action) => {
       const { finished } = action.payload;
