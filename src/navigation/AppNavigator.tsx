@@ -13,6 +13,7 @@ import currentVersion from '../config/legal.json';
 // import { isAndroid } from '../constants';
 
 import LinkingConfiguration from './LinkingConfiguration';
+
 import { IntroStackScreen, RootStackScreen } from './stacks';
 
 const ProdChecker = NativeModules.ProdChecker;

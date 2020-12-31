@@ -14,5 +14,8 @@ export * from './buttons/RoundButton';
 export * from './cards/AssetCard';
 export * from './cards/AssetValueCard';
 
+// Switch components
+export * from './switches/Toggle';
+
 // Text components
 export * from './text/Text';

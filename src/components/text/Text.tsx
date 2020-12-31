@@ -29,7 +29,7 @@ export const Text: React.FC<Props> = ({
   fontSize = textSize.m,
   // Define default text color
   fontColor = 'black',
-  numberOfLines = 1,
+  numberOfLines = undefined,
   textAlign = 'center',
   alignToBottom = false,
   style = {},
