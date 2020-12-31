@@ -4,7 +4,6 @@ import { textSize, colors, spacing, fonts } from '../../constants';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import Icon, { iconName } from '../Icon';
 import { Text } from '../text/Text';
-import { ExampleState } from '../../redux/reducer/example';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 
@@ -43,7 +42,7 @@ export const HeaderBar: React.FC<Props> = (props) => {
             </PortfolioValueTitle>
             <PortfolioValueAmount
               fontWeight="semiBold"
-              fontSize={textSize.s}
+              fontSize={textSize.m}
               alignToBottom
             >
               ${portfolioValue}
@@ -82,13 +81,7 @@ const PortfolioValueContainer = styled.View`
   align-items: flex-end;
 `;
 
-const PortfolioValueTitle = styled(Text)`
-  font-family: ${fonts.light};
-  font-size: ${textSize.s}px;
-`;
-const PortfolioValueAmount = styled(Text)`
-  font-family: ${fonts.semiBold};
-  font-size: ${textSize.s}px;
-`;
+const PortfolioValueTitle = styled(Text)``;
+const PortfolioValueAmount = styled(Text)``;
 
 const IconContainer = styled.TouchableOpacity``;

@@ -23,7 +23,6 @@ type Props = {
 const AssetDetailScreen: React.FC<Props> = (props) => {
   // Get route params
   const asset = props.route.params.asset;
-  console.log(asset);
 
   // const buttonWidth: number = (windowWidth - 2 * spacing.s) / 3 - 2 * spacing.m;
   const buttonWidth: number = 50;
@@ -85,6 +84,14 @@ const AssetDetailScreen: React.FC<Props> = (props) => {
           <Text textAlign="left" fontWeight="semiBold" fontSize={textSize.xl}>
             Transaction History
           </Text>
+          <Text
+            textAlign="left"
+            fontWeight="light"
+            fontSize={textSize.s}
+            fontColor={colors.LIGHT_BLACK}
+          >
+            Last updated: a few seconds ago
+          </Text>
         </Section>
       </ContentContainer>
     </Container>
@@ -109,7 +116,7 @@ const OverviewContainer = styled.View`
 
 const Spacer = styled.View`
   width: ${spacing.s}px;
-  height: ${spacing.xs}px;
+  height: ${spacing.s}px;
 `;
 
 const ButtonContainer = styled.View`
