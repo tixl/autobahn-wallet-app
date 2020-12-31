@@ -79,7 +79,7 @@ export const AssetCard: React.FC<Props> = (props) => {
               color={colors.DARK_GRAY}
             ></Icon>
           </AssetIconContainer>
-          <AssetName fontSize={textSize.s}>{props.name}</AssetName>
+          <AssetName fontSize={textSize.m}>{props.name}</AssetName>
         </AssetInformationContainer>
         <AssetAmountContainer>
           <AssetAmountValue fontWeight="semiBold" fontSize={textSize.s}>

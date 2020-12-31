@@ -9,10 +9,11 @@ import TabNavigator from './root/TabNavigator';
 
 // Screen imports
 import { AssetDetailScreen } from '../../screens';
+import { ExampleAsset } from '../../redux/reducer/example';
 
-type RootStackParamList = {
+export type RootStackParamList = {
   Tab: undefined;
-  CurrencyDetail: { currency: string };
+  AssetDetail: { asset: ExampleAsset };
 };
 
 const RootStack = createStackNavigator<RootStackParamList>();
@@ -29,7 +30,7 @@ const RootStackScreen = () => (
     })}
   >
     <RootStack.Screen name="Tab" component={TabNavigator} />
-    <RootStack.Screen name="CurrencyDetail" component={AssetDetailScreen} />
+    <RootStack.Screen name="AssetDetail" component={AssetDetailScreen} />
   </RootStack.Navigator>
 );
 

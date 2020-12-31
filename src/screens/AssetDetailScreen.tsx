@@ -1,5 +1,7 @@
+import { RouteProp, useNavigation } from '@react-navigation/native';
 import * as React from 'react';
 import { color } from 'react-native-reanimated';
+import { RootStackParamList } from '../navigation/stacks/RootStack';
 import styled from 'styled-components/native';
 import {
   HeaderBar,
@@ -12,19 +14,23 @@ import {
 
 import { colors, spacing, textSize, windowWidth } from '../constants';
 
+type AssetDetailScreenRouteProp = RouteProp<RootStackParamList, 'AssetDetail'>;
+
 type Props = {
-  children?: string;
+  route: AssetDetailScreenRouteProp;
 };
 
 const AssetDetailScreen: React.FC<Props> = (props) => {
-  console.log(windowWidth);
+  // Get route params
+  const asset = props.route.params.asset;
+  console.log(asset);
 
   // const buttonWidth: number = (windowWidth - 2 * spacing.s) / 3 - 2 * spacing.m;
   const buttonWidth: number = 50;
 
   return (
     <Container>
-      <HeaderBar title="BTC" type="close" />
+      <HeaderBar title={asset.name} type="close" />
       <ContentContainer>
         {/* Overview Section */}
         <Section>
@@ -33,9 +39,15 @@ const AssetDetailScreen: React.FC<Props> = (props) => {
           </Text>
           <Spacer />
           <OverviewContainer>
-            <AssetValueCard name="BTC" value="1234"></AssetValueCard>
+            <AssetValueCard
+              name={asset.prefix}
+              value={asset.value.toString()}
+            ></AssetValueCard>
             <Spacer />
-            <AssetValueCard name="USD" value="1234"></AssetValueCard>
+            <AssetValueCard
+              name="USD"
+              value={asset.valueUsd.toString()}
+            ></AssetValueCard>
           </OverviewContainer>
         </Section>
         {/* Action Button Section */}

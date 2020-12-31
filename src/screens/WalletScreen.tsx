@@ -7,6 +7,7 @@ import { textSize, colors, spacing } from '../constants';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { ExampleAsset, ExampleState } from '../redux/reducer/example';
+import { RootStackParamList } from '../navigation/stacks/RootStack';
 
 type Props = {
   children?: string;
@@ -23,7 +24,7 @@ export const WalletScreen: React.FC<Props> = (props) => {
   );
 
   const onButtonPress = (asset: ExampleAsset) => {
-    navigation.navigate('CurrencyDetail');
+    navigation.navigate('AssetDetail', { asset: asset });
   };
 
   return (
@@ -38,7 +39,7 @@ export const WalletScreen: React.FC<Props> = (props) => {
             onPress={() => onButtonPress(asset)}
             amount={asset.value.toString()}
             amountUsd={asset.valueUsd.toString()}
-            disabled={asset.prefix == 'TXL'}
+            // disabled={asset.prefix == 'TXL'}
           />
         ))}
       </ContentContainer>
