@@ -3,11 +3,12 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { persistReducer, persistStore } from 'redux-persist';
 import thunk from 'redux-thunk';
 
-import { introReducer, exampleReducer } from './reducer';
+import { introReducer, exampleReducer, uiReducer } from './reducer';
 
 const rootReducer = combineReducers({
   intro: introReducer,
   example: exampleReducer,
+  ui: uiReducer,
 });
 
 const middleware = [thunk];
@@ -19,7 +20,7 @@ const middleware = [thunk];
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  blacklist: ['example'],
+  blacklist: ['example', 'ui'],
   // whitelist: []
 };
 

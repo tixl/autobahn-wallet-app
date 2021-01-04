@@ -27,6 +27,7 @@ export type ExampleState = {
   portfolioValue: number;
 };
 
+// Define initial state
 const initialState: ExampleState = {
   assets: [
     {

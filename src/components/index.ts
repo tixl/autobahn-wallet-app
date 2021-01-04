@@ -1,5 +1,7 @@
+// Icon
 export { default as Icon, iconName } from './Icon';
-export { default as Modal } from './Modal';
+
+// QR Code
 export { default as QRCode } from './QRCode';
 
 // Bar components
@@ -19,3 +21,7 @@ export * from './switches/Toggle';
 
 // Text components
 export * from './text/Text';
+
+// Modal components
+export * from './modal/BottomModal';
+// export { default as Modal } from './Modal';
