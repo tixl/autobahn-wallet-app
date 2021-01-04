@@ -20,7 +20,7 @@ const middleware = [thunk];
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  blacklist: ['example'],
+  blacklist: ['example', 'ui'],
   // whitelist: []
 };
 

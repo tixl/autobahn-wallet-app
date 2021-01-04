@@ -22,13 +22,15 @@ const ui = createSlice({
   name: 'ui',
   initialState,
   reducers: {
-    setShowModal: (state, action: PayloadAction<boolean>) => {
-      state.showModal = action.payload;
-    },
-    setModalType: (state, action: PayloadAction<ModalType>) => {
+    openModal: (state, action: PayloadAction<ModalType>) => {
       state.modalType = action.payload;
+      state.showModal = true;
+    },
+    closeModal: (state) => {
+      state.showModal = false;
+      state.modalType = undefined;
     },
   },
 });
 
-export const { actions: uiAction, reducer: uiReducer } = ui;
+export const { actions: uiActions, reducer: uiReducer } = ui;

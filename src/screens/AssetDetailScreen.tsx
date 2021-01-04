@@ -98,6 +98,11 @@ const AssetDetailScreen: React.FC<Props> = (props) => {
   );
 };
 
+const ModalContainer = styled.View`
+  height: 100px;
+  background-color: red;
+`;
+
 const Container = styled.View`
   flex: 1;
 `;
