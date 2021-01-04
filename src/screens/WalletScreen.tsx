@@ -30,7 +30,7 @@ export const WalletScreen: React.FC<Props> = (props) => {
   const dispatch = useDispatch();
 
   // Get example data from redux store
-  const { assets, portfolioValue }: ExampleState = useSelector(
+  const { assets }: ExampleState = useSelector(
     (state: RootState) => state.example
   );
 
@@ -110,7 +110,6 @@ export const WalletScreen: React.FC<Props> = (props) => {
           // onRightAction={() => handleButton('receive')}
         />
       </ContentContainer>
-      {/* <Button onPress={openModal}></Button> */}
     </Container>
   );
 };

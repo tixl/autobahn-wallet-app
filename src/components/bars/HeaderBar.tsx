@@ -9,13 +9,13 @@ import { RootState } from '../../redux/store';
 
 type HeaderBarType = 'value' | 'back' | 'close';
 
-type Props = {
+export type HeaderBarProps = {
   type: HeaderBarType;
   title?: string;
   portfolioValue?: string;
 };
 
-export const HeaderBar: React.FC<Props> = (props) => {
+export const HeaderBar: React.FC<HeaderBarProps> = (props) => {
   const portfolioValue = useSelector(
     (state: RootState) => state.example.portfolioValue
   );

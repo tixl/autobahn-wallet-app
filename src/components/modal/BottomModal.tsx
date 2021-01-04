@@ -8,7 +8,7 @@ import { RootState } from '../../redux/store';
 import ReactNativeModal from 'react-native-modal';
 
 type Props = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   isVisible: boolean;
   type?: ModalType;
   initialStep?: string;
@@ -30,7 +30,10 @@ export const BottomModal: React.FC<Props> = (props) => {
       onBackdropPress={props.onClose}
       onSwipeComplete={props.onClose}
     >
-      <Container>{props.children}</Container>
+      {/* <Container>{props.children}</Container> */}
+      <Container>
+        <PlaceholderContent></PlaceholderContent>
+      </Container>
     </ReactNativeModal>
   );
 };
@@ -39,4 +42,9 @@ const Container = styled.View`
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   overflow: hidden;
+`;
+
+const PlaceholderContent = styled.View`
+  height: 400px;
+  background-color: white;
 `;
