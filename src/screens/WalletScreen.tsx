@@ -2,7 +2,13 @@ import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { AssetCard, HeaderBar, iconName, RoundButton, BottomModal } from '../components';
+import {
+  AssetCard,
+  HeaderBar,
+  iconName,
+  RoundButton,
+  BottomModal,
+} from '../components';
 import { textSize, colors, spacing } from '../constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
@@ -32,10 +38,6 @@ export const WalletScreen: React.FC<Props> = (props) => {
   const { showModal }: UiState = useSelector((state: RootState) => state.ui);
   const closeModal = () => dispatch(uiActions.closeModal());
   const openModal = () => dispatch(uiActions.openModal('send'));
-
-  // const [showModal, setShowModal] = useState(false);
-  // const closeModal = () => setShowModal(false);
-  // const openModal = () => setShowModal(true);
 
   const onButtonPress = (asset: ExampleAsset) => {
     navigation.navigate('AssetDetail', { asset: asset });
@@ -88,14 +90,14 @@ export const WalletScreen: React.FC<Props> = (props) => {
                 title="Send"
                 icon={iconName.arrowLeft}
                 color={colors.LIGHT_BLUE}
-                onPress={() => handleButton('send')}
+                onPress={openModal}
               />
               <RoundButton
                 width={50}
                 title="Receive"
                 icon={iconName.arrowRight}
                 color={colors.LIGHT_BLUE}
-                onPress={() => handleButton('receive')}
+                onPress={openModal}
               />
             </ButtonContainer>
           )}
