@@ -52,7 +52,7 @@ export const RoundButton: React.FC<Props> = ({
 };
 
 const Container = styled.TouchableOpacity`
-  flex: 1;
+  /* flex: 1; */
   align-items: center;
 `;
 
