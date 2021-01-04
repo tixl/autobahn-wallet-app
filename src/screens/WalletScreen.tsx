@@ -58,7 +58,7 @@ export const WalletScreen: React.FC<Props> = (props) => {
           />
         ))}
       </ContentContainer>
-      <Button onPress={openModal}></Button>
+      {/* <Button onPress={openModal}></Button> */}
     </Container>
   );
 };
@@ -80,16 +80,6 @@ const Container = styled.View`
 const ContentContainer = styled.ScrollView`
   flex: 1;
   padding: ${spacing.m}px ${spacing.s}px 0px;
-`;
-
-const CenterText = styled.Text`
-  margin-top: 30px;
-  font-size: ${textSize.l}px;
-  text-align: center;
-`;
-
-const NavigationButton = styled.Button`
-  height: 30px;
 `;
 
 export default WalletScreen;
