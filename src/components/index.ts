@@ -18,6 +18,7 @@ export * from './cards/AssetValueCard';
 
 // Switch components
 export * from './inputs/Toggle';
+export * from './inputs/TextInput';
 
 // Text components
 export * from './text/Text';

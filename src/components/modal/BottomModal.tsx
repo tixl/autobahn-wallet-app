@@ -5,6 +5,7 @@ import ReactNativeModal from 'react-native-modal';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { ModalContentSend } from './modal-contents';
+import { shapes, windowHeight } from '../../constants';
 
 type Props = {
   children?: React.ReactNode;
@@ -23,7 +24,7 @@ export const BottomModal: React.FC<Props> = (props) => {
 
   switch (modalType) {
     case 'send':
-      modalContent = <ModalContentSend></ModalContentSend>;
+      modalContent = <ModalContentSend />;
       break;
     case 'receive':
       modalContent = <PlaceholderContent></PlaceholderContent>;
@@ -43,22 +44,24 @@ export const BottomModal: React.FC<Props> = (props) => {
       style={{ justifyContent: 'flex-end', margin: 0 }}
       backdropOpacity={0.7}
       coverScreen={true}
-      avoidKeyboard={true}
+      avoidKeyboard={false}
       animationInTiming={300}
       animationOutTiming={300}
       hideModalContentWhileAnimating={false}
       onBackdropPress={props.onClose}
       onSwipeComplete={props.onClose}
     >
-      <Container>{modalContent}</Container>
+      <ContentContainer>{modalContent}</ContentContainer>
     </ReactNativeModal>
   );
 };
 
-const Container = styled.View`
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
+const ContentContainer = styled.View`
+  border-top-left-radius: ${shapes.borderRadius}px;
+  border-top-right-radius: ${shapes.borderRadius}px;
   overflow: hidden;
+  min-height: ${windowHeight * 0.5};
+  background-color: white;
 `;
 
 const PlaceholderContent = styled.View`
