@@ -48,15 +48,6 @@ const SettingsScreen: React.FC<Props> = (props) => {
   );
 };
 
-const Container = styled.View`
-  flex: 1;
-`;
-
-const ContentContainer = styled.ScrollView`
-  flex: 1;
-  padding: ${spacing.m}px ${spacing.s}px 0px;
-`;
-
 const ToggleRow = styled.View`
   flex-direction: row;
   justify-content: space-between;

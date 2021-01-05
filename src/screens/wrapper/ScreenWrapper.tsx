@@ -16,10 +16,16 @@ import { RootState } from '../../redux/store';
 type Props = {
   children: React.ReactNode;
   headerBarConfig: HeaderBarProps;
+  showHeaderBar?: boolean;
   disableTopPadding?: boolean;
+  sidePadding?: number;
 };
 
-export const ScreenWrapper: React.FC<Props> = (props) => {
+export const ScreenWrapper: React.FC<Props> = ({
+  showHeaderBar = true,
+  sidePadding = 0,
+  ...props
+}) => {
   const insets = useSafeAreaInsets();
   const dispatch = useDispatch();
 
@@ -29,7 +35,9 @@ export const ScreenWrapper: React.FC<Props> = (props) => {
 
   return (
     <Container style={{ paddingTop: props.disableTopPadding ? 0 : insets.top }}>
-      <HeaderBar {...props.headerBarConfig} />
+      {showHeaderBar && props.headerBarConfig && (
+        <HeaderBar {...props.headerBarConfig} />
+      )}
       <ContentContainer>{props.children}</ContentContainer>
       <BottomModal
         isVisible={showModal}

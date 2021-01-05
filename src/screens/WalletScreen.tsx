@@ -18,6 +18,7 @@ import { uiActions, UiState } from '../redux/reducer/ui';
 import ReactNativeModal from 'react-native-modal';
 
 import { SwipeListView } from 'react-native-swipe-list-view';
+import { ScreenWrapper } from './wrapper/ScreenWrapper';
 
 type Props = {
   children?: string;
@@ -43,18 +44,9 @@ export const WalletScreen: React.FC<Props> = (props) => {
     navigation.navigate('AssetDetail', { asset: asset });
   };
 
-  const handleButton = (type: string) => {
-    console.log('Button action ' + type + ' activated');
-  };
-
   return (
-    <Container style={{ paddingTop: insets.top }}>
-      <HeaderBar type="value" title="Assets" />
-      <BottomModal isVisible={showModal} type="send" onClose={closeModal}>
-        <ModalTestComponent></ModalTestComponent>
-      </BottomModal>
-      <ContentContainer>
-        {/* {assets.map((asset, index) => (
+    <ScreenWrapper headerBarConfig={{ type: 'value' }}>
+      {/* {assets.map((asset, index) => (
           <AssetCard
             key={index}
             name={asset.name}
@@ -65,73 +57,48 @@ export const WalletScreen: React.FC<Props> = (props) => {
             // disabled={asset.prefix == 'TXL'}
           />
         ))} */}
-        <SwipeListView
-          style={{
-            paddingLeft: spacing.s,
-            paddingRight: spacing.s,
-            paddingTop: spacing.m,
-          }}
-          data={assets}
-          renderItem={(data, rowMap) => (
-            <AssetCard
-              key={data.index}
-              name={data.item.name}
-              prefix={data.item.prefix}
-              onPress={() => onButtonPress(data.item)}
-              amount={data.item.value.toString()}
-              amountUsd={data.item.valueUsd.toString()}
-              // disabled={asset.prefix == 'TXL'}
+      <SwipeListView
+        style={{
+          overflow: 'visible',
+        }}
+        data={assets}
+        renderItem={(data, rowMap) => (
+          <AssetCard
+            key={data.index}
+            name={data.item.name}
+            prefix={data.item.prefix}
+            onPress={() => onButtonPress(data.item)}
+            amount={data.item.value.toString()}
+            amountUsd={data.item.valueUsd.toString()}
+            // disabled={asset.prefix == 'TXL'}
+          />
+        )}
+        renderHiddenItem={(data, rowMap) => (
+          <ButtonContainer key={data.index}>
+            <RoundButton
+              width={50}
+              title="Send"
+              icon={iconName.arrowLeft}
+              color={colors.LIGHT_BLUE}
+              onPress={openModal}
             />
-          )}
-          renderHiddenItem={(data, rowMap) => (
-            <ButtonContainer key={data.index}>
-              <RoundButton
-                width={50}
-                title="Send"
-                icon={iconName.arrowLeft}
-                color={colors.LIGHT_BLUE}
-                onPress={openModal}
-              />
-              <RoundButton
-                width={50}
-                title="Receive"
-                icon={iconName.arrowRight}
-                color={colors.LIGHT_BLUE}
-                onPress={openModal}
-              />
-            </ButtonContainer>
-          )}
-          closeOnRowOpen
-          closeOnRowBeginSwipe
-          leftOpenValue={50 + 2 * spacing.s}
-          rightOpenValue={-(50 + 2 * spacing.s)}
-          // leftActivationValue={20}
-          // onLeftAction={() => handleButton('send')}
-          // onRightAction={() => handleButton('receive')}
-        />
-      </ContentContainer>
-    </Container>
+            <RoundButton
+              width={50}
+              title="Receive"
+              icon={iconName.arrowRight}
+              color={colors.LIGHT_BLUE}
+              onPress={openModal}
+            />
+          </ButtonContainer>
+        )}
+        closeOnRowOpen
+        closeOnRowBeginSwipe
+        leftOpenValue={50 + 2 * spacing.s}
+        rightOpenValue={-(50 + 2 * spacing.s)}
+      />
+    </ScreenWrapper>
   );
 };
-
-const ModalTestComponent = styled.View`
-  height: 400px;
-  background-color: red;
-`;
-
-const Button = styled.TouchableOpacity`
-  height: 40px;
-  background-color: green;
-`;
-
-const Container = styled.View`
-  flex: 1;
-`;
-
-const ContentContainer = styled.View`
-  flex: 1;
-  /* padding: ${spacing.m}px ${spacing.s}px 0px; */
-`;
 
 const ButtonContainer = styled.View`
   padding: ${spacing.s}px;
