@@ -43,7 +43,6 @@ export const ModalContentSend: React.FC<Props> = (props) => {
             BTC or Autobahn Network Address
           </InputHeader>
           <TextInput
-            type="mail"
             value={address}
             onChangeText={(newValue: string) => setAddress(newValue)}
           ></TextInput>
@@ -65,7 +64,6 @@ export const ModalContentSend: React.FC<Props> = (props) => {
             Balance: 0.00 BTC
           </InputHeader>
           <TextInput
-            type="mail"
             value={amount}
             placeholder="0.00"
             onChangeText={(newValue: string) => setAmount(newValue)}

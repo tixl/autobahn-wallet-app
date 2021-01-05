@@ -1,12 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import { colors, fonts, shapes, spacing, textSize } from '../../constants';
-import {
-  NativeSyntheticEvent,
-  TextInput as RNTextInput,
-  TextInputChangeEventData,
-} from 'react-native';
-import { composeInitialProps } from 'react-i18next/*';
 
 export type InputType = 'mail';
 
@@ -15,7 +9,6 @@ type StyledProps = {
 };
 
 type Props = {
-  type: InputType;
   value: string;
   placeholder?: string;
   autoFocus?: boolean;
@@ -23,7 +16,6 @@ type Props = {
 };
 
 export const TextInput: React.FC<Props> = ({
-  type = 'mail',
   placeholder = '',
   value = '',
   onChangeText,

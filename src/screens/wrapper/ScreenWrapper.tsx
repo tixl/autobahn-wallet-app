@@ -1,14 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
-import {
-  BottomModal,
-  HeaderBar,
-  HeaderBarProps,
-  Text,
-  Toggle,
-} from '../../components';
+import { BottomModal, HeaderBar, HeaderBarProps } from '../../components';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { colors, spacing, textSize } from '../../constants';
+import { spacing } from '../../constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { uiActions, UiState } from '../../redux/reducer/ui';
 import { RootState } from '../../redux/store';

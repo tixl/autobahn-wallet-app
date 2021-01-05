@@ -1,8 +1,6 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { composeInitialProps } from 'react-i18next/*';
-import { StyleSheet, TextStyle, Text as RNText } from 'react-native';
-import styled from 'styled-components/native';
-import { textSize, colors, fonts } from '../../constants';
+import React from 'react';
+import { TextStyle, Text as RNText } from 'react-native';
+import { textSize, fonts } from '../../constants';
 
 type FontWeightTypes = 'regular' | 'bold' | 'semiBold' | 'light';
 

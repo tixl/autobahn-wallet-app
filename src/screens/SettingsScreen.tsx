@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
-import { HeaderBar, Text, Toggle } from '../components';
+import { Text, Toggle } from '../components';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors, spacing, textSize } from '../constants';
 import { ScreenWrapper } from './wrapper/ScreenWrapper';
@@ -8,8 +8,6 @@ import { ScreenWrapper } from './wrapper/ScreenWrapper';
 type Props = {};
 
 const SettingsScreen: React.FC<Props> = (props) => {
-  const insets = useSafeAreaInsets();
-
   const [advancedDeposits, setAdvancedDeposits] = useState(false);
 
   return (

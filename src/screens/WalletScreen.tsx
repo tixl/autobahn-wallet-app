@@ -1,21 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import {
-  AssetCard,
-  HeaderBar,
-  iconName,
-  RoundButton,
-  BottomModal,
-} from '../components';
-import { textSize, colors, spacing } from '../constants';
+import { AssetCard, iconName, RoundButton } from '../components';
+import { colors, spacing } from '../constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { ExampleAsset, ExampleState } from '../redux/reducer/example';
-import { RootStackParamList } from '../navigation/stacks/RootStack';
-import { uiActions, UiState } from '../redux/reducer/ui';
-import ReactNativeModal from 'react-native-modal';
+import { uiActions } from '../redux/reducer/ui';
 
 import { SwipeListView } from 'react-native-swipe-list-view';
 import { ScreenWrapper } from './wrapper/ScreenWrapper';
@@ -27,7 +18,6 @@ type Props = {
 export const WalletScreen: React.FC<Props> = (props) => {
   const navigation = useNavigation();
   const route = useRoute();
-  const insets = useSafeAreaInsets();
   const dispatch = useDispatch();
 
   // Get example data from redux store
@@ -35,9 +25,6 @@ export const WalletScreen: React.FC<Props> = (props) => {
     (state: RootState) => state.example
   );
 
-  // Get modal data from store
-  const { showModal }: UiState = useSelector((state: RootState) => state.ui);
-  const closeModal = () => dispatch(uiActions.closeModal());
   const openModal = () => dispatch(uiActions.openModal('send'));
 
   const onButtonPress = (asset: ExampleAsset) => {

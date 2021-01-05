@@ -1,11 +1,10 @@
-import { RouteProp, useNavigation } from '@react-navigation/native';
+import { RouteProp } from '@react-navigation/native';
 import * as React from 'react';
-import { color } from 'react-native-reanimated';
 import { RootStackParamList } from '../navigation/stacks/RootStack';
 import styled from 'styled-components/native';
 import { iconName, Text, RoundButton, AssetValueCard } from '../components';
 
-import { colors, spacing, textSize, windowWidth } from '../constants';
+import { colors, spacing, textSize } from '../constants';
 import { ScreenWrapper } from './wrapper/ScreenWrapper';
 import { useDispatch } from 'react-redux';
 import { ModalType, uiActions } from '../redux/reducer/ui';
