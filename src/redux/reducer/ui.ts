@@ -28,7 +28,7 @@ const ui = createSlice({
     },
     closeModal: (state) => {
       state.showModal = false;
-      state.modalType = undefined;
+      // state.modalType = undefined;
     },
   },
 });

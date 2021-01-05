@@ -3,17 +3,12 @@ import * as React from 'react';
 import { color } from 'react-native-reanimated';
 import { RootStackParamList } from '../navigation/stacks/RootStack';
 import styled from 'styled-components/native';
-import {
-  HeaderBar,
-  Icon,
-  iconName,
-  Text,
-  RoundButton,
-  AssetValueCard,
-} from '../components';
+import { iconName, Text, RoundButton, AssetValueCard } from '../components';
 
 import { colors, spacing, textSize, windowWidth } from '../constants';
 import { ScreenWrapper } from './wrapper/ScreenWrapper';
+import { useDispatch } from 'react-redux';
+import { ModalType, uiActions } from '../redux/reducer/ui';
 
 type AssetDetailScreenRouteProp = RouteProp<RootStackParamList, 'AssetDetail'>;
 
@@ -22,11 +17,16 @@ type Props = {
 };
 
 const AssetDetailScreen: React.FC<Props> = (props) => {
+  const dispatch = useDispatch();
   // Get route params
   const asset = props.route.params.asset;
 
   // const buttonWidth: number = (windowWidth - 2 * spacing.s) / 3 - 2 * spacing.m;
   const buttonWidth: number = 50;
+
+  const onButtonPress = (type: ModalType) => {
+    dispatch(uiActions.openModal(type));
+  };
 
   return (
     <ScreenWrapper
@@ -63,21 +63,21 @@ const AssetDetailScreen: React.FC<Props> = (props) => {
             title="Send"
             icon={iconName.arrowLeft}
             color={colors.LIGHT_BLUE}
-            onPress={() => console.log('Send button pressed')}
+            onPress={() => onButtonPress('send')}
           />
           <RoundButton
             width={buttonWidth}
             title="Receive"
             icon={iconName.arrowRight}
             color={colors.LIGHT_BLUE}
-            onPress={() => console.log('Send button pressed')}
+            onPress={() => onButtonPress('receive')}
           />
           <RoundButton
             width={buttonWidth}
             title="Deposit"
             icon={iconName.bug}
             color={colors.LIGHT_BLUE}
-            onPress={() => console.log('Send button pressed')}
+            onPress={() => onButtonPress('deposit')}
           />
         </ButtonContainer>
       </Section>

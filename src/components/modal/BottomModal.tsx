@@ -1,11 +1,10 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
-import { textSize, colors, spacing, fonts } from '../../constants';
-import { ModalType, uiActions, UiState } from '../../redux/reducer/ui';
-import { ReactNativeModal as RNModal } from 'react-native-modal';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
+import { ModalType } from '../../redux/reducer/ui';
 import ReactNativeModal from 'react-native-modal';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
+import { ModalContentSend } from './modal-contents';
 
 type Props = {
   children?: React.ReactNode;
@@ -16,6 +15,27 @@ type Props = {
 };
 
 export const BottomModal: React.FC<Props> = (props) => {
+  var modalContent: React.ReactNode = null;
+
+  const modalType: ModalType = useSelector(
+    (state: RootState) => state.ui.modalType
+  );
+
+  switch (modalType) {
+    case 'send':
+      modalContent = <ModalContentSend></ModalContentSend>;
+      break;
+    case 'receive':
+      modalContent = <PlaceholderContent></PlaceholderContent>;
+      break;
+    case 'deposit':
+      modalContent = <PlaceholderContent></PlaceholderContent>;
+      break;
+    default:
+      modalContent = null;
+      break;
+  }
+
   return (
     <ReactNativeModal
       isVisible={props.isVisible}
@@ -30,10 +50,7 @@ export const BottomModal: React.FC<Props> = (props) => {
       onBackdropPress={props.onClose}
       onSwipeComplete={props.onClose}
     >
-      {/* <Container>{props.children}</Container> */}
-      <Container>
-        <PlaceholderContent></PlaceholderContent>
-      </Container>
+      <Container>{modalContent}</Container>
     </ReactNativeModal>
   );
 };

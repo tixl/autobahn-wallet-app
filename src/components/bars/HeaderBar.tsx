@@ -67,10 +67,7 @@ const Container = styled.View`
   height: 45px;
 `;
 
-const Title = styled(Text)`
-  font-family: ${fonts.semiBold};
-  font-size: ${textSize.xxl}px;
-`;
+const Title = styled(Text)``;
 
 const RightContainer = styled.View`
   align-items: flex-end;

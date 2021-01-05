@@ -64,7 +64,7 @@ export const Text: React.FC<Props> = ({
           color: fontColor,
           textAlign: textAlign,
           // Vertically align text to bottom (workaround, as textAlignVertical only works on Android devices)
-          bottom: alignToBottom ? -(0.25 * fontSize) : 0,
+          bottom: alignToBottom ? -(0.3 * fontSize) : 0,
         },
         props.maxWidth ? { maxWidth: props.maxWidth } : {},
         style,

@@ -17,7 +17,7 @@ export * from './cards/AssetCard';
 export * from './cards/AssetValueCard';
 
 // Switch components
-export * from './switches/Toggle';
+export * from './inputs/Toggle';
 
 // Text components
 export * from './text/Text';
