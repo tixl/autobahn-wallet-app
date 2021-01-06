@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { uiActions, UiState } from '../../redux/reducer/ui';
 import { RootState } from '../../redux/store';
 import { useBottomModal } from '../../hooks/useBottomModal';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 type Props = {
   children: React.ReactNode;
@@ -25,6 +26,10 @@ export const ScreenWrapper: React.FC<Props> = ({
 }) => {
   const insets = useSafeAreaInsets();
   const { modalEnabled, hideModal } = useBottomModal();
+  const route = useRoute();
+  const navigation = useNavigation();
+
+  console.log(route.name);
 
   return (
     <Container style={{ paddingTop: props.disableTopPadding ? 0 : insets.top }}>

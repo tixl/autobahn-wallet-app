@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import * as React from 'react';
 import styled from 'styled-components/native';
 import { Button, Logo } from '../components';
@@ -8,6 +9,8 @@ type Props = {
 };
 
 const IntroScreen: React.FC<Props> = (props) => {
+  const navigation = useNavigation();
+
   return (
     <SafeAreaContainer>
       <Container>
@@ -28,8 +31,7 @@ const IntroScreen: React.FC<Props> = (props) => {
           <Button
             type="primary"
             label="Create new wallet"
-            onPress={() => console.log('Create new wallet clicked')}
-            style={{ marginBottom: 20 }}
+            onPress={() => navigation.navigate('Legal')}
           />
           <ButtonSpacer />
           <Button

@@ -54,6 +54,7 @@ export const TouchableWrapper: React.FC<Props> = ({
 
   return (
     <TouchContainer
+      disabled={disabled}
       onPress={handlePress}
       onPressIn={handleOnPressIn}
       onPressOut={handleOnPressOut}
@@ -75,4 +76,6 @@ export const TouchableWrapper: React.FC<Props> = ({
 
 const TouchContainer = styled.TouchableWithoutFeedback``;
 
-const Container = styled(Animated.View)``;
+const Container = styled(Animated.View)`
+  flex-grow: 1;
+`;

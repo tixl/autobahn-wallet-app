@@ -60,7 +60,7 @@ export const Button: React.FC<Props> = ({
   }
 
   return (
-    <TouchableWrapper onPress={onPress}>
+    <TouchableWrapper onPress={onPress} disabled={disabled}>
       <Gradient
         colors={gradientColors}
         start={[0, 1]}
