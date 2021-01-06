@@ -9,7 +9,8 @@ const textSize = {
   l: isSmallDevice ? 18 : 20,
   xl: isSmallDevice ? 20 : 24,
   xxl: isSmallDevice ? 24 : 32,
-  xxxl: isSmallDevice ? 56 : 80,
+  xxxl: isSmallDevice ? 32 : 48,
+  xxxxl: isSmallDevice ? 56 : 80,
 };
 
 export default textSize;

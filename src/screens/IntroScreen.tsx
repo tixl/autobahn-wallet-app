@@ -59,7 +59,7 @@ const TitleContainer = styled.View`
 const TitleText = styled.Text`
   text-align: center;
   font-family: ${fonts.bold};
-  font-size: ${textSize.xxl}px;
+  font-size: ${textSize.xxxl}px;
 `;
 
 const SubTitleText = styled.Text`
