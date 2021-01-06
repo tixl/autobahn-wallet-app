@@ -7,16 +7,13 @@ import { Image } from 'react-native-svg';
 import {
   animationSelect,
   animationSelectShadow,
-  isSmallDevice,
   textSize,
   colors,
   spacing,
-  fonts,
   shapes,
 } from '../../constants';
 import fireHapticFeedback from '../../utils/hapticFeedback';
 import { Text } from '../text/Text';
-import { color } from 'react-native-reanimated';
 
 type Props = {
   name: string;
@@ -39,8 +36,8 @@ export const AssetCard: React.FC<Props> = (props) => {
   };
 
   // Animation
-  const scale = new Animated.Value(1);
-  const shadowOpacity = new Animated.Value(0.16);
+  const [scale] = useState(new Animated.Value(1));
+  const [shadowOpacity] = useState(new Animated.Value(0.16));
 
   const handleOnPressIn = () => {
     const configScale = animationSelect(0.98);
@@ -94,9 +91,7 @@ export const AssetCard: React.FC<Props> = (props) => {
   );
 };
 
-const TouchContainer = styled.TouchableWithoutFeedback`
-  overflow: visible;
-`;
+const TouchContainer = styled.TouchableWithoutFeedback``;
 
 const Container = styled(Animated.View)`
   height: 112px;
