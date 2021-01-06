@@ -1,8 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components/native';
-import { Button } from '../components';
+import { Button, Logo } from '../components';
 import { colors, fonts, spacing, textSize } from '../constants';
-import { ScreenWrapper } from './wrapper/ScreenWrapper';
 
 type Props = {
   children?: string;
@@ -12,6 +11,9 @@ const IntroScreen: React.FC<Props> = (props) => {
   return (
     <SafeAreaContainer>
       <Container>
+        <LogoContainer>
+          <Logo name="btc" size={textSize.xxxxl}></Logo>
+        </LogoContainer>
         <TitleContainer>
           <TitleText>Tixl's</TitleText>
           <TitleText style={{ color: colors.BLUE }}>
@@ -52,13 +54,17 @@ const Container = styled.View`
   padding: 0px ${spacing.s}px 0px;
 `;
 
+const LogoContainer = styled.View`
+  margin-bottom: ${spacing.m}px;
+`;
+
 const TitleContainer = styled.View`
   margin-bottom: ${spacing.s}px;
 `;
 
 const TitleText = styled.Text`
   text-align: center;
-  font-family: ${fonts.bold};
+  font-family: ${fonts.extraBold};
   font-size: ${textSize.xxxl}px;
 `;
 

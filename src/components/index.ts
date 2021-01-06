@@ -1,6 +1,9 @@
 // Icon
 export { default as Icon, iconName } from './Icon';
 
+// Logo
+export * from './Logo';
+
 // QR Code
 export { default as QRCode } from './QRCode';
 

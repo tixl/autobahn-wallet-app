@@ -20,6 +20,7 @@ export default function useCachedResources() {
           [fonts.regular]: require('../assets/fonts/Poppins-Regular.ttf'),
           [fonts.semiBold]: require('../assets/fonts/Poppins-SemiBold.ttf'),
           [fonts.bold]: require('../assets/fonts/Poppins-Bold.ttf'),
+          [fonts.extraBold]: require('../assets/fonts/Poppins-ExtraBold.ttf'),
           [fonts.light]: require('../assets/fonts/Poppins-Light.ttf'),
         });
       } catch (e) {

@@ -3,5 +3,6 @@ export default {
   regular: 'poppinsRegular',
   semiBold: 'poppinsSemiBold',
   bold: 'poppinsBold',
+  extraBold: 'poppinsExtraBold',
   light: 'poppinsLight',
 };
