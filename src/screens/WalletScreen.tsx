@@ -10,6 +10,7 @@ import { uiActions } from '../redux/reducer/ui';
 
 import { SwipeListView } from 'react-native-swipe-list-view';
 import { ScreenWrapper } from './wrapper/ScreenWrapper';
+import { useBottomModal } from '../hooks/useBottomModal';
 
 type Props = {
   children?: string;
@@ -17,15 +18,12 @@ type Props = {
 
 export const WalletScreen: React.FC<Props> = (props) => {
   const navigation = useNavigation();
-  const route = useRoute();
-  const dispatch = useDispatch();
+  const { showModal } = useBottomModal();
 
   // Get example data from redux store
   const { assets }: ExampleState = useSelector(
     (state: RootState) => state.example
   );
-
-  const openModal = () => dispatch(uiActions.openModal('send'));
 
   const onButtonPress = (asset: ExampleAsset) => {
     navigation.navigate('AssetDetail', { asset: asset });
@@ -33,17 +31,6 @@ export const WalletScreen: React.FC<Props> = (props) => {
 
   return (
     <ScreenWrapper headerBarConfig={{ type: 'value' }}>
-      {/* {assets.map((asset, index) => (
-          <AssetCard
-            key={index}
-            name={asset.name}
-            prefix={asset.prefix}
-            onPress={() => onButtonPress(asset)}
-            amount={asset.value.toString()}
-            amountUsd={asset.valueUsd.toString()}
-            // disabled={asset.prefix == 'TXL'}
-          />
-        ))} */}
       <SwipeListView
         style={{
           overflow: 'visible',
@@ -67,14 +54,14 @@ export const WalletScreen: React.FC<Props> = (props) => {
               title="Send"
               icon={iconName.arrowLeft}
               color={colors.LIGHT_BLUE}
-              onPress={openModal}
+              onPress={() => showModal('send')}
             />
             <RoundButton
               width={50}
               title="Receive"
               icon={iconName.arrowRight}
               color={colors.LIGHT_BLUE}
-              onPress={openModal}
+              onPress={() => showModal('receive')}
             />
           </ButtonContainer>
         )}
@@ -83,6 +70,17 @@ export const WalletScreen: React.FC<Props> = (props) => {
         leftOpenValue={50 + 2 * spacing.s}
         rightOpenValue={-(50 + 2 * spacing.s)}
       />
+      {/* {assets.map((asset, index) => (
+          <AssetCard
+            key={index}
+            name={asset.name}
+            prefix={asset.prefix}
+            onPress={() => onButtonPress(asset)}
+            amount={asset.value.toString()}
+            amountUsd={asset.valueUsd.toString()}
+            // disabled={asset.prefix == 'TXL'}
+          />
+        ))} */}
     </ScreenWrapper>
   );
 };

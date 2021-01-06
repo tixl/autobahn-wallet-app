@@ -8,6 +8,7 @@ import { colors, spacing, textSize } from '../constants';
 import { ScreenWrapper } from './wrapper/ScreenWrapper';
 import { useDispatch } from 'react-redux';
 import { ModalType, uiActions } from '../redux/reducer/ui';
+import { useBottomModal } from '../hooks/useBottomModal';
 
 type AssetDetailScreenRouteProp = RouteProp<RootStackParamList, 'AssetDetail'>;
 
@@ -16,16 +17,13 @@ type Props = {
 };
 
 const AssetDetailScreen: React.FC<Props> = (props) => {
-  const dispatch = useDispatch();
+  const { showModal } = useBottomModal();
+
   // Get route params
   const asset = props.route.params.asset;
 
   // const buttonWidth: number = (windowWidth - 2 * spacing.s) / 3 - 2 * spacing.m;
   const buttonWidth: number = 50;
-
-  const onButtonPress = (type: ModalType) => {
-    dispatch(uiActions.openModal(type));
-  };
 
   return (
     <ScreenWrapper
@@ -62,21 +60,21 @@ const AssetDetailScreen: React.FC<Props> = (props) => {
             title="Send"
             icon={iconName.arrowLeft}
             color={colors.LIGHT_BLUE}
-            onPress={() => onButtonPress('send')}
+            onPress={() => showModal('send')}
           />
           <RoundButton
             width={buttonWidth}
             title="Receive"
             icon={iconName.arrowRight}
             color={colors.LIGHT_BLUE}
-            onPress={() => onButtonPress('receive')}
+            onPress={() => showModal('receive')}
           />
           <RoundButton
             width={buttonWidth}
             title="Deposit"
             icon={iconName.bug}
             color={colors.LIGHT_BLUE}
-            onPress={() => onButtonPress('deposit')}
+            onPress={() => showModal('deposit')}
           />
         </ButtonContainer>
       </Section>

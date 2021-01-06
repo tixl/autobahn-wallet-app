@@ -6,6 +6,7 @@ import { spacing } from '../../constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { uiActions, UiState } from '../../redux/reducer/ui';
 import { RootState } from '../../redux/store';
+import { useBottomModal } from '../../hooks/useBottomModal';
 
 type Props = {
   children: React.ReactNode;
@@ -21,11 +22,8 @@ export const ScreenWrapper: React.FC<Props> = ({
   ...props
 }) => {
   const insets = useSafeAreaInsets();
-  const dispatch = useDispatch();
 
-  // Get modal data from store
-  const { showModal }: UiState = useSelector((state: RootState) => state.ui);
-  const closeModal = () => dispatch(uiActions.closeModal());
+  const { modalEnabled, hideModal } = useBottomModal();
 
   return (
     <Container style={{ paddingTop: props.disableTopPadding ? 0 : insets.top }}>
@@ -34,9 +32,9 @@ export const ScreenWrapper: React.FC<Props> = ({
       )}
       <ContentContainer>{props.children}</ContentContainer>
       <BottomModal
-        isVisible={showModal}
+        isVisible={modalEnabled}
         type="send"
-        onClose={closeModal}
+        onClose={hideModal}
       ></BottomModal>
     </Container>
   );

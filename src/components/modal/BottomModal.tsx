@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { ModalContentSend } from './modal-contents';
 import { shapes, windowHeight } from '../../constants';
+import { useBottomModal } from '../../hooks/useBottomModal';
 
 type Props = {
   children?: React.ReactNode;
@@ -18,9 +19,7 @@ type Props = {
 export const BottomModal: React.FC<Props> = (props) => {
   var modalContent: React.ReactNode = null;
 
-  const modalType: ModalType = useSelector(
-    (state: RootState) => state.ui.modalType
-  );
+  const { modalType } = useBottomModal();
 
   switch (modalType) {
     case 'send':
