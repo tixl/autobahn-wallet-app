@@ -1,6 +1,15 @@
 import * as Haptic from 'expo-haptics';
 
-const fireHapticFeedback = hapticType => {
+export type HapticPressType =
+  | 'selection'
+  | 'notificationSuccess'
+  | 'notificationWarning'
+  | 'notificationError'
+  | 'impactLight'
+  | 'impactMedium'
+  | 'impactHeavy';
+
+const fireHapticFeedback = (hapticType: HapticPressType) => {
   switch (hapticType) {
     case 'selection':
       Haptic.selectionAsync();

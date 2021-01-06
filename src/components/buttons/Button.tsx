@@ -9,38 +9,49 @@ import {
   textSize,
   colors,
   spacing,
+  shapes,
 } from '../../constants';
-import fireHapticFeedback from '../../utils/hapticFeedback';
+import fireHapticFeedback, {
+  HapticPressType,
+} from '../../utils/hapticFeedback';
 import { Text } from '../text/Text';
+import { TouchableWrapper } from '../wrapper/TouchableWrapper';
+import { NumericLiteral } from 'typescript';
 
-export const Button = ({
-  borderRadius,
-  onPress,
-  type = 'primary',
+export type ButtonType = 'primary' | 'secondary';
+
+type Props = {
+  label: string;
+  disabled?: boolean;
+  loading?: boolean;
+  borderRadius?: number;
+  type: ButtonType;
+  onPress: () => void;
+  hapticPressType?: HapticPressType;
+  style?: React.CSSProperties;
+};
+
+export const Button: React.FC<Props> = ({
   label = 'Label',
-  hapticTypePress,
   disabled = false,
   loading = false,
-  style,
+  type = 'primary',
+  hapticPressType = 'selection',
+  borderRadius = shapes.borderRadius,
+  onPress,
+  ...props
 }) => {
   let gradientColors;
   let fontColor;
 
-  const handlePress = () => {
-    if (!disabled) {
-      fireHapticFeedback(hapticTypePress);
-      onPress && onPress();
-    }
-  };
-
   switch (type) {
     case 'primary':
-      gradientColors = [colors.primary300, colors.primary400];
-      fontColor = colors.neutral000;
+      gradientColors = [colors.BLUE, colors.DARK_BLUE];
+      fontColor = colors.WHITE;
       break;
     case 'secondary':
-      gradientColors = ['transparent', 'transparent'];
-      fontColor = colors.primary400;
+      gradientColors = ['white', 'white'];
+      fontColor = colors.BLUE;
       break;
     default:
       gradientColors = [colors.primary300, colors.primary400];
@@ -48,78 +59,36 @@ export const Button = ({
       break;
   }
 
-  /**
-   * Animation
-   */
-  const scale = new Animated.Value(1);
-  const shadowOpacity = new Animated.Value(0.16);
-
-  const handleOnPressIn = () => {
-    const configScale = animationSelect(0.98);
-    const configShadow = animationSelectShadow(0);
-    Animated.timing(scale, configScale).start();
-    Animated.timing(shadowOpacity, configShadow).start();
-  };
-
-  const handleOnPressOut = () => {
-    const configScale = animationSelect(1);
-    const configShadow = animationSelectShadow(0.16);
-    Animated.timing(scale, configScale).start();
-    Animated.timing(shadowOpacity, configShadow).start();
-  };
-
   return (
-    <Touch
-      onPress={handlePress}
-      onPressIn={handleOnPressIn}
-      onPressOut={handleOnPressOut}
-      {...borderRadius}
-    >
-      <Container
+    <TouchableWrapper onPress={onPress}>
+      <Gradient
+        colors={gradientColors}
+        start={[0, 1]}
+        end={[1, 0]}
+        pointerEvents="none"
         style={[
           {
-            shadowOpacity,
-            shadowRadius: 12,
-            shadowOffset: { width: 0, height: 4 },
-            shadowColor: colors.neutral900,
-            transform: [{ scale }],
+            height: isSmallDevice ? 48 : 56,
+            opacity: disabled ? 0.5 : 1,
+            borderRadius: borderRadius,
           },
-          style,
         ]}
       >
-        <Gradient
-          colors={gradientColors}
-          start={[0, 1]}
-          end={[1, 0]}
-          pointerEvents="none"
-          style={{
-            height: isSmallDevice ? 48 : 56,
-            borderRadius: borderRadius || 8,
-            opacity: disabled ? 0.5 : 1,
-          }}
-        >
-          {loading ? (
-            <ActivityIndicator color={fontColor} size="small" />
-          ) : (
-            <Text
-              fontColor={fontColor}
-              fontSize={textSize.l}
-              fontWeight="semiBold"
-            >
-              {label}
-            </Text>
-          )}
-        </Gradient>
-      </Container>
-    </Touch>
+        {loading ? (
+          <ActivityIndicator color={fontColor} size="small" />
+        ) : (
+          <Text
+            fontColor={fontColor}
+            fontSize={textSize.m}
+            fontWeight="semiBold"
+          >
+            {label}
+          </Text>
+        )}
+      </Gradient>
+    </TouchableWrapper>
   );
 };
-
-const Container = styled(Animated.View)``;
-
-const Touch = styled.TouchableWithoutFeedback`
-  overflow: visible;
-`;
 
 const Gradient = styled(LinearGradient)`
   justify-content: center;

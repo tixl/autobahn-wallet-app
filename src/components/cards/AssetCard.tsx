@@ -14,6 +14,7 @@ import {
 } from '../../constants';
 import fireHapticFeedback from '../../utils/hapticFeedback';
 import { Text } from '../text/Text';
+import { TouchableWrapper } from '../wrapper/TouchableWrapper';
 
 type Props = {
   name: string;
@@ -54,20 +55,8 @@ export const AssetCard: React.FC<Props> = (props) => {
   };
 
   return (
-    <TouchContainer
-      onPress={handlePress}
-      onPressIn={handleOnPressIn}
-      onPressOut={handleOnPressOut}
-    >
-      <Container
-        style={{
-          shadowOpacity,
-          shadowRadius: 12,
-          shadowOffset: { width: 0, height: 3 },
-          shadowColor: colors.neutral900,
-          transform: [{ scale }],
-        }}
-      >
+    <TouchableWrapper onPress={props.onPress}>
+      <Container>
         <AssetInformationContainer>
           <AssetIconContainer>
             <Icon
@@ -87,16 +76,14 @@ export const AssetCard: React.FC<Props> = (props) => {
           </AssetAmountValueDollar>
         </AssetAmountContainer>
       </Container>
-    </TouchContainer>
+    </TouchableWrapper>
   );
 };
 
-const TouchContainer = styled.TouchableWithoutFeedback``;
-
-const Container = styled(Animated.View)`
+const Container = styled.View`
   height: 112px;
-  background-color: white;
   border-radius: ${shapes.borderRadius}px;
+  background-color: white;
   padding: ${spacing.s}px;
   flex-direction: row;
   justify-content: space-between;

@@ -28,7 +28,7 @@ const AppNavigator = () => {
       version: 1.0,
     },
   };
-  const isIntroFinished = true;
+  const isIntroFinished = false;
 
   const [showOnboarding, setShowOnboarding] = useState(!isIntroFinished);
   const [initialRoute, setInitialRoute] = useState('Intro');
