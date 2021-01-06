@@ -10,3 +10,5 @@ const spacing = {
 };
 
 export default spacing;
+
+/* padding: ${spacing.m}px ${spacing.s}px 0px; */

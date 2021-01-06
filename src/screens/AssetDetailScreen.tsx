@@ -30,71 +30,77 @@ const AssetDetailScreen: React.FC<Props> = (props) => {
       headerBarConfig={{ title: asset.name, type: 'close' }}
       disableTopPadding
     >
-      {/* Overview Section */}
-      <Section>
-        <Text textAlign="left" fontWeight="semiBold" fontSize={textSize.xl}>
-          Overview
-        </Text>
-        <Spacer />
-        <OverviewContainer>
-          <AssetValueCard
-            name={asset.prefix}
-            value={asset.value.toString()}
-          ></AssetValueCard>
+      <ScrollContainer>
+        {/* Overview Section */}
+        <Section>
+          <Text textAlign="left" fontWeight="semiBold" fontSize={textSize.xl}>
+            Overview
+          </Text>
           <Spacer />
-          <AssetValueCard
-            name="USD"
-            value={asset.valueUsd.toString()}
-          ></AssetValueCard>
-        </OverviewContainer>
-      </Section>
-      {/* Action Button Section */}
-      <Section>
-        <Text textAlign="left" fontWeight="semiBold" fontSize={textSize.xl}>
-          Transfers
-        </Text>
-        <Spacer />
-        <ButtonContainer>
-          <RoundButton
-            width={buttonWidth}
-            title="Send"
-            icon={iconName.arrowLeft}
-            color={colors.LIGHT_BLUE}
-            onPress={() => showModal('send')}
-          />
-          <RoundButton
-            width={buttonWidth}
-            title="Receive"
-            icon={iconName.arrowRight}
-            color={colors.LIGHT_BLUE}
-            onPress={() => showModal('receive')}
-          />
-          <RoundButton
-            width={buttonWidth}
-            title="Deposit"
-            icon={iconName.bug}
-            color={colors.LIGHT_BLUE}
-            onPress={() => showModal('deposit')}
-          />
-        </ButtonContainer>
-      </Section>
-      {/* Transaction History Section */}
-      <Section>
-        <Text textAlign="left" fontWeight="semiBold" fontSize={textSize.xl}>
-          Transaction History
-        </Text>
-        <Text
-          textAlign="left"
-          fontWeight="light"
-          fontSize={textSize.s}
-          fontColor={colors.LIGHT_BLACK}
-        >
-          Last updated: a few seconds ago
-        </Text>
-      </Section>
+          <OverviewContainer>
+            <AssetValueCard
+              name={asset.prefix}
+              value={asset.value.toString()}
+            ></AssetValueCard>
+            <Spacer />
+            <AssetValueCard
+              name="USD"
+              value={asset.valueUsd.toString()}
+            ></AssetValueCard>
+          </OverviewContainer>
+        </Section>
+        {/* Action Button Section */}
+        <Section>
+          <Text textAlign="left" fontWeight="semiBold" fontSize={textSize.xl}>
+            Transfers
+          </Text>
+          <Spacer />
+          <ButtonContainer>
+            <RoundButton
+              width={buttonWidth}
+              title="Send"
+              icon={iconName.arrowLeft}
+              color={colors.LIGHT_BLUE}
+              onPress={() => showModal('send')}
+            />
+            <RoundButton
+              width={buttonWidth}
+              title="Receive"
+              icon={iconName.arrowRight}
+              color={colors.LIGHT_BLUE}
+              onPress={() => showModal('receive')}
+            />
+            <RoundButton
+              width={buttonWidth}
+              title="Deposit"
+              icon={iconName.bug}
+              color={colors.LIGHT_BLUE}
+              onPress={() => showModal('deposit')}
+            />
+          </ButtonContainer>
+        </Section>
+        {/* Transaction History Section */}
+        <Section>
+          <Text textAlign="left" fontWeight="semiBold" fontSize={textSize.xl}>
+            Transaction History
+          </Text>
+          <Text
+            textAlign="left"
+            fontWeight="light"
+            fontSize={textSize.s}
+            fontColor={colors.LIGHT_BLACK}
+          >
+            Last updated: a few seconds ago
+          </Text>
+        </Section>
+      </ScrollContainer>
     </ScreenWrapper>
   );
 };
+
+const ScrollContainer = styled.ScrollView`
+  overflow: visible;
+`;
 
 const Section = styled.View`
   margin-bottom: ${spacing.xl}px;

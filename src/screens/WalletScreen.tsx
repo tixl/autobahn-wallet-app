@@ -70,6 +70,7 @@ export const WalletScreen: React.FC<Props> = (props) => {
         leftOpenValue={50 + 2 * spacing.s}
         rightOpenValue={-(50 + 2 * spacing.s)}
       />
+
       {/* {assets.map((asset, index) => (
           <AssetCard
             key={index}
@@ -90,6 +91,10 @@ const ButtonContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+`;
+
+const Container = styled.View`
+  /* padding: ${spacing.m}px ${spacing.s}px 0px; */
 `;
 
 export default WalletScreen;

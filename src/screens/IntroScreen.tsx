@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components/native';
+import { ScreenWrapper } from './wrapper/ScreenWrapper';
 
 type Props = {
   children?: string;
@@ -7,9 +8,11 @@ type Props = {
 
 const IntroScreen: React.FC<Props> = (props) => {
   return (
-    <Container>
-      <CenterText>Intro</CenterText>
-    </Container>
+    <ScreenWrapper>
+      <Container>
+        <CenterText>Intro Screen</CenterText>
+      </Container>
+    </ScreenWrapper>
   );
 };
 
@@ -21,7 +24,7 @@ const Container = styled.View`
 `;
 
 const CenterText = styled.Text`
-  color: white;
+  color: black;
 `;
 
 export default IntroScreen;

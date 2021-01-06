@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Children } from 'react';
 import styled from 'styled-components/native';
 import { BottomModal, HeaderBar, HeaderBarProps } from '../../components';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -10,19 +10,20 @@ import { useBottomModal } from '../../hooks/useBottomModal';
 
 type Props = {
   children: React.ReactNode;
-  headerBarConfig: HeaderBarProps;
+  headerBarConfig?: HeaderBarProps;
   showHeaderBar?: boolean;
   disableTopPadding?: boolean;
   sidePadding?: number;
+  fixed?: boolean;
 };
 
 export const ScreenWrapper: React.FC<Props> = ({
   showHeaderBar = true,
   sidePadding = 0,
+  fixed = false,
   ...props
 }) => {
   const insets = useSafeAreaInsets();
-
   const { modalEnabled, hideModal } = useBottomModal();
 
   return (
@@ -31,6 +32,7 @@ export const ScreenWrapper: React.FC<Props> = ({
         <HeaderBar {...props.headerBarConfig} />
       )}
       <ContentContainer>{props.children}</ContentContainer>
+      {/* {props.children} */}
       <BottomModal
         isVisible={modalEnabled}
         type="send"
@@ -44,7 +46,8 @@ const Container = styled.View`
   flex: 1;
 `;
 
-const ContentContainer = styled.ScrollView`
+const ContentContainer = styled.View`
   flex: 1;
+  overflow: hidden;
   padding: ${spacing.m}px ${spacing.s}px 0px;
 `;
