@@ -134,7 +134,7 @@ const ButtonContainer = styled.View`
 `;
 
 const ButtonSpacer = styled.View`
-  width: ${spacing.s}px;
+  width: ${spacing.xxl}px;
 `;
 
 export default LegalScreen;
