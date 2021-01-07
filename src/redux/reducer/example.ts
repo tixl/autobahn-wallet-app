@@ -25,6 +25,7 @@ export type ExampleAsset = {
 export type ExampleState = {
   assets: ExampleAsset[];
   portfolioValue: number;
+  mnemonicPhrase: string[];
 };
 
 // Define initial state
@@ -96,6 +97,32 @@ const initialState: ExampleState = {
     },
   ],
   portfolioValue: 23.31,
+  mnemonicPhrase: [
+    'north',
+    'secret',
+    'prison',
+    'burden',
+    'north',
+    'secret',
+    'prison',
+    'burden',
+    'north',
+    'secret',
+    'prison',
+    'burden',
+    'north',
+    'secret',
+    'prison',
+    'burden',
+    'north',
+    'secret',
+    'prison',
+    'burden',
+    'north',
+    'secret',
+    'prison',
+    'burden',
+  ],
 };
 
 const example = createSlice({

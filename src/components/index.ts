@@ -26,6 +26,9 @@ export * from './inputs/TextInput';
 // Text components
 export * from './text/Text';
 
+// Mnemonic components
+export * from './mnemonic/MnemonicWord';
+
 // Modal components
 export * from './modal/BottomModal';
 // export { default as Modal } from './Modal';
