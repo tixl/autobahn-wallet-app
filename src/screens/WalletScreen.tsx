@@ -45,6 +45,7 @@ export const WalletScreen: React.FC<Props> = (props) => {
             onPress={() => onButtonPress(data.item)}
             amount={data.item.value.toString()}
             amountUsd={data.item.valueUsd.toString()}
+            logoName={data.item.logo}
             // disabled={asset.prefix == 'TXL'}
           />
         )}

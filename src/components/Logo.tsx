@@ -1,5 +1,10 @@
 import React from 'react';
-import { ColorValue, Image } from 'react-native';
+import {
+  ColorValue,
+  Image,
+  ImageRequireSource,
+  ImageSourcePropType,
+} from 'react-native';
 import logos from '../assets/logos';
 
 export type LogoName = 'tixl' | 'btc' | 'btc-cash' | 'monero';
@@ -15,7 +20,10 @@ export const Logo: React.FC<Props> = ({
   size = 36,
   backgroundColor = 'transparent',
 }) => {
-  let source: NodeRequire = logos.tixl;
+  // Replace with unknown logo (e.g. question mark)
+  let source: ImageSourcePropType = logos.tixl;
+
+  console.log(name);
 
   switch (name) {
     case 'btc':
@@ -36,7 +44,7 @@ export const Logo: React.FC<Props> = ({
 
   return (
     <Image
-      source={require('../assets/logos/tixl.png')}
+      source={source}
       style={{ width: size, height: size, backgroundColor: backgroundColor }}
     ></Image>
   );

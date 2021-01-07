@@ -1,24 +1,13 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { Animated, ActivityIndicator } from 'react-native';
+import React from 'react';
 import styled from 'styled-components/native';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import Icon, { iconName } from '../Icon';
-import { Image } from 'react-native-svg';
-import {
-  animationSelect,
-  animationSelectShadow,
-  textSize,
-  colors,
-  spacing,
-  shapes,
-} from '../../constants';
-import fireHapticFeedback from '../../utils/hapticFeedback';
+import { textSize, spacing, shapes } from '../../constants';
 import { Text } from '../text/Text';
 import { TouchableWrapper } from '../wrapper/TouchableWrapper';
+import { Logo, LogoName } from '../Logo';
 
 type Props = {
   name: string;
-  logo?: Image;
+  logoName: LogoName;
   amount: string;
   prefix: string;
   amountUsd: string;
@@ -27,43 +16,18 @@ type Props = {
 };
 
 export const AssetCard: React.FC<Props> = (props) => {
-  const handlePress = () => {
-    if (props.onPress && !props.disabled) {
-      fireHapticFeedback('selection');
-      props.onPress();
-    } else {
-      fireHapticFeedback('notificationError');
-    }
-  };
-
-  // Animation
-  const [scale] = useState(new Animated.Value(1));
-  const [shadowOpacity] = useState(new Animated.Value(0.16));
-
-  const handleOnPressIn = () => {
-    const configScale = animationSelect(0.98);
-    const configShadow = animationSelectShadow(0);
-    Animated.timing(scale, configScale).start();
-    Animated.timing(shadowOpacity, configShadow).start();
-  };
-
-  const handleOnPressOut = () => {
-    const configScale = animationSelect(1);
-    const configShadow = animationSelectShadow(0.16);
-    Animated.timing(scale, configScale).start();
-    Animated.timing(shadowOpacity, configShadow).start();
-  };
-
+  console.log(props.logoName);
   return (
     <TouchableWrapper onPress={props.onPress}>
       <Container>
         <AssetInformationContainer>
           <AssetIconContainer>
-            <Icon
+            {/* <Icon
               name={iconName.bug}
               size={shapes.iconSize}
               color={colors.DARK_GRAY}
-            ></Icon>
+            ></Icon> */}
+            <Logo name={props.logoName} />
           </AssetIconContainer>
           <AssetName fontSize={textSize.m}>{props.name}</AssetName>
         </AssetInformationContainer>

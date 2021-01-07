@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { LogoName } from '../../components';
 
 /**
  * createSlice is a function that accepts an initial state,
@@ -16,7 +17,7 @@ export type ExampleHistory = {
 export type ExampleAsset = {
   name: string;
   prefix: string;
-  logo: string;
+  logo: LogoName;
   value: number;
   valueUsd: number;
   history: ExampleHistory[];
@@ -42,55 +43,23 @@ const initialState: ExampleState = {
     {
       name: 'Bitcoin',
       prefix: 'BTC',
-      logo: 'bitcoin',
+      logo: 'btc',
       value: 984.54,
       valueUsd: 100.82,
       history: [],
     },
     {
-      name: 'Test',
-      prefix: 'BTC',
-      logo: 'bitcoin',
+      name: 'Bitcoin Cash',
+      prefix: 'BTH',
+      logo: 'btc-cash',
       value: 984.54,
       valueUsd: 100.82,
       history: [],
     },
     {
-      name: 'Test',
-      prefix: 'BTC',
-      logo: 'bitcoin',
-      value: 984.54,
-      valueUsd: 100.82,
-      history: [],
-    },
-    {
-      name: 'Test',
-      prefix: 'BTC',
-      logo: 'bitcoin',
-      value: 984.54,
-      valueUsd: 100.82,
-      history: [],
-    },
-    {
-      name: 'Test',
-      prefix: 'BTC',
-      logo: 'bitcoin',
-      value: 984.54,
-      valueUsd: 100.82,
-      history: [],
-    },
-    {
-      name: 'Test',
-      prefix: 'BTC',
-      logo: 'bitcoin',
-      value: 984.54,
-      valueUsd: 100.82,
-      history: [],
-    },
-    {
-      name: 'Test',
-      prefix: 'BTC',
-      logo: 'bitcoin',
+      name: 'Monero',
+      prefix: 'XMR',
+      logo: 'monero',
       value: 984.54,
       valueUsd: 100.82,
       history: [],

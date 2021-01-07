@@ -11,7 +11,7 @@ export type IntroState = {
 };
 
 const initialState: IntroState = {
-  appIntroFinished: false,
+  appIntroFinished: true,
 };
 
 const intro = createSlice({
