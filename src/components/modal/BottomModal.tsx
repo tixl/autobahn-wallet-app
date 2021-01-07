@@ -43,7 +43,7 @@ export const BottomModal: React.FC<Props> = (props) => {
       style={{ justifyContent: 'flex-end', margin: 0 }}
       backdropOpacity={0.7}
       coverScreen={true}
-      avoidKeyboard={false}
+      avoidKeyboard={true}
       animationInTiming={300}
       animationOutTiming={300}
       hideModalContentWhileAnimating={false}
@@ -59,7 +59,7 @@ const ContentContainer = styled.View`
   border-top-left-radius: ${shapes.borderRadius}px;
   border-top-right-radius: ${shapes.borderRadius}px;
   overflow: hidden;
-  min-height: ${windowHeight * 0.5};
+  min-height: ${windowHeight * 0.5}px;
   background-color: white;
 `;
 
