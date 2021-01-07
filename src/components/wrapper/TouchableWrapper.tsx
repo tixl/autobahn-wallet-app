@@ -37,6 +37,8 @@ export const TouchableWrapper: React.FC<Props> = ({
   // Animation
   const [scale] = useState(new Animated.Value(1));
   const [shadowOpacity] = useState(new Animated.Value(0.16));
+  // Android config (not implemented yet)
+  const [elevation] = useState(new Animated.Value(3));
 
   const handleOnPressIn = () => {
     const configScale = animationSelect(0.98);

@@ -6,6 +6,7 @@ import { Switch } from 'react-native';
 type Props = {
   value: boolean;
   onValueChange: (newValue: boolean) => void;
+  disabled?: boolean;
 };
 
 export const Toggle: React.FC<Props> = (props) => {

@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import styled from 'styled-components/native';
 import { ScreenWrapper } from './wrapper/ScreenWrapper';
-import { Button } from '../components';
+import { Button, Toggle } from '../components';
 import { colors, fonts, spacing, textSize } from '../constants';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { NativeScrollEvent } from 'react-native';
 
 type Props = {
   children?: string;
@@ -16,57 +17,79 @@ const LegalScreen: React.FC<Props> = (props) => {
 
   const [accepted, setAccepted] = useState<boolean>(false);
 
+  // Detect if text was scrolled to bottom
+  const [scrolledToBottom, setScrolledToBottom] = useState<boolean>(false);
+  const isCloseToBottom = ({
+    layoutMeasurement,
+    contentOffset,
+    contentSize,
+  }: NativeScrollEvent) => {
+    const paddingToBottom = 20;
+    return (
+      layoutMeasurement.height + contentOffset.y >=
+      contentSize.height - paddingToBottom
+    );
+  };
+
   return (
     <ScreenWrapper
       headerBarConfig={{ type: 'back', title: 'Security & Terms' }}
     >
       <Content style={{ paddingBottom: insets.bottom }}>
-        <TextContainer>
+        <TextContainer
+          onLayout={({ nativeEvent }) => {
+            console.log(nativeEvent);
+          }}
+          onScroll={({ nativeEvent }) => {
+            if (isCloseToBottom(nativeEvent)) {
+              setScrolledToBottom(true);
+            }
+          }}
+          scrollEventThrottle={400}
+        >
           <CustomText>
-            Contrary to popular belief, Lorem Ipsum is not simply random text.
-            It has roots in a piece of classical Latin literature from 45 BC,
-            making it over 2000 years old. Richard McClintock, a Latin professor
-            at Hampden-Sydney College in Virginia, looked up one of the more
-            obscure Latin words, consectetur, from a Lorem Ipsum passage, and
-            going through the cites of the word in classical literature,
-            discovered the undoubtable source. Lorem Ipsum comes from sections
-            1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes
-            of Good and Evil) by Cicero, written in 45 BC. This book is a
-            treatise on the theory of ethics, very popular during the
-            Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit
-            amet..", comes from a line in section 1.10.32. The standard chunk of
-            Lorem Ipsum used since the 1500s is reproduced below for those
-            interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et
-            Malorum" by Cicero are also reproduced in their exact original form,
-            accompanied by English versions from the 1914 translation by H.
-            Rackham. There are many variations of passages of Lorem Ipsum
-            available, but the majority have suffered alteration in some form,
-            by injected humour, or randomised words which don't look even
-            slightly believable. If you are going to use a passage of Lorem
-            Ipsum, you need to be sure there isn't anything embarrassing hidden
-            in the middle of text. All the Lorem Ipsum generators on the
-            Internet tend to repeat predefined chunks as necessary, making this
-            the first true generator on the Internet. It uses a dictionary of
-            over 200 Latin words, combined with a handful of model sentence
-            structures, to generate Lorem Ipsum which looks reasonable. The
-            generated Lorem Ipsum is therefore always free from repetition,
-            injected humour, or non-characteristic words etc.
+            Mnemonic phrases offer permanent and direct access to one’s wallet,
+            so they should be treated carefully. These phrases cannot be
+            changed, so keeping them safe is crucial.{'\n\n'}
+            More tips for using mnemonic phrases: {'\n'}
+            {'\n\u2022'} Don’t keep the words on a computer, write them down on
+            physical paper.
+            {'\n\u2022'} Write them down again. And one more time. Keep these
+            lists in easy-to-remember, separate locations.
+            {'\n\u2022'} Order is important – the phrase will not work in the
+            wrong sequence. {'\n\n'}
+            Please be aware of the fact that this Wallet uses Tixl’s Autobahn
+            Network v0.1. The use it at your own risk. Coins will not be
+            compensated.
           </CustomText>
         </TextContainer>
-        <ButtonContainer>
-          <Button
-            type="primary"
-            label="Back"
-            onPress={() => navigation.goBack()}
-          />
-          <ButtonSpacer />
-          <Button
-            type="primary"
-            disabled={!accepted}
-            label="Next"
-            onPress={() => console.log('Login clicked')}
-          />
-        </ButtonContainer>
+        <BottomContainer>
+          <AcceptContainer style={{ opacity: scrolledToBottom ? 1 : 0.4 }}>
+            <AcceptText>
+              I have read Tixl Wallet‘s Terms of Use and Privacy Policy and
+              accept both.
+            </AcceptText>
+            <Toggle
+              value={accepted}
+              onValueChange={(newValue) => setAccepted(newValue)}
+              disabled={!scrolledToBottom}
+            />
+          </AcceptContainer>
+          <ButtonContainer>
+            <Button
+              type="primary"
+              label="Back"
+              onPress={() => navigation.goBack()}
+            />
+            <ButtonSpacer />
+            <Button
+              type="primary"
+              disabled={!accepted}
+              label="Next"
+              onPress={() => console.log('Login clicked')}
+            />
+          </ButtonContainer>
+        </BottomContainer>
       </Content>
     </ScreenWrapper>
   );
@@ -79,12 +102,30 @@ const Content = styled.View`
 const TextContainer = styled.ScrollView`
   flex: 1;
   margin-bottom: ${spacing.s}px;
+  overflow: visible;
 `;
 
 const CustomText = styled.Text`
   font-family: ${fonts.light};
   color: ${colors.GRAY};
-  font-size: ${textSize.s}px;
+  font-size: ${textSize.m}px;
+`;
+
+const BottomContainer = styled.View``;
+
+const AcceptContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: ${spacing.m}px;
+  /* padding: 0px ${spacing.xs}px; */
+`;
+
+const AcceptText = styled.Text`
+  flex: 1;
+  margin-right: ${spacing.xs}px;
+  font-family: ${fonts.regular};
+  color: ${colors.BLACK};
+  font-size: ${textSize.m}px;
 `;
 
 const ButtonContainer = styled.View`
