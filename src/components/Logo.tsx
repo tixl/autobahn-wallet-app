@@ -23,8 +23,6 @@ export const Logo: React.FC<Props> = ({
   // Replace with unknown logo (e.g. question mark)
   let source: ImageSourcePropType = logos.tixl;
 
-  console.log(name);
-
   switch (name) {
     case 'btc':
       source = logos.bitcoin;

@@ -35,8 +35,6 @@ const AppNavigator = () => {
     (state: RootState) => state.intro.appIntroFinished
   );
 
-  
-
   const [showOnboarding, setShowOnboarding] = useState(!isIntroFinished);
   const [initialRoute, setInitialRoute] = useState('Intro');
 
@@ -44,7 +42,6 @@ const AppNavigator = () => {
   const routeNameRef = useRef();
 
   useEffect(() => {
-    console.log(isIntroFinished);
     const newPrivacy = currentVersion.privacy !== agreedLegal.privacy.version;
     const newTerms = currentVersion.terms !== agreedLegal.terms.version;
 

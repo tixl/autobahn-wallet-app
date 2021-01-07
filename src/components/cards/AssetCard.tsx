@@ -16,7 +16,6 @@ type Props = {
 };
 
 export const AssetCard: React.FC<Props> = (props) => {
-  console.log(props.logoName);
   return (
     <TouchableWrapper onPress={props.onPress}>
       <Container>

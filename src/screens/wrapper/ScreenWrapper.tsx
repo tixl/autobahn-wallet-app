@@ -29,8 +29,6 @@ export const ScreenWrapper: React.FC<Props> = ({
   const route = useRoute();
   const navigation = useNavigation();
 
-  console.log(route.name);
-
   return (
     <Container style={{ paddingTop: props.disableTopPadding ? 0 : insets.top }}>
       {showHeaderBar && props.headerBarConfig && (
