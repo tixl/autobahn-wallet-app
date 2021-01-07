@@ -28,6 +28,7 @@ export * from './text/Text';
 
 // Mnemonic components
 export * from './mnemonic/MnemonicWord';
+export * from './mnemonic/MnemonicItem';
 
 // Modal components
 export * from './modal/BottomModal';

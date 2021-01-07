@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import styled from 'styled-components/native';
 import { ScreenWrapper } from './wrapper/ScreenWrapper';
-import { Button, MnemonicWord, Toggle } from '../components';
+import { Button, MnemonicItem, MnemonicWord, Toggle } from '../components';
 import { colors, fonts, spacing, textSize } from '../constants';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { NativeScrollEvent } from 'react-native';
@@ -25,31 +25,41 @@ const MnemonicScreen: React.FC<Props> = (props) => {
 
   // Detect if text was scrolled to bottom
   const [scrolledToBottom, setScrolledToBottom] = useState<boolean>(false);
-  // const isCloseToBottom = ({
-  //   layoutMeasurement,
-  //   contentOffset,
-  //   contentSize,
-  // }: NativeScrollEvent) => {
-  //   const paddingToBottom = 20;
-  //   return (
-  //     layoutMeasurement.height + contentOffset.y >=
-  //     contentSize.height - paddingToBottom
-  //   );
-  // };
+  const isCloseToBottom = ({
+    layoutMeasurement,
+    contentOffset,
+    contentSize,
+  }: NativeScrollEvent) => {
+    const paddingToBottom = 20;
+    return (
+      layoutMeasurement.height + contentOffset.y >=
+      contentSize.height - paddingToBottom
+    );
+  };
 
   return (
     <ScreenWrapper
       headerBarConfig={{ type: 'back', title: 'Your Mnemonic Phrase' }}
     >
       <Content style={{ paddingBottom: insets.bottom }}>
-        <MnemonicPhraseContainer>
-          {mnemonicPhrase.map((mnemonicWord, index) => (
-            <MnemonicItem key={index}>
-              <CounterText>{index + 1}:</CounterText>
-              <MnemonicWord label={mnemonicWord}></MnemonicWord>
-            </MnemonicItem>
-          ))}
-        </MnemonicPhraseContainer>
+        <ScrollContainer
+          onScroll={({ nativeEvent }) => {
+            if (isCloseToBottom(nativeEvent)) {
+              setScrolledToBottom(true);
+            }
+          }}
+          scrollEventThrottle={400}
+        >
+          <MnemonicPhraseContainer>
+            {mnemonicPhrase.map((mnemonicWord, index) => (
+              <MnemonicItem
+                key={index}
+                index={index}
+                label={mnemonicWord}
+              ></MnemonicItem>
+            ))}
+          </MnemonicPhraseContainer>
+        </ScrollContainer>
         <BottomContainer>
           <AcceptContainer style={{ opacity: scrolledToBottom ? 1 : 0.4 }}>
             <AcceptText>I wrote down my mnemonic phrase</AcceptText>
@@ -83,23 +93,15 @@ const Content = styled.View`
   flex: 1;
 `;
 
-const MnemonicPhraseContainer = styled.ScrollView`
-  margin-bottom: ${spacing.s}px;
-  flex-direction: row;
-  /* flex-wrap: wrap; */
+const ScrollContainer = styled.ScrollView`
+  flex: 1;
   /* overflow: visible; */
 `;
 
-const MnemonicItem = styled.View`
+const MnemonicPhraseContainer = styled.View`
+  margin-bottom: ${spacing.s}px;
   flex-direction: row;
-  align-items: center;
-`;
-
-const CounterText = styled.Text`
-  margin-right: ${spacing.xs}px;
-  font-family: ${fonts.semiBold};
-  color: ${colors.GRAY};
-  font-size: ${textSize.m}px;
+  flex-wrap: wrap;
 `;
 
 const BottomContainer = styled.View``;

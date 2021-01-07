@@ -37,9 +37,6 @@ const LegalScreen: React.FC<Props> = (props) => {
     >
       <Content style={{ paddingBottom: insets.bottom }}>
         <TextContainer
-          onLayout={({ nativeEvent }) => {
-            console.log(nativeEvent);
-          }}
           onScroll={({ nativeEvent }) => {
             if (isCloseToBottom(nativeEvent)) {
               setScrolledToBottom(true);
