@@ -99,7 +99,7 @@ const AssetDetailScreen: React.FC<Props> = (props) => {
 };
 
 const ScrollContainer = styled.ScrollView`
-  overflow: visible;
+  padding-top: ${spacing.viewTopPadding}px;
 `;
 
 const Section = styled.View`
