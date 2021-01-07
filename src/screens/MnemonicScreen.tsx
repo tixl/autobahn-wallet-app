@@ -63,12 +63,13 @@ const MnemonicScreen: React.FC<Props> = (props) => {
           </MnemonicPhraseContainer>
         </ScrollContainer>
         <BottomContainer>
-          <AcceptContainer style={{ opacity: scrolledToBottom ? 1 : 0.4 }}>
+          <AcceptContainer>
             <AcceptText>I wrote down my mnemonic phrase</AcceptText>
             <Toggle
               value={accepted}
               onValueChange={(newValue) => setAccepted(newValue)}
               disabled={!scrolledToBottom}
+              style={{ opacity: scrolledToBottom ? 1 : 0.4 }}
             />
           </AcceptContainer>
           <ButtonContainer>
@@ -112,7 +113,7 @@ const AcceptContainer = styled.View`
   flex-direction: row;
   align-items: center;
   margin-bottom: ${spacing.m}px;
-  /* padding: 0px ${spacing.xs}px; */
+  margin-top: ${spacing.s}px;
 `;
 
 const AcceptText = styled.Text`

@@ -61,7 +61,7 @@ const LegalScreen: React.FC<Props> = (props) => {
           </CustomText>
         </TextContainer>
         <BottomContainer>
-          <AcceptContainer style={{ opacity: scrolledToBottom ? 1 : 0.4 }}>
+          <AcceptContainer>
             <AcceptText>
               I have read Tixl Wallet‘s Terms of Use and Privacy Policy and
               accept both.
@@ -70,6 +70,7 @@ const LegalScreen: React.FC<Props> = (props) => {
               value={accepted}
               onValueChange={(newValue) => setAccepted(newValue)}
               disabled={!scrolledToBottom}
+              style={{ opacity: scrolledToBottom ? 1 : 0.4 }}
             />
           </AcceptContainer>
           <ButtonContainer>
@@ -98,7 +99,7 @@ const Content = styled.View`
 
 const TextContainer = styled.ScrollView`
   flex: 1;
-  margin-bottom: ${spacing.s}px;
+
   padding-top: ${spacing.viewTopPadding}px;
 `;
 
@@ -114,6 +115,7 @@ const AcceptContainer = styled.View`
   flex-direction: row;
   align-items: center;
   margin-bottom: ${spacing.m}px;
+  margin-top: ${spacing.s}px;
   /* padding: 0px ${spacing.xs}px; */
 `;
 
