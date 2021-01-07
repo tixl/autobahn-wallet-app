@@ -50,7 +50,7 @@ const SettingsScreen: React.FC<Props> = (props) => {
 
 const Container = styled.ScrollView`
   flex: 1;
-  overflow: visible;
+  padding-top: ${spacing.viewTopPadding}px;
 `;
 
 const ToggleRow = styled.View`

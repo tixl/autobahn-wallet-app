@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 /**
  * createSlice is a function that accepts an initial state,
@@ -18,9 +18,8 @@ const intro = createSlice({
   name: 'intro',
   initialState,
   reducers: {
-    setIntroAppFinished: (state, action) => {
-      const { finished } = action.payload;
-      state.appIntroFinished = finished;
+    setIntroAppFinished: (state, action: PayloadAction<boolean>) => {
+      state.appIntroFinished = action.payload;
     },
   },
 });

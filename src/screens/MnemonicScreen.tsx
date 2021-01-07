@@ -6,8 +6,9 @@ import { Button, MnemonicItem, MnemonicWord, Toggle } from '../components';
 import { colors, fonts, spacing, textSize } from '../constants';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { NativeScrollEvent } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
+import { introActions } from '../redux/reducer';
 
 type Props = {
   children?: string;
@@ -16,6 +17,7 @@ type Props = {
 const MnemonicScreen: React.FC<Props> = (props) => {
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
+  const dispatch = useDispatch();
 
   const mnemonicPhrase = useSelector(
     (state: RootState) => state.example.mnemonicPhrase
@@ -80,7 +82,7 @@ const MnemonicScreen: React.FC<Props> = (props) => {
               type="primary"
               disabled={!accepted}
               label="Next"
-              onPress={() => console.log('Login clicked')}
+              onPress={() => dispatch(introActions.setIntroAppFinished(true))}
             />
           </ButtonContainer>
         </BottomContainer>
@@ -95,7 +97,7 @@ const Content = styled.View`
 
 const ScrollContainer = styled.ScrollView`
   flex: 1;
-  /* overflow: visible; */
+  padding-top: ${spacing.viewTopPadding}px;
 `;
 
 const MnemonicPhraseContainer = styled.View`

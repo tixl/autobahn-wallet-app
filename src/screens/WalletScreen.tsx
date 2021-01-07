@@ -34,6 +34,7 @@ export const WalletScreen: React.FC<Props> = (props) => {
       <SwipeListView
         style={{
           overflow: 'visible',
+          paddingTop: spacing.viewTopPadding,
         }}
         data={assets}
         renderItem={(data, rowMap) => (

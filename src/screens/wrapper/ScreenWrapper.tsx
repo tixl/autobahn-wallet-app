@@ -54,5 +54,5 @@ const Container = styled.View`
 const ContentContainer = styled.View`
   flex: 1;
   overflow: hidden;
-  padding: ${spacing.m}px ${spacing.s}px 0px;
+  padding: 0px ${spacing.s}px;
 `;

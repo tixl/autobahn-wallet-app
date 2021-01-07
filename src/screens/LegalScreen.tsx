@@ -99,7 +99,7 @@ const Content = styled.View`
 const TextContainer = styled.ScrollView`
   flex: 1;
   margin-bottom: ${spacing.s}px;
-  overflow: visible;
+  padding-top: ${spacing.viewTopPadding}px;
 `;
 
 const CustomText = styled.Text`

@@ -15,6 +15,8 @@ import currentVersion from '../config/legal.json';
 import LinkingConfiguration from './LinkingConfiguration';
 
 import { IntroStackScreen, RootStackScreen } from './stacks';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
 
 const ProdChecker = NativeModules.ProdChecker;
 
@@ -28,7 +30,12 @@ const AppNavigator = () => {
       version: 1.0,
     },
   };
-  const isIntroFinished = false;
+  // const isIntroFinished = false;
+  const isIntroFinished = useSelector(
+    (state: RootState) => state.intro.appIntroFinished
+  );
+
+  
 
   const [showOnboarding, setShowOnboarding] = useState(!isIntroFinished);
   const [initialRoute, setInitialRoute] = useState('Intro');
@@ -37,6 +44,7 @@ const AppNavigator = () => {
   const routeNameRef = useRef();
 
   useEffect(() => {
+    console.log(isIntroFinished);
     const newPrivacy = currentVersion.privacy !== agreedLegal.privacy.version;
     const newTerms = currentVersion.terms !== agreedLegal.terms.version;
 
