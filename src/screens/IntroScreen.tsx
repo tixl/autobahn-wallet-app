@@ -15,7 +15,7 @@ const IntroScreen: React.FC<Props> = (props) => {
     <SafeAreaContainer>
       <Container>
         <LogoContainer>
-          <Logo name="btc" size={textSize.xxxxl}></Logo>
+          <Logo name="tixl" size={textSize.xxxxl}></Logo>
         </LogoContainer>
         <TitleContainer>
           <TitleText>Tixl's</TitleText>
