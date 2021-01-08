@@ -6,6 +6,7 @@ import Icon, { iconName } from '../Icon';
 import { Text } from '../text/Text';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
+import { Logo } from '../Logo';
 
 type HeaderBarType = 'value' | 'back' | 'close';
 
@@ -27,9 +28,13 @@ export const HeaderBar: React.FC<HeaderBarProps> = (props) => {
 
   return (
     <Container>
-      <Title fontWeight="semiBold" fontSize={textSize.xxl} alignToBottom>
-        {props.title ? props.title : route.name}
-      </Title>
+      <LeftContainer>
+        {/* <Logo size={textSize.xxl} name="btc-cash" /> */}
+        <Title fontWeight="semiBold" fontSize={textSize.xxl} alignToBottom>
+          {props.title ? props.title : route.name}
+        </Title>
+      </LeftContainer>
+
       <RightContainer>
         {props.type == 'value' && (
           <PortfolioValueContainer>
@@ -65,6 +70,11 @@ const Container = styled.View`
   justify-content: space-between;
   margin: 0px ${spacing.s}px ${spacing.xs}px;
   height: 45px;
+`;
+
+const LeftContainer = styled.View`
+  flex-direction: row;
+  align-items: flex-end;
 `;
 
 const Title = styled(Text)``;

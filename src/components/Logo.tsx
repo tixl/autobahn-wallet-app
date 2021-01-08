@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import logos from '../assets/logos';
 
-export type LogoName = 'tixl' | 'btc' | 'btc-cash' | 'monero';
+export type LogoName = 'tixl' | 'btc' | 'btc-cash' | 'monero' | 'dollar';
 
 type Props = {
   name: LogoName;
@@ -35,6 +35,9 @@ export const Logo: React.FC<Props> = ({
       break;
     case 'tixl':
       source = logos.tixl;
+      break;
+    case 'dollar':
+      source = logos.dollar;
       break;
     default:
       break;

@@ -41,11 +41,13 @@ const AssetDetailScreen: React.FC<Props> = (props) => {
             <AssetValueCard
               name={asset.prefix}
               value={asset.value.toString()}
+              logoName={asset.logo}
             ></AssetValueCard>
             <Spacer />
             <AssetValueCard
               name="USD"
               value={asset.valueUsd.toString()}
+              logoName="dollar"
             ></AssetValueCard>
           </OverviewContainer>
         </Section>

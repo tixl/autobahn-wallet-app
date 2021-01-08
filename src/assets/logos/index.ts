@@ -3,6 +3,7 @@ const logos = {
   bitcoin: require('./bitcoin.png'),
   bitcoinCash: require('./bitcoin-cash.png'),
   monero: require('./monero.png'),
+  dollar: require('./dollar.png'),
 };
 
 export default logos;

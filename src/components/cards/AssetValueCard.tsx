@@ -5,11 +5,12 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import Icon, { iconName } from '../Icon';
 import { Text } from '../text/Text';
 import { Image } from 'react-native-svg';
+import { Logo, LogoName } from '../Logo';
 
 type Props = {
   name: string;
   value: string;
-  logo?: Image;
+  logoName: LogoName;
 };
 
 export const AssetValueCard: React.FC<Props> = (props) => {
@@ -26,7 +27,8 @@ export const AssetValueCard: React.FC<Props> = (props) => {
         <Text fontSize={textSize.l}>{props.value}</Text>
       </TextContainer>
       <LogoContainer>
-        <Icon name={iconName.bug} color={colors.DARK_GRAY}></Icon>
+        {/* <Icon name={iconName.bug} color={colors.DARK_GRAY}></Icon> */}
+        <Logo name={props.logoName} size={textSize.xl} />
       </LogoContainer>
     </Container>
   );
