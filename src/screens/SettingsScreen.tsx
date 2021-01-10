@@ -1,48 +1,65 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
-import { Text, Toggle } from '../components';
+import { Button, Text, Toggle } from '../components';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors, spacing, textSize } from '../constants';
 import { ScreenWrapper } from './wrapper/ScreenWrapper';
+import { useDispatch, useStore } from 'react-redux';
+import { introActions } from '../redux/reducer';
 
 type Props = {};
 
 const SettingsScreen: React.FC<Props> = (props) => {
+  const dispatch = useDispatch();
   const [advancedDeposits, setAdvancedDeposits] = useState(false);
+
+  const handleLogoutPress = () => {
+    dispatch(introActions.logout());
+  };
 
   return (
     <ScreenWrapper headerBarConfig={{ type: 'value' }}>
       <Container>
-        <ToggleRow>
-          <Text fontSize={textSize.xl} numberOfLines={1}>
-            Advanced Deposits
+        <SettingContainer>
+          <ToggleRow>
+            <Text fontSize={textSize.xl} numberOfLines={1}>
+              Advanced Deposits
+            </Text>
+            <Toggle
+              value={advancedDeposits}
+              onValueChange={(newValue) => setAdvancedDeposits(newValue)}
+            ></Toggle>
+          </ToggleRow>
+          <Text
+            fontSize={textSize.s}
+            textAlign="left"
+            fontColor={colors.LIGHT_BLACK}
+          >
+            If you switch on the advanced deposit mode, the Wallet distinguishes
+            between Receive transactions on the Autobahn Network (always
+            displaying the Autobahn Network addresses) and Deposit transactions
+            (offering another, fee-saving, but more advanced method of
+            depositing into Tixl´s Autobahn Network). {'\n'}
+            {'\n'}For using the advanced deposit mode, the sender needs to have
+            a wallet that can sign arbitrary strings. The disadvantage of this
+            method is that it is more complicated. The advantage is that it is
+            cheaper with regards to network fees as only one transaction
+            directly to the pool is required.
+            {'\n'}
+            {'\n'}In the normal mode, the coins are sent to your individual
+            Proxy address and everything will be handled automatically. This
+            requires two transactions, and is not decentralised yet, but relayed
+            by the Tixl organisation.
           </Text>
-          <Toggle
-            value={advancedDeposits}
-            onValueChange={(newValue) => setAdvancedDeposits(newValue)}
-          ></Toggle>
-        </ToggleRow>
-        <Text
-          fontSize={textSize.s}
-          textAlign="left"
-          fontColor={colors.LIGHT_BLACK}
-        >
-          If you switch on the advanced deposit mode, the Wallet distinguishes
-          between Receive transactions on the Autobahn Network (always
-          displaying the Autobahn Network addresses) and Deposit transactions
-          (offering another, fee-saving, but more advanced method of depositing
-          into Tixl´s Autobahn Network). {'\n'}
-          {'\n'}For using the advanced deposit mode, the sender needs to have a
-          wallet that can sign arbitrary strings. The disadvantage of this
-          method is that it is more complicated. The advantage is that it is
-          cheaper with regards to network fees as only one transaction directly
-          to the pool is required.
-          {'\n'}
-          {'\n'}In the normal mode, the coins are sent to your individual Proxy
-          address and everything will be handled automatically. This requires
-          two transactions, and is not decentralised yet, but relayed by the
-          Tixl organisation.
-        </Text>
+        </SettingContainer>
+        <SettingContainer>
+          <Button
+            label="Logout"
+            type="cancel"
+            onPress={handleLogoutPress}
+            style={{ marginTop: spacing.xxxl }}
+          ></Button>
+        </SettingContainer>
       </Container>
     </ScreenWrapper>
   );
@@ -51,6 +68,10 @@ const SettingsScreen: React.FC<Props> = (props) => {
 const Container = styled.ScrollView`
   flex: 1;
   padding-top: ${spacing.viewTopPadding}px;
+`;
+
+const SettingContainer = styled.View`
+  margin-bottom: ${spacing.l}px;
 `;
 
 const ToggleRow = styled.View`

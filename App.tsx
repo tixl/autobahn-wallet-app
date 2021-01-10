@@ -25,7 +25,7 @@ enableScreens();
 
 // QuickActions.clearShortcutItems();
 
-LogBox.ignoreLogs([]);
+LogBox.ignoreLogs(['VirtualizedList', 'Native splash screen']);
 
 export default function App() {
   const isLoadingComplete = useCachedResources();

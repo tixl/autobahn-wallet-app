@@ -8,10 +8,16 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type IntroState = {
   appIntroFinished: boolean;
+  onboardingFinished: boolean;
+  loggedIn: boolean;
 };
 
 const initialState: IntroState = {
   appIntroFinished: true,
+  // Not used so far (no onboarding integrated in app)
+  onboardingFinished: false,
+  // Placholder, that will later be replaced, e.g. with a (client) token
+  loggedIn: true,
 };
 
 const intro = createSlice({
@@ -20,6 +26,12 @@ const intro = createSlice({
   reducers: {
     setIntroAppFinished: (state, action: PayloadAction<boolean>) => {
       state.appIntroFinished = action.payload;
+    },
+    login: (state) => {
+      state.loggedIn = true;
+    },
+    logout: (state) => {
+      state.loggedIn = false;
     },
   },
 });

@@ -54,14 +54,14 @@ export const WalletScreen: React.FC<Props> = (props) => {
             <RoundButton
               width={50}
               title="Send"
-              icon={iconName.arrowLeft}
+              icon={iconName.arrowUp}
               color={colors.LIGHT_BLUE}
               onPress={() => showModal('send')}
             />
             <RoundButton
               width={50}
               title="Receive"
-              icon={iconName.arrowRight}
+              icon={iconName.arrowDown}
               color={colors.LIGHT_BLUE}
               onPress={() => showModal('receive')}
             />

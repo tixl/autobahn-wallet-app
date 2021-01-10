@@ -4,7 +4,7 @@ import { RootStackParamList } from '../navigation/stacks/RootStack';
 import styled from 'styled-components/native';
 import { iconName, Text, RoundButton, AssetValueCard } from '../components';
 
-import { colors, spacing, textSize } from '../constants';
+import { colors, spacing, textSize, windowWidth } from '../constants';
 import { ScreenWrapper } from './wrapper/ScreenWrapper';
 import { useDispatch } from 'react-redux';
 import { ModalType, uiActions } from '../redux/reducer/ui';
@@ -22,8 +22,11 @@ const AssetDetailScreen: React.FC<Props> = (props) => {
   // Get route params
   const asset = props.route.params.asset;
 
-  // const buttonWidth: number = (windowWidth - 2 * spacing.s) / 3 - 2 * spacing.m;
-  const buttonWidth: number = 50;
+  let buttonWidth: number = (windowWidth - 2 * spacing.s) / 3 - 2 * spacing.m;
+  const maxButtonWidth: number = 56;
+  if (buttonWidth > maxButtonWidth) {
+    buttonWidth = maxButtonWidth;
+  }
 
   return (
     <ScreenWrapper
@@ -61,14 +64,14 @@ const AssetDetailScreen: React.FC<Props> = (props) => {
             <RoundButton
               width={buttonWidth}
               title="Send"
-              icon={iconName.arrowLeft}
+              icon={iconName.arrowUp}
               color={colors.LIGHT_BLUE}
               onPress={() => showModal('send')}
             />
             <RoundButton
               width={buttonWidth}
               title="Receive"
-              icon={iconName.arrowRight}
+              icon={iconName.arrowDown}
               color={colors.LIGHT_BLUE}
               onPress={() => showModal('receive')}
             />

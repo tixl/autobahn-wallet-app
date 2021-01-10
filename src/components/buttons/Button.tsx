@@ -1,5 +1,5 @@
 import React from 'react';
-import { Animated, ActivityIndicator } from 'react-native';
+import { Animated, ActivityIndicator, ViewStyle } from 'react-native';
 import styled from 'styled-components/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import {
@@ -18,17 +18,17 @@ import { Text } from '../text/Text';
 import { TouchableWrapper } from '../wrapper/TouchableWrapper';
 import { NumericLiteral } from 'typescript';
 
-export type ButtonType = 'primary' | 'secondary';
+export type ButtonType = 'primary' | 'secondary' | 'cancel';
 
 type Props = {
   label: string;
   disabled?: boolean;
   loading?: boolean;
   borderRadius?: number;
-  type: ButtonType;
+  type?: ButtonType;
   onPress: () => void;
   hapticPressType?: HapticPressType;
-  style?: React.CSSProperties;
+  style?: ViewStyle;
 };
 
 export const Button: React.FC<Props> = ({
@@ -39,7 +39,7 @@ export const Button: React.FC<Props> = ({
   hapticPressType = 'selection',
   borderRadius = shapes.borderRadius,
   onPress,
-  ...props
+  style = {},
 }) => {
   let gradientColors;
   let fontColor;
@@ -53,6 +53,10 @@ export const Button: React.FC<Props> = ({
       gradientColors = ['white', 'white'];
       fontColor = colors.BLUE;
       break;
+    case 'cancel':
+      gradientColors = [colors.RED, colors.RED];
+      fontColor = colors.WHITE;
+      break;
     default:
       gradientColors = [colors.primary300, colors.primary400];
       fontColor = colors.neutral000;
@@ -60,7 +64,11 @@ export const Button: React.FC<Props> = ({
   }
 
   return (
-    <TouchableWrapper onPress={onPress} disabled={disabled}>
+    <TouchableWrapper
+      onPress={onPress}
+      disabled={disabled}
+      {...hapticPressType}
+    >
       <Gradient
         colors={gradientColors}
         start={[0, 1]}
@@ -72,6 +80,7 @@ export const Button: React.FC<Props> = ({
             opacity: disabled ? 0.5 : 1,
             borderRadius: borderRadius,
           },
+          style,
         ]}
       >
         {loading ? (

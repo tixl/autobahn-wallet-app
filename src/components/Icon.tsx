@@ -1,11 +1,14 @@
 import React from 'react';
 import { TextStyle } from 'react-native';
+import { round } from 'react-native-reanimated';
 import Svg, { SvgXml, Circle, Path, Rect } from 'react-native-svg';
 import { colors } from '../constants';
 
 export const iconName = {
   arrowLeft: 'arrowLeft',
   arrowRight: 'arrowRight',
+  arrowUp: 'arrowUp',
+  arrowDown: 'arrowDown',
   bug: 'bug',
   cameraAdd: 'cameraAdd',
   check: 'check',
@@ -71,6 +74,36 @@ const Icon: React.FC<Props> = ({
         >
           <Path
             d="M14.7072 5.2929C14.3165 4.90237 13.6835 4.90237 13.2928 5.2929C12.9023 5.6834 12.9023 6.31658 13.2928 6.70708L17.5858 11H4C3.44775 11 3 11.4477 3 12C3 12.5523 3.44775 13 4 13H17.5858L13.2928 17.2929C12.9023 17.6834 12.9023 18.3166 13.2928 18.7071C13.6835 19.0976 14.3165 19.0976 14.7072 18.7071L20.7072 12.7071C20.9023 12.5118 21 12.2559 21 12C21 11.7441 20.9023 11.4882 20.7072 11.2929L14.7072 5.2929Z"
+            fill={color}
+          />
+        </Svg>
+      );
+    case iconName.arrowUp:
+      return (
+        <Svg
+          width={size}
+          height={size}
+          viewBox="0 0 24 24"
+          fill="none"
+          style={[style, { transform: [{ rotate: '90deg' }] }]}
+        >
+          <Path
+            d="M9.29285 18.7071C9.68347 19.0976 10.3165 19.0976 10.7072 18.7071C11.0977 18.3166 11.0977 17.6834 10.7072 17.2929L6.41418 13H20C20.5522 13 21 12.5523 21 12C21 11.4477 20.5522 11 20 11H6.41418L10.7072 6.70708C11.0977 6.31658 11.0977 5.6834 10.7072 5.2929C10.3165 4.90237 9.68347 4.90237 9.29285 5.2929L3.29285 11.2929C3.09766 11.4882 3 11.7441 3 12C3 12.2559 3.09766 12.5118 3.29285 12.7071L9.29285 18.7071Z"
+            fill={color}
+          />
+        </Svg>
+      );
+    case iconName.arrowDown:
+      return (
+        <Svg
+          width={size}
+          height={size}
+          viewBox="0 0 24 24"
+          fill="none"
+          style={[style, { transform: [{ rotate: '-90deg' }] }]}
+        >
+          <Path
+            d="M9.29285 18.7071C9.68347 19.0976 10.3165 19.0976 10.7072 18.7071C11.0977 18.3166 11.0977 17.6834 10.7072 17.2929L6.41418 13H20C20.5522 13 21 12.5523 21 12C21 11.4477 20.5522 11 20 11H6.41418L10.7072 6.70708C11.0977 6.31658 11.0977 5.6834 10.7072 5.2929C10.3165 4.90237 9.68347 4.90237 9.29285 5.2929L3.29285 11.2929C3.09766 11.4882 3 11.7441 3 12C3 12.2559 3.09766 12.5118 3.29285 12.7071L9.29285 18.7071Z"
             fill={color}
           />
         </Svg>
