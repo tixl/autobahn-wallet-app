@@ -2,6 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import * as React from 'react';
+import { fonts } from '../constants';
 
 export default function useCachedResources() {
   const [isLoadingComplete, setLoadingComplete] = React.useState(false);
@@ -15,7 +16,12 @@ export default function useCachedResources() {
         // Load fonts
         await Font.loadAsync({
           ...Ionicons.font,
-          poppins: require('../assets/fonts/Poppins-Regular.ttf'),
+          [fonts.poppins]: require('../assets/fonts/Poppins-Regular.ttf'),
+          [fonts.regular]: require('../assets/fonts/Poppins-Regular.ttf'),
+          [fonts.semiBold]: require('../assets/fonts/Poppins-SemiBold.ttf'),
+          [fonts.bold]: require('../assets/fonts/Poppins-Bold.ttf'),
+          [fonts.extraBold]: require('../assets/fonts/Poppins-ExtraBold.ttf'),
+          [fonts.light]: require('../assets/fonts/Poppins-Light.ttf'),
         });
       } catch (e) {
         // We might want to provide this error information to an error reporting service

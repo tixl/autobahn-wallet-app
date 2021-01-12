@@ -1,14 +1,21 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import { IntroScreen, LegalScreen } from '../../screens';
+import { IntroScreen, LegalScreen, MnemonicScreen } from '../../screens';
 
-const IntroStack = createStackNavigator();
+type IntroStackParamList = {
+  Intro: undefined;
+  Legal: undefined;
+  Mnemonic: undefined;
+};
 
-const IntroStackScreen = ({ initialRouteName = 'Intro' }) => (
-  <IntroStack.Navigator headerMode="none" initialRouteName={initialRouteName}>
+const IntroStack = createStackNavigator<IntroStackParamList>();
+
+const IntroStackScreen = ({}) => (
+  <IntroStack.Navigator headerMode="none" initialRouteName="Intro">
     <IntroStack.Screen name="Intro" component={IntroScreen} />
     <IntroStack.Screen name="Legal" component={LegalScreen} />
+    <IntroStack.Screen name="Mnemonic" component={MnemonicScreen} />
   </IntroStack.Navigator>
 );
 

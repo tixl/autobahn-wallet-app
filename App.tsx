@@ -15,17 +15,17 @@ import AppNavigator from './src/navigation/AppNavigator';
 import { persistor, store } from './src/redux/store';
 import useCachedResources from './src/hooks/useCachedResources';
 import './src/i18n';
+import { StatusBar } from 'expo-status-bar';
 
 /**
  * Expose native navigation container components to React Native
  * https://github.com/kmagiera/react-native-screens
  */
-
 enableScreens();
 
 // QuickActions.clearShortcutItems();
 
-LogBox.ignoreLogs([]);
+LogBox.ignoreLogs(['VirtualizedList', 'Native splash screen']);
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -39,6 +39,7 @@ export default function App() {
       <PersistGate loading={null} persistor={persistor}>
         <AppearanceProvider>
           <SafeAreaProvider>
+            <StatusBar style="auto" />
             <AppNavigator />
           </SafeAreaProvider>
         </AppearanceProvider>

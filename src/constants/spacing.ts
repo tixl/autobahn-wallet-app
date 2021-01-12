@@ -7,6 +7,9 @@ const spacing = {
   xl: 40,
   xxl: 48,
   xxxl: 56,
+  viewTopPadding: 16,
 };
 
 export default spacing;
+
+/* padding: ${spacing.m}px ${spacing.s}px 0px; */

@@ -1,10 +1,44 @@
 import React from 'react';
+import { TextStyle } from 'react-native';
+import { round } from 'react-native-reanimated';
 import Svg, { SvgXml, Circle, Path, Rect } from 'react-native-svg';
 import { colors } from '../constants';
 
-const Icon = (props: any) => {
-  const { color = colors.neutral000, name, size = 24, style } = props;
+export const iconName = {
+  arrowLeft: 'arrowLeft',
+  arrowRight: 'arrowRight',
+  arrowUp: 'arrowUp',
+  arrowDown: 'arrowDown',
+  bug: 'bug',
+  cameraAdd: 'cameraAdd',
+  check: 'check',
+  chevronRight: 'chevronRight',
+  chevronLeft: 'chevronLeft',
+  close: 'close',
+  cross: 'cross',
+  feedback: 'feedback',
+  info: 'info',
+  legal: 'legal',
+  lock: 'lock',
+  more: 'more',
+  pulse: 'pulse',
+  settingsActive: 'settingsActive',
+  settingsInactive: 'settingsInactive',
+};
 
+type Props = {
+  name: string;
+  size?: number;
+  color?: string;
+  style?: TextStyle | TextStyle[];
+};
+
+const Icon: React.FC<Props> = ({
+  name,
+  color = colors.neutral000,
+  size = 24,
+  style = {},
+}) => {
   const CAMERA_ADD_XML = `
     <svg width=${size} height=${size} viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0001 11C11.0001 9.52728 12.194 8.33337 13.6667 8.33337H24.3334C25.8062 8.33337 27.0001 9.52728 27.0001 11H29.6667C31.1395 11 32.3334 12.1939 32.3334 13.6667V27C32.3334 28.4728 31.1395 29.6667 29.6667 29.6667H8.33342C6.86066 29.6667 5.66675 28.4728 5.66675 27V13.6667C5.66675 12.1939 6.86066 11 8.33341 11L11.0001 11ZM24.3334 20.3334C24.3334 23.2789 21.9456 25.6667 19.0001 25.6667C16.0546 25.6667 13.6667 23.2789 13.6667 20.3334C13.6667 17.3879 16.0546 15 19.0001 15C21.9456 15 24.3334 17.3879 24.3334 20.3334ZM28.3334 16.3334C29.0698 16.3334 29.6667 15.7364 29.6667 15C29.6667 14.2637 29.0698 13.6667 28.3334 13.6667C27.597 13.6667 27.0001 14.2637 27.0001 15C27.0001 15.7364 27.597 16.3334 28.3334 16.3334Z" fill=${color}/>
@@ -40,6 +74,36 @@ const Icon = (props: any) => {
         >
           <Path
             d="M14.7072 5.2929C14.3165 4.90237 13.6835 4.90237 13.2928 5.2929C12.9023 5.6834 12.9023 6.31658 13.2928 6.70708L17.5858 11H4C3.44775 11 3 11.4477 3 12C3 12.5523 3.44775 13 4 13H17.5858L13.2928 17.2929C12.9023 17.6834 12.9023 18.3166 13.2928 18.7071C13.6835 19.0976 14.3165 19.0976 14.7072 18.7071L20.7072 12.7071C20.9023 12.5118 21 12.2559 21 12C21 11.7441 20.9023 11.4882 20.7072 11.2929L14.7072 5.2929Z"
+            fill={color}
+          />
+        </Svg>
+      );
+    case iconName.arrowUp:
+      return (
+        <Svg
+          width={size}
+          height={size}
+          viewBox="0 0 24 24"
+          fill="none"
+          style={[style, { transform: [{ rotate: '90deg' }] }]}
+        >
+          <Path
+            d="M9.29285 18.7071C9.68347 19.0976 10.3165 19.0976 10.7072 18.7071C11.0977 18.3166 11.0977 17.6834 10.7072 17.2929L6.41418 13H20C20.5522 13 21 12.5523 21 12C21 11.4477 20.5522 11 20 11H6.41418L10.7072 6.70708C11.0977 6.31658 11.0977 5.6834 10.7072 5.2929C10.3165 4.90237 9.68347 4.90237 9.29285 5.2929L3.29285 11.2929C3.09766 11.4882 3 11.7441 3 12C3 12.2559 3.09766 12.5118 3.29285 12.7071L9.29285 18.7071Z"
+            fill={color}
+          />
+        </Svg>
+      );
+    case iconName.arrowDown:
+      return (
+        <Svg
+          width={size}
+          height={size}
+          viewBox="0 0 24 24"
+          fill="none"
+          style={[style, { transform: [{ rotate: '-90deg' }] }]}
+        >
+          <Path
+            d="M9.29285 18.7071C9.68347 19.0976 10.3165 19.0976 10.7072 18.7071C11.0977 18.3166 11.0977 17.6834 10.7072 17.2929L6.41418 13H20C20.5522 13 21 12.5523 21 12C21 11.4477 20.5522 11 20 11H6.41418L10.7072 6.70708C11.0977 6.31658 11.0977 5.6834 10.7072 5.2929C10.3165 4.90237 9.68347 4.90237 9.29285 5.2929L3.29285 11.2929C3.09766 11.4882 3 11.7441 3 12C3 12.2559 3.09766 12.5118 3.29285 12.7071L9.29285 18.7071Z"
             fill={color}
           />
         </Svg>
@@ -322,26 +386,6 @@ const Icon = (props: any) => {
         </Svg>
       );
   }
-};
-
-export const iconName = {
-  arrowLeft: 'arrowLeft',
-  arrowRight: 'arrowRight',
-  bug: 'bug',
-  cameraAdd: 'cameraAdd',
-  check: 'check',
-  chevronRight: 'chevronRight',
-  chevronLeft: 'chevronLeft',
-  close: 'close',
-  cross: 'cross',
-  feedback: 'feedback',
-  info: 'info',
-  legal: 'legal',
-  lock: 'lock',
-  more: 'more',
-  pulse: 'pulse',
-  settingsActive: 'settingsActive',
-  settingsInactive: 'settingsInactive',
 };
 
 export default Icon;

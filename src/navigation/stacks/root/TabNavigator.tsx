@@ -48,12 +48,12 @@ const TabNavigator = ({ navigation, route }: any) => {
       <Tab.Screen
         name="WalletStack"
         component={WalletStackScreen}
-        options={({ route }) => ({ tabBarVisible: getTabBarVisible(route) })}
+        // options={({ route }) => ({ tabBarVisible: getTabBarVisible(route) })}
       />
       <Tab.Screen
         name="SettingsStack"
         component={SettingsStackScreen}
-        options={({ route }) => ({ tabBarVisible: getTabBarVisible(route) })}
+        // options={({ route }) => ({ tabBarVisible: getTabBarVisible(route) })}
       />
     </Tab.Navigator>
   );
