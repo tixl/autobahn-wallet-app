@@ -11,6 +11,7 @@ import { Provider, connect } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 // import QuickActions from 'react-native-quick-actions';
 
+import '@tixl/tixl-sdk-js/react-native/worker';
 import AppNavigator from './src/navigation/AppNavigator';
 import { persistor, store } from './src/redux/store';
 import useCachedResources from './src/hooks/useCachedResources';

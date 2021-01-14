@@ -1,22 +1,36 @@
 import React from 'react';
+import { SwipeListView } from 'react-native-swipe-list-view';
 import styled from 'styled-components/native';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
+import { generateKeys } from '@tixl/tixl-sdk-js/redux/keys/actions';
+
 import { AssetCard, iconName, RoundButton } from '../components';
 import { colors, spacing } from '../constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { ExampleAsset, ExampleState } from '../redux/reducer/example';
-import { uiActions } from '../redux/reducer/ui';
-
-import { SwipeListView } from 'react-native-swipe-list-view';
 import { ScreenWrapper } from './wrapper/ScreenWrapper';
 import { useBottomModal } from '../hooks/useBottomModal';
+import { TestShowKeys } from '../components/TestShowKeys';
 
 type Props = {
   children?: string;
 };
 
 export const WalletScreen: React.FC<Props> = (props) => {
+  const dispatch = useDispatch();
+
+  // TODO remove this and integrate correctly
+  React.useEffect(() => {
+    (async () => {
+      // dont call crypto immediately, usually these are user initiated anyways
+      await new Promise((resolve) => setTimeout(resolve, 100));
+
+      console.log('Dispatch key request every time');
+      dispatch(generateKeys());
+    })();
+  }, []);
+
   const navigation = useNavigation();
   const { showModal } = useBottomModal();
 
@@ -31,6 +45,7 @@ export const WalletScreen: React.FC<Props> = (props) => {
 
   return (
     <ScreenWrapper headerBarConfig={{ type: 'value' }}>
+      <TestShowKeys />
       <SwipeListView
         style={{
           overflow: 'visible',
