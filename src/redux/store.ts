@@ -30,7 +30,6 @@ const middleware = [thunk];
 /**
  * Setup Redux Persist
  */
-
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,

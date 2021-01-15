@@ -27,12 +27,7 @@ const AppNavigator = () => {
   //   (state: RootState) => state.intro.appIntroFinished
   // );
 
-  // Defines is user is loggedIn
-  const userToken = useSelector((state: RootState) => state.intro.userToken);
-
   const accountChain = useSelector(getAccountChain);
-
-  console.log(accountChain);
 
   // const [showIntroStack, setShowIntroStack] = useState(true);
   // const [introStackInitialRoute, setIntroStackInitialRoute] = useState('Intro');

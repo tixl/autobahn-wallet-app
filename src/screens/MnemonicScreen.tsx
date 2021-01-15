@@ -2,13 +2,11 @@ import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import styled from 'styled-components/native';
 import { ScreenWrapper } from './wrapper/ScreenWrapper';
-import { Button, MnemonicItem, MnemonicWord, Toggle } from '../components';
+import { Button, MnemonicPhrase, Toggle } from '../components';
 import { colors, fonts, spacing, textSize } from '../constants';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { NativeScrollEvent } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../redux/store';
-import { introActions } from '../redux/reducer';
 
 type Props = {
   children?: string;
@@ -19,9 +17,32 @@ const MnemonicScreen: React.FC<Props> = (props) => {
   const insets = useSafeAreaInsets();
   const dispatch = useDispatch();
 
-  const mnemonicPhrase = useSelector(
-    (state: RootState) => state.example.mnemonicPhrase
-  );
+  const [mnemonic] = useState<string[]>([
+    'test',
+    'secret',
+    'prison',
+    'burden',
+    'north',
+    'secret',
+    'prison',
+    'burden',
+    'north',
+    'secret',
+    'prison',
+    'burden',
+    'north',
+    'secret',
+    'prison',
+    'burden',
+    'north',
+    'secret',
+    'prison',
+    'burden',
+    'north',
+    'secret',
+    'prison',
+    'burden',
+  ]);
 
   const [accepted, setAccepted] = useState<boolean>(false);
 
@@ -52,15 +73,7 @@ const MnemonicScreen: React.FC<Props> = (props) => {
           }}
           scrollEventThrottle={400}
         >
-          <MnemonicPhraseContainer>
-            {mnemonicPhrase.map((mnemonicWord, index) => (
-              <MnemonicItem
-                key={index}
-                index={index}
-                label={mnemonicWord}
-              ></MnemonicItem>
-            ))}
-          </MnemonicPhraseContainer>
+          <MnemonicPhrase mnemonic={mnemonic}></MnemonicPhrase>
         </ScrollContainer>
         <BottomContainer>
           <AcceptContainer>
@@ -83,7 +96,9 @@ const MnemonicScreen: React.FC<Props> = (props) => {
               type="primary"
               disabled={!accepted}
               label="Next"
-              onPress={() => dispatch(introActions.setIntroAppFinished(true))}
+              onPress={() =>
+                navigation.navigate('MnemonicConfirm', { mnemonic: mnemonic })
+              }
             />
           </ButtonContainer>
         </BottomContainer>
