@@ -1,8 +1,10 @@
 import { useNavigation } from '@react-navigation/native';
 import * as React from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components/native';
 import { Button, Logo } from '../components';
 import { colors, fonts, spacing, textSize } from '../constants';
+import { introActions } from '../redux/reducer';
 
 type Props = {
   children?: string;
@@ -10,6 +12,7 @@ type Props = {
 
 const IntroScreen: React.FC<Props> = (props) => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   return (
     <SafeAreaContainer>
@@ -37,7 +40,7 @@ const IntroScreen: React.FC<Props> = (props) => {
           <Button
             type="secondary"
             label="Login existing wallet"
-            onPress={() => console.log('Login clicked')}
+            onPress={() => dispatch(introActions.login())}
           />
         </ButtonContainer>
       </Container>

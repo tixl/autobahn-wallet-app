@@ -17,46 +17,50 @@ import LinkingConfiguration from './LinkingConfiguration';
 import { IntroStackScreen, RootStackScreen } from './stacks';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
+import { getAccountChain } from '@tixl/tixl-sdk-js/redux/chains/selectors';
 
 const ProdChecker = NativeModules.ProdChecker;
 
 const AppNavigator = () => {
-  // temp workaround because its not connected yet
-  const agreedLegal = {
-    privacy: {
-      version: 1.0,
-    },
-    terms: {
-      version: 1.0,
-    },
-  };
   // const isIntroFinished = false;
-  const isIntroFinished = useSelector(
-    (state: RootState) => state.intro.appIntroFinished
-  );
+  // const isIntroFinished = useSelector(
+  //   (state: RootState) => state.intro.appIntroFinished
+  // );
 
-  const [showOnboarding, setShowOnboarding] = useState(!isIntroFinished);
-  const [initialRoute, setInitialRoute] = useState('Intro');
+  // Defines is user is loggedIn
+  const userToken = useSelector((state: RootState) => state.intro.userToken);
+
+  const accountChain = useSelector(getAccountChain);
+
+  // const [showIntroStack, setShowIntroStack] = useState(true);
+  // const [introStackInitialRoute, setIntroStackInitialRoute] = useState('Intro');
+
+  // const [showOnboarding, setShowOnboarding] = useState(!isIntroFinished);
+  // const [initiaIntrolRoute, setInitialIntroRoute] = useState('Intro');
+
+  // Moving this to Tab navigator
+  // useEffect(() => {
+  //   const newPrivacy = currentVersion.privacy !== agreedLegal.privacy.version;
+  //   const newTerms = currentVersion.terms !== agreedLegal.terms.version;
+
+  //   const showLegal = newPrivacy || newTerms;
+  //   const showIntro = !isIntroFinished;
+
+  //   const showOnboardingStack = showLegal || showIntro;
+
+  //   if (showOnboardingStack) {
+  //     const initial = showLegal ? 'Legal' : 'Intro';
+  //     setInitialRoute(initial);
+  //   }
+
+  //   setShowOnboarding(showOnboardingStack);
+  // }, [isIntroFinished, agreedLegal]);
+
+  // Defindes is navigation tracking has been accepted (needs to be toogable in settings and will be asked on new device --> part of local storage)
+  const trackingAccepted = false;
 
   const navigationRef = useRef();
   const routeNameRef = useRef();
-
-  useEffect(() => {
-    const newPrivacy = currentVersion.privacy !== agreedLegal.privacy.version;
-    const newTerms = currentVersion.terms !== agreedLegal.terms.version;
-
-    const showLegal = newPrivacy || newTerms;
-    const showIntro = !isIntroFinished;
-
-    const showOnboardingStack = showLegal || showIntro;
-
-    if (showOnboardingStack) {
-      const initial = showLegal ? 'Legal' : 'Intro';
-      setInitialRoute(initial);
-    }
-
-    setShowOnboarding(showOnboardingStack);
-  }, [isIntroFinished, agreedLegal]);
 
   const onStateChange = () => {
     // https://reactnavigation.org/docs/en/next/screen-tracking.html
@@ -90,11 +94,7 @@ const AppNavigator = () => {
       linking={LinkingConfiguration}
       onStateChange={onStateChange}
     >
-      {showOnboarding ? (
-        <IntroStackScreen initialRouteName={initialRoute} />
-      ) : (
-        <RootStackScreen />
-      )}
+      {userToken == null ? <IntroStackScreen /> : <RootStackScreen />}
     </NavigationContainer>
   );
 };
