@@ -32,6 +32,8 @@ const AppNavigator = () => {
 
   const accountChain = useSelector(getAccountChain);
 
+  console.log(accountChain);
+
   // const [showIntroStack, setShowIntroStack] = useState(true);
   // const [introStackInitialRoute, setIntroStackInitialRoute] = useState('Intro');
 
@@ -94,7 +96,7 @@ const AppNavigator = () => {
       linking={LinkingConfiguration}
       onStateChange={onStateChange}
     >
-      {userToken == null ? <IntroStackScreen /> : <RootStackScreen />}
+      {accountChain === null ? <IntroStackScreen /> : <RootStackScreen />}
     </NavigationContainer>
   );
 };

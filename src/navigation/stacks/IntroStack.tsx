@@ -1,10 +1,10 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import { IntroScreen, LegalScreen, MnemonicScreen } from '../../screens';
+import { StartScreen, LegalScreen, MnemonicScreen } from '../../screens';
 
 type IntroStackParamList = {
-  Intro: undefined;
+  Start: undefined;
   Legal: undefined;
   Mnemonic: undefined;
 };
@@ -12,8 +12,8 @@ type IntroStackParamList = {
 const IntroStack = createStackNavigator<IntroStackParamList>();
 
 const IntroStackScreen = ({}) => (
-  <IntroStack.Navigator headerMode="none" initialRouteName="Intro">
-    <IntroStack.Screen name="Intro" component={IntroScreen} />
+  <IntroStack.Navigator headerMode="none" initialRouteName="Start">
+    <IntroStack.Screen name="Start" component={StartScreen} />
     <IntroStack.Screen name="Legal" component={LegalScreen} />
     <IntroStack.Screen name="Mnemonic" component={MnemonicScreen} />
   </IntroStack.Navigator>

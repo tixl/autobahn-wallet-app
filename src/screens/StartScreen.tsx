@@ -10,7 +10,7 @@ type Props = {
   children?: string;
 };
 
-const IntroScreen: React.FC<Props> = (props) => {
+const StartScreen: React.FC<Props> = (props) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
@@ -89,4 +89,4 @@ const ButtonSpacer = styled.View`
   height: ${spacing.s}px;
 `;
 
-export default IntroScreen;
+export default StartScreen;
