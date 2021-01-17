@@ -13,6 +13,7 @@ import {
   useRoute,
 } from '@react-navigation/native';
 import { useUpdateLegal } from '../../hooks/useUpdateLegal';
+import { Platform } from 'react-native';
 
 type Props = {
   children: React.ReactNode;
@@ -42,19 +43,31 @@ export const ScreenWrapper: React.FC<Props> = ({
   });
 
   return (
-    <Container style={{ paddingTop: props.disableTopPadding ? 0 : insets.top }}>
-      {showHeaderBar && props.headerBarConfig && (
-        <HeaderBar {...props.headerBarConfig} />
-      )}
-      <ContentContainer>{props.children}</ContentContainer>
-      <BottomModal
-        isVisible={modalEnabled}
-        type="send"
-        onClose={hideModal}
-      ></BottomModal>
-    </Container>
+    <KeyBoardAvoidingContainer
+      behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+      enabled
+      keyboardVerticalOffset={0}
+    >
+      <Container
+        style={{ paddingTop: props.disableTopPadding ? 0 : insets.top }}
+      >
+        {showHeaderBar && props.headerBarConfig && (
+          <HeaderBar {...props.headerBarConfig} />
+        )}
+        <ContentContainer>{props.children}</ContentContainer>
+        <BottomModal
+          isVisible={modalEnabled}
+          type="send"
+          onClose={hideModal}
+        ></BottomModal>
+      </Container>
+    </KeyBoardAvoidingContainer>
   );
 };
+
+const KeyBoardAvoidingContainer = styled.KeyboardAvoidingView`
+  flex: auto;
+`;
 
 const Container = styled.View`
   flex: 1;
