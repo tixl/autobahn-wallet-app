@@ -9,6 +9,7 @@ export { default as QRCode } from './QRCode';
 
 // Bar components
 export * from './bars/HeaderBar';
+export * from './bars/BottomBar';
 
 // Button components
 export * from './buttons/Button';

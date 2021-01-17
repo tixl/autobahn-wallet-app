@@ -2,7 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import styled from 'styled-components/native';
 import { ScreenWrapper } from './wrapper/ScreenWrapper';
-import { Button, MnemonicPhrase, MnemonicWord, Toggle } from '../components';
+import {
+  BottomBar,
+  Button,
+  MnemonicPhrase,
+  MnemonicWord,
+  Toggle,
+} from '../components';
 import { colors, fonts, spacing, textSize } from '../constants';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -84,23 +90,13 @@ const MnemonicConfirmScreen: React.FC<Props> = ({ route }) => {
             onValueUpdated={(index, value) => updateValidMnemonic(index, value)}
           ></MnemonicPhrase>
         </ScrollContainer>
-        <BottomContainer>
-          <ButtonContainer>
-            <Button
-              type="primary"
-              label="Back"
-              onPress={() => navigation.goBack()}
-            />
-            <ButtonSpacer />
-            <Button
-              type="primary"
-              disabled={!isValid}
-              label="Next"
-              loading={nextButtonLoading}
-              onPress={() => onNextButtonPressed()}
-            />
-          </ButtonContainer>
-        </BottomContainer>
+        <BottomBar
+          onNext={() => onNextButtonPressed()}
+          nextButtonText="Next"
+          nextButtonDisabled={!isValid}
+          onPrevious={() => navigation.goBack()}
+          previousButtonText="Back"
+        />
       </Content>
     </ScreenWrapper>
   );

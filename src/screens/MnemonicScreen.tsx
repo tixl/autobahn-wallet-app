@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import styled from 'styled-components/native';
 import { ScreenWrapper } from './wrapper/ScreenWrapper';
-import { Button, MnemonicPhrase, Toggle } from '../components';
+import { BottomBar, Button, MnemonicPhrase, Toggle } from '../components';
 import { colors, fonts, spacing, textSize } from '../constants';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { NativeScrollEvent } from 'react-native';
@@ -74,33 +74,17 @@ const MnemonicScreen: React.FC<Props> = (props) => {
         >
           <MnemonicPhrase mnemonic={mnemonic}></MnemonicPhrase>
         </ScrollContainer>
-        <BottomContainer>
-          <AcceptContainer>
-            <AcceptText>I wrote down my mnemonic phrase</AcceptText>
-            <Toggle
-              value={accepted}
-              onValueChange={(newValue) => setAccepted(newValue)}
-              disabled={!scrolledToBottom}
-              style={{ opacity: scrolledToBottom ? 1 : 0.4 }}
-            />
-          </AcceptContainer>
-          <ButtonContainer>
-            <Button
-              type="primary"
-              label="Back"
-              onPress={() => navigation.goBack()}
-            />
-            <ButtonSpacer />
-            <Button
-              type="primary"
-              disabled={!accepted}
-              label="Next"
-              onPress={() =>
-                navigation.navigate('MnemonicConfirm', { mnemonic: mnemonic })
-              }
-            />
-          </ButtonContainer>
-        </BottomContainer>
+        <BottomBar
+          onNext={() =>
+            navigation.navigate('MnemonicConfirm', { mnemonic: mnemonic })
+          }
+          nextButtonText="Next"
+          onPrevious={() => navigation.goBack()}
+          previousButtonText="Back"
+          showToggle
+          toggleDisabled={!scrolledToBottom}
+          toggleText="I wrote down my mnemonic phrase"
+        />
       </Content>
     </ScreenWrapper>
   );
@@ -113,12 +97,6 @@ const Content = styled.View`
 const ScrollContainer = styled.ScrollView`
   flex: 1;
   padding-top: ${spacing.viewTopPadding}px;
-`;
-
-const MnemonicPhraseContainer = styled.View`
-  margin-bottom: ${spacing.s}px;
-  flex-direction: row;
-  flex-wrap: wrap;
 `;
 
 const BottomContainer = styled.View``;
