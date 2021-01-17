@@ -17,19 +17,22 @@ const StartScreen: React.FC<Props> = (props) => {
   return (
     <SafeAreaContainer>
       <Container>
-        <LogoContainer>
-          <Logo name="tixl" size={textSize.xxxxl}></Logo>
-        </LogoContainer>
-        <TitleContainer>
-          <TitleText>Tixl's</TitleText>
-          <TitleText style={{ color: colors.BLUE }}>
-            Autobahn Network Wallet
-          </TitleText>
-        </TitleContainer>
-        <SubTitleText>
-          Use Tixl’s Autobahn Network Wallet to send, receive, deposit, or
-          withdraw funds. Experience instant and 0 to minimum fee transactions!
-        </SubTitleText>
+        <TopContainer>
+          <LogoContainer>
+            <Logo name="tixl" size={textSize.xxxxl}></Logo>
+          </LogoContainer>
+          <TitleContainer>
+            <TitleText>Tixl's</TitleText>
+            <TitleText style={{ color: colors.BLUE }}>
+              Autobahn Network Wallet
+            </TitleText>
+          </TitleContainer>
+          <SubTitleText>
+            Use Tixl’s Autobahn Network Wallet to send, receive, deposit, or
+            withdraw funds. Experience instant and 0 to minimum fee
+            transactions!
+          </SubTitleText>
+        </TopContainer>
         <ButtonContainer>
           <Button
             type="primary"
@@ -54,9 +57,14 @@ const SafeAreaContainer = styled.SafeAreaView`
 
 const Container = styled.View`
   flex: 1;
-  align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   padding: 0px ${spacing.s}px 0px;
+`;
+
+const TopContainer = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
 `;
 
 const LogoContainer = styled.View`
@@ -83,6 +91,7 @@ const SubTitleText = styled.Text`
 const ButtonContainer = styled.View`
   width: 100%;
   margin-top: ${spacing.l}px;
+  margin-bottom: ${spacing.s}px;
 `;
 
 const ButtonSpacer = styled.View`
