@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
+import React, { useEffect, useState } from 'react';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import styled from 'styled-components/native';
 import { ScreenWrapper } from './wrapper/ScreenWrapper';
 import { Button, Toggle } from '../components';
@@ -30,6 +30,11 @@ const LegalScreen: React.FC<Props> = (props) => {
       contentSize.height - paddingToBottom
     );
   };
+
+  useEffect(() => {
+    // setAccepted(false);
+    console.log('fjdslkfjsdlk');
+  });
 
   return (
     <ScreenWrapper
@@ -116,7 +121,6 @@ const AcceptContainer = styled.View`
   align-items: center;
   margin-bottom: ${spacing.m}px;
   margin-top: ${spacing.s}px;
-  /* padding: 0px ${spacing.xs}px; */
 `;
 
 const AcceptText = styled.Text`

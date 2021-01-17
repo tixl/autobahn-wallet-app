@@ -8,7 +8,7 @@ import {
   MnemonicConfirmScreen,
 } from '../../screens';
 
-type IntroStackParamList = {
+export type IntroStackParamList = {
   Start: undefined;
   Legal: undefined;
   Mnemonic: undefined;

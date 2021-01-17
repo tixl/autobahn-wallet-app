@@ -15,7 +15,6 @@ type Props = {
 const MnemonicScreen: React.FC<Props> = (props) => {
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
-  const dispatch = useDispatch();
 
   const [mnemonic] = useState<string[]>([
     'test',

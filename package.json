@@ -47,6 +47,7 @@
     "expo-status-bar": "^1.0.3",
     "husky": "^4.2.5",
     "i18next": "^19.4.5",
+    "lodash": "^4.17.20",
     "prettier": "^2.0.5",
     "pretty-quick": "^2.0.1",
     "react": "16.13.1",

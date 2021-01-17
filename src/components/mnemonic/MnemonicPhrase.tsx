@@ -6,12 +6,13 @@ import { MnemonicWord } from '..';
 
 type Props = {
   mnemonic: string[];
-  onChange?: () => string[];
+  onValueUpdated?: (index: number, value: string) => any;
 };
 
-export const MnemonicPhrase: React.FC<Props> = ({ mnemonic = [] }) => {
-  const onValueUpdated = (index: number, newValue: string) => {};
-
+export const MnemonicPhrase: React.FC<Props> = ({
+  mnemonic = [],
+  onValueUpdated,
+}) => {
   return (
     <Container>
       {mnemonic.map((mnemonicWord, index) => (
@@ -22,7 +23,9 @@ export const MnemonicPhrase: React.FC<Props> = ({ mnemonic = [] }) => {
           ) : (
             <MnemonicWord
               input
-              onChangeText={(newValue) => onValueUpdated(index, newValue)}
+              onChangeText={(newValue) =>
+                onValueUpdated && onValueUpdated(index, newValue)
+              }
             />
           )}
         </MnemonicItem>
