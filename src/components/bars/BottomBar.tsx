@@ -93,6 +93,10 @@ const ButtonContainer = styled.View`
   justify-content: space-between;
 `;
 
+const NextButtonContainer = styled.View`
+  flex: 6;
+`;
+
 const ButtonSpacer = styled.View`
-  width: ${spacing.xxl}px;
+  width: ${spacing.l}px;
 `;
