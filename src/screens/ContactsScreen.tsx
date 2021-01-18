@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import styled from 'styled-components/native';
 import { useNavigation } from '@react-navigation/native';
@@ -9,6 +9,8 @@ import { colors, spacing } from '../constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { ScreenWrapper } from './wrapper/ScreenWrapper';
 import { useBottomModal } from '../hooks/useBottomModal';
+import * as Contacts from 'expo-contacts';
+import ContactsStackScreen from '../navigation/stacks/root/tabs/ContactsStack';
 
 type Props = {
   children?: string;
@@ -19,9 +21,33 @@ export const ContactsScreen: React.FC<Props> = (props) => {
   const navigation = useNavigation();
   const { showModal } = useBottomModal();
 
+  // Use contacts from redux state
+  const [contacts, setContacts] = useState<Contacts.Contact[]>([]);
+
+  useEffect(() => {
+    (async () => {
+      const { status } = await Contacts.requestPermissionsAsync();
+      if (status === 'granted') {
+        const { data } = await Contacts.getContactsAsync({
+          fields: [Contacts.Fields.Emails],
+        });
+
+        if (data.length > 0) {
+          setContacts(data);
+        }
+      }
+    })();
+  }, []);
+
   return (
     <ScreenWrapper headerBarConfig={{ type: 'value' }}>
-      <ContactsContainer></ContactsContainer>
+      <ContactsContainer>
+        {contacts.map((contact, index) => (
+          <Contact key={index}>
+            {contact.firstName} {contact.lastName}
+          </Contact>
+        ))}
+      </ContactsContainer>
     </ScreenWrapper>
   );
 };
@@ -34,5 +60,7 @@ const ButtonContainer = styled.View`
 `;
 
 const ContactsContainer = styled.ScrollView``;
+
+const Contact = styled.Text``;
 
 export default ContactsScreen;

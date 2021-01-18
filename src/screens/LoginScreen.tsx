@@ -47,7 +47,6 @@ const LoginScreen: React.FC<Props> = ({}) => {
   // Validate entered mnemonic every time it was updated
   useEffect(() => {
     const isValid = validateMnemonic(enteredMnemonic);
-    console.log(isValid);
     setMnemonicValid(isValid);
   }, [enteredMnemonic]);
 

@@ -38,6 +38,7 @@
     "eslint": "^7.1.0",
     "eslint-config-prettier": "^6.11.0",
     "expo": "^40.0.0",
+    "expo-contacts": "~8.6.0",
     "expo-font": "~8.4.0",
     "expo-haptics": "^8.4.0",
     "expo-linking": "~2.0.0",

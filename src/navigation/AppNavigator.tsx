@@ -91,7 +91,7 @@ const AppNavigator = () => {
       linking={LinkingConfiguration}
       onStateChange={onStateChange}
     >
-      {accountChain !== null ? <IntroStackScreen /> : <RootStackScreen />}
+      {accountChain === null ? <IntroStackScreen /> : <RootStackScreen />}
     </NavigationContainer>
   );
 };
