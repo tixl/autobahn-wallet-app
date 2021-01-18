@@ -6,3 +6,4 @@ export { default as LoginScreen } from './LoginScreen';
 export { default as SettingsScreen } from './SettingsScreen';
 export { default as WalletScreen } from './WalletScreen';
 export { default as AssetDetailScreen } from './AssetDetailScreen';
+export { default as ContactsScreen } from './ContactsScreen';
