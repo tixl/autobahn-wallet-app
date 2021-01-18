@@ -1,9 +1,9 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import { textSize, colors, spacing, fonts } from '../../constants';
 
-import { Button, Toggle } from '..';
-import { ButtonType } from '../buttons/Button';
+import { Toggle } from '../inputs/Toggle';
+import { Button, ButtonType } from '../buttons/Button';
 
 export type BottomBarProps = {
   onNext?: () => any;
@@ -94,10 +94,6 @@ const ButtonContainer = styled.View`
   margin-top: ${spacing.s}px;
   flex-direction: row;
   justify-content: space-between;
-`;
-
-const NextButtonContainer = styled.View`
-  flex: 6;
 `;
 
 const ButtonSpacer = styled.View`

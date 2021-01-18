@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import { colors, fonts, shapes, spacing, textSize } from '../../constants';
-import { Switch } from 'react-native';
 
 type Props = {
   label?: string;

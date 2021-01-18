@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { colors, fonts, shapes, spacing, textSize } from '../../constants';
-import { Switch } from 'react-native';
-import { MnemonicWord } from '..';
+import { colors, fonts, spacing, textSize } from '../../constants';
+import { MnemonicWord } from './MnemonicWord';
 
 type Props = {
   mnemonic: string[];

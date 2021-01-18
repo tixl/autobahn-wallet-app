@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import styled from 'styled-components/native';
 import { ScreenWrapper } from './wrapper/ScreenWrapper';
-import { BottomBar, Button, MnemonicPhrase, Toggle } from '../components';
+import { BottomBar, MnemonicPhrase } from '../components';
 import { colors, fonts, spacing, textSize } from '../constants';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { NativeScrollEvent } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
 
 type Props = {
   children?: string;
