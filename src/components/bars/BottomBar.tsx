@@ -14,8 +14,8 @@ export type BottomBarProps = {
   previousButtonText?: string;
   previousButtonType?: ButtonType;
   previousButtonDisabled?: boolean;
+  text?: string;
   showToggle?: boolean;
-  toggleText?: string;
   toggleDisabled?: boolean;
 };
 
@@ -26,9 +26,9 @@ export const BottomBar: React.FC<BottomBarProps> = ({
   previousButtonText = 'Label (Previous)',
   previousButtonType = 'primary',
   previousButtonDisabled = false,
-  toggleText = 'Label (Accepted Text)',
   showToggle = false,
   toggleDisabled = false,
+  text,
   onNext,
   onPrevious,
 }) => {
@@ -36,15 +36,17 @@ export const BottomBar: React.FC<BottomBarProps> = ({
 
   return (
     <Container>
-      {showToggle && (
+      {(showToggle || text) && (
         <ToggleContainer>
-          <ToggleText>{toggleText}</ToggleText>
-          <Toggle
-            value={accepted}
-            onValueChange={(newValue) => setAccepted(newValue)}
-            disabled={toggleDisabled}
-            style={{ opacity: !toggleDisabled ? 1 : 0.4 }}
-          />
+          {text && <ToggleText>{text}</ToggleText>}
+          {showToggle && (
+            <Toggle
+              value={accepted}
+              onValueChange={(newValue) => setAccepted(newValue)}
+              disabled={toggleDisabled}
+              style={{ opacity: !toggleDisabled ? 1 : 0.4 }}
+            />
+          )}
         </ToggleContainer>
       )}
 

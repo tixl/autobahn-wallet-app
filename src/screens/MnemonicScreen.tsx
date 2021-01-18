@@ -83,7 +83,7 @@ const MnemonicScreen: React.FC<Props> = (props) => {
           previousButtonText="Back"
           showToggle
           toggleDisabled={!scrolledToBottom}
-          toggleText="I wrote down my mnemonic phrase"
+          text="I wrote down my mnemonic phrase"
         />
       </Content>
     </ScreenWrapper>

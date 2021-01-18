@@ -6,6 +6,7 @@ import {
   LegalScreen,
   MnemonicScreen,
   MnemonicConfirmScreen,
+  LoginScreen,
 } from '../../screens';
 
 export type IntroStackParamList = {
@@ -13,6 +14,7 @@ export type IntroStackParamList = {
   Legal: undefined;
   Mnemonic: undefined;
   MnemonicConfirm: { mnemonic: string[] };
+  Login: undefined;
 };
 
 const IntroStack = createStackNavigator<IntroStackParamList>();
@@ -26,6 +28,7 @@ const IntroStackScreen = ({}) => (
       name="MnemonicConfirm"
       component={MnemonicConfirmScreen}
     />
+    <IntroStack.Screen name="Login" component={LoginScreen} />
   </IntroStack.Navigator>
 );
 

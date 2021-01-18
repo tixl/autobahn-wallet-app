@@ -12,7 +12,6 @@ type Props = {
 
 const StartScreen: React.FC<Props> = (props) => {
   const navigation = useNavigation();
-  const dispatch = useDispatch();
 
   return (
     <SafeAreaContainer>
@@ -43,7 +42,7 @@ const StartScreen: React.FC<Props> = (props) => {
           <Button
             type="secondary"
             label="Login existing wallet"
-            onPress={() => dispatch(introActions.login())}
+            onPress={() => navigation.navigate('Login')}
           />
         </ButtonContainer>
       </Container>

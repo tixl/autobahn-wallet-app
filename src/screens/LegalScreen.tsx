@@ -65,7 +65,7 @@ const LegalScreen: React.FC<Props> = (props) => {
           previousButtonText="Back"
           showToggle
           toggleDisabled={!scrolledToBottom}
-          toggleText="I have read Tixl Wallet‘s Terms of Use and Privacy Policy and
+          text="I have read Tixl Wallet‘s Terms of Use and Privacy Policy and
           accept both."
         />
       </Content>
