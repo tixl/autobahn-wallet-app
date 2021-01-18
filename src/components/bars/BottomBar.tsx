@@ -32,7 +32,8 @@ export const BottomBar: React.FC<BottomBarProps> = ({
   onNext,
   onPrevious,
 }) => {
-  const [accepted, setAccepted] = useState<boolean>(false);
+  // Only set accepted false if toggle is enabled
+  const [accepted, setAccepted] = useState<boolean>(!showToggle);
 
   return (
     <Container>
