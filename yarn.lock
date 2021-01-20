@@ -1437,10 +1437,10 @@
     redux-thunk "^2.3.0"
     reselect "^4.0.0"
 
-"@tixl/tixl-sdk-js@0.4.1":
-  version "0.4.1"
-  resolved "https://npm.pkg.github.com/download/@tixl/tixl-sdk-js/0.4.1/abd312cb202af6dc457c7947a33b957e4759d8b6be521c88125b0f0c324c1842#7252d5ea6d5095a177937b0310550ae3ad8d89bc"
-  integrity sha512-/UuGK9HdNEGgv3L+3gr1hWNQBEiMwHSk9dOh+6Vcdd3flMvoU6bZFoi8ExtWlITGPcrPxQbeJFcaXC0Ekz1hUg==
+"@tixl/tixl-sdk-js@0.5.1":
+  version "0.5.1"
+  resolved "https://npm.pkg.github.com/download/@tixl/tixl-sdk-js/0.5.1/30c06402ebc725f4b8423e203a2eea6b92684229048f30ca6d4adafafafc9609#52e5b24d3fcfbee948b2e04301c9ae00d9241317"
+  integrity sha512-1GE27ZjZ2osOi7sCcu9PV9encnk3ouVDb0S/9M8V7ohE2UFPQxsqFWdSzNmfWP+htI+ZcMJJiFOUbuCy7ex8eg==
   dependencies:
     "@bitauth/libauth" "1.17.3"
     "@tixl/tixl-types" "0.7.1"

@@ -3,6 +3,14 @@ import { SwipeListView } from 'react-native-swipe-list-view';
 import styled from 'styled-components/native';
 import { useNavigation } from '@react-navigation/native';
 import { generateKeys } from '@tixl/tixl-sdk-js/redux/keys/actions';
+import { createAccountChain } from '@tixl/tixl-sdk-js/redux/chains/actions';
+import { getKeys } from '@tixl/tixl-sdk-js/redux/keys/selectors';
+import { setEnvironment } from '@tixl/tixl-sdk-js/helpers/env';
+import { getUnspent } from '@tixl/tixl-sdk-js/requests/getUnspent';
+import { createReceiveTask } from '@tixl/tixl-sdk-js/redux/tasks/actions';
+import { updateBlockStatesNetwork } from '@tixl/tixl-sdk-js/redux/chains/actions';
+import { ReceiveTaskData } from '@tixl/tixl-sdk-js/redux/tasks/actionTypes';
+import { handleReceiveTask } from '@tixl/tixl-sdk-js/redux/tasks/transactions/receive';
 
 import { AssetCard, iconName, RoundButton } from '../components';
 import { colors, spacing } from '../constants';
@@ -12,24 +20,81 @@ import { ExampleAsset, ExampleState } from '../redux/reducer/example';
 import { ScreenWrapper } from './wrapper/ScreenWrapper';
 import { useBottomModal } from '../hooks/useBottomModal';
 import { TestShowKeys } from '../components/TestShowKeys';
+import { useAccountChain } from '../hooks/useAccountChain';
 
 type Props = {
   children?: string;
 };
 
+setEnvironment({
+  appGateway: 'https://gateway.int.tixl.dev',
+});
+
 export const WalletScreen: React.FC<Props> = (props) => {
   const dispatch = useDispatch();
+  const keySet = useSelector(getKeys);
+  const accountChain = useAccountChain();
+  const state = useSelector((state: RootState) => state);
+  const receiveTasks = useSelector((state: RootState) => state.tasks.receive);
 
-  // TODO remove this and integrate correctly
+  // create the wallet keyset
   React.useEffect(() => {
     (async () => {
+      if (keySet) return;
+
       // dont call crypto immediately, usually these are user initiated anyways
       await new Promise((resolve) => setTimeout(resolve, 100));
 
-      console.log('Dispatch key request every time');
       dispatch(generateKeys());
     })();
   }, []);
+
+  // create wallet
+  React.useEffect(() => {
+    if (!keySet) return;
+    if (accountChain) return;
+
+    // create account chain
+    dispatch(createAccountChain());
+  }, [keySet]);
+
+  // handle incoming send blocks
+  React.useEffect(() => {
+    if (!keySet) return;
+
+    (async () => {
+      console.log('your AN address', keySet.sig.publicKey);
+
+      // find new blocks to receive
+      const res = await getUnspent(keySet.sig.publicKey);
+
+      // create receive tasks
+      res.blocks.forEach((send) => {
+        //dispatch(createReceiveTask(send.signature, undefined, send.symbol));
+      });
+    })();
+  }, [keySet]);
+
+  // update state for blocks
+  React.useEffect(() => {
+    if (!accountChain) return;
+
+    // lookup new block states
+    dispatch(updateBlockStatesNetwork());
+  }, [accountChain]);
+
+  // manually handle a receive task
+  React.useEffect(() => {
+    (async () => {
+      receiveTasks.forEach((receiveTask) => {
+        // handleReceiveTask(
+        //   dispatch,
+        //   state as any,
+        //   receiveTask as ReceiveTaskData
+        // );
+      });
+    })();
+  }, [receiveTasks]);
 
   const navigation = useNavigation();
   const { showModal } = useBottomModal();
