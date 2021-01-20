@@ -9,6 +9,7 @@ export { default as QRCode } from './QRCode';
 
 // Bar components
 export * from './bars/HeaderBar';
+export * from './bars/BottomBar';
 
 // Button components
 export * from './buttons/Button';
@@ -28,7 +29,7 @@ export * from './text/Text';
 
 // Mnemonic components
 export * from './mnemonic/MnemonicWord';
-export * from './mnemonic/MnemonicItem';
+export * from './mnemonic/MnemonicPhrase';
 
 // Modal components
 export * from './modal/BottomModal';

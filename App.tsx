@@ -6,7 +6,7 @@ import { LogBox } from 'react-native';
 import { AppearanceProvider } from 'react-native-appearance';
 import { enableScreens } from 'react-native-screens';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { Provider, connect } from 'react-redux';
+import { Provider, connect, useSelector } from 'react-redux';
 // @ts-ignore
 import { PersistGate } from 'redux-persist/integration/react';
 // import QuickActions from 'react-native-quick-actions';
@@ -17,6 +17,9 @@ import { persistor, store } from './src/redux/store';
 import useCachedResources from './src/hooks/useCachedResources';
 import './src/i18n';
 import { StatusBar } from 'expo-status-bar';
+
+// Tixl SDK imports
+import { getAccountChain } from '@tixl/tixl-sdk-js/redux/chains/selectors';
 
 /**
  * Expose native navigation container components to React Native

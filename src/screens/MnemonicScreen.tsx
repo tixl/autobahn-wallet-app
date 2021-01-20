@@ -2,13 +2,10 @@ import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import styled from 'styled-components/native';
 import { ScreenWrapper } from './wrapper/ScreenWrapper';
-import { Button, MnemonicItem, MnemonicWord, Toggle } from '../components';
+import { BottomBar, MnemonicPhrase } from '../components';
 import { colors, fonts, spacing, textSize } from '../constants';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { NativeScrollEvent } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../redux/store';
-import { introActions } from '../redux/reducer';
 
 type Props = {
   children?: string;
@@ -17,11 +14,33 @@ type Props = {
 const MnemonicScreen: React.FC<Props> = (props) => {
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
-  const dispatch = useDispatch();
 
-  const mnemonicPhrase = useSelector(
-    (state: RootState) => state.example.mnemonicPhrase
-  );
+  const [mnemonic] = useState<string[]>([
+    'test',
+    'secret',
+    'prison',
+    'burden',
+    'north',
+    'secret',
+    'prison',
+    'burden',
+    'north',
+    'secret',
+    'prison',
+    'burden',
+    'north',
+    'secret',
+    'prison',
+    'burden',
+    'north',
+    'secret',
+    'prison',
+    'burden',
+    'north',
+    'secret',
+    'prison',
+    'burden',
+  ]);
 
   const [accepted, setAccepted] = useState<boolean>(false);
 
@@ -52,41 +71,19 @@ const MnemonicScreen: React.FC<Props> = (props) => {
           }}
           scrollEventThrottle={400}
         >
-          <MnemonicPhraseContainer>
-            {mnemonicPhrase.map((mnemonicWord, index) => (
-              <MnemonicItem
-                key={index}
-                index={index}
-                label={mnemonicWord}
-              ></MnemonicItem>
-            ))}
-          </MnemonicPhraseContainer>
+          <MnemonicPhrase mnemonic={mnemonic}></MnemonicPhrase>
         </ScrollContainer>
-        <BottomContainer>
-          <AcceptContainer>
-            <AcceptText>I wrote down my mnemonic phrase</AcceptText>
-            <Toggle
-              value={accepted}
-              onValueChange={(newValue) => setAccepted(newValue)}
-              disabled={!scrolledToBottom}
-              style={{ opacity: scrolledToBottom ? 1 : 0.4 }}
-            />
-          </AcceptContainer>
-          <ButtonContainer>
-            <Button
-              type="primary"
-              label="Back"
-              onPress={() => navigation.goBack()}
-            />
-            <ButtonSpacer />
-            <Button
-              type="primary"
-              disabled={!accepted}
-              label="Next"
-              onPress={() => dispatch(introActions.setIntroAppFinished(true))}
-            />
-          </ButtonContainer>
-        </BottomContainer>
+        <BottomBar
+          onNext={() =>
+            navigation.navigate('MnemonicConfirm', { mnemonic: mnemonic })
+          }
+          nextButtonText="Next"
+          onPrevious={() => navigation.goBack()}
+          previousButtonText="Back"
+          showToggle
+          toggleDisabled={!scrolledToBottom}
+          text="I wrote down my mnemonic phrase"
+        />
       </Content>
     </ScreenWrapper>
   );
@@ -99,12 +96,6 @@ const Content = styled.View`
 const ScrollContainer = styled.ScrollView`
   flex: 1;
   padding-top: ${spacing.viewTopPadding}px;
-`;
-
-const MnemonicPhraseContainer = styled.View`
-  margin-bottom: ${spacing.s}px;
-  flex-direction: row;
-  flex-wrap: wrap;
 `;
 
 const BottomContainer = styled.View``;

@@ -3,6 +3,7 @@ import * as React from 'react';
 import { Icon, iconName } from '../../../components';
 import SettingsStackScreen from './tabs/SettingsStack';
 import WalletStackScreen from './tabs/WalletStack';
+import ContactsStackScreen from './tabs/ContactsStack';
 
 const Tab = createBottomTabNavigator();
 
@@ -22,6 +23,9 @@ const tabScreenOptions = ({ route }: { route: any }) => ({
         name = focused ? iconName.settingsActive : iconName.settingsInactive;
         break;
       case 'SettingsStack':
+        name = focused ? iconName.settingsActive : iconName.settingsInactive;
+        break;
+      case 'ContactsStack':
         name = focused ? iconName.settingsActive : iconName.settingsInactive;
         break;
       default:
@@ -48,6 +52,11 @@ const TabNavigator = ({ navigation, route }: any) => {
       <Tab.Screen
         name="WalletStack"
         component={WalletStackScreen}
+        // options={({ route }) => ({ tabBarVisible: getTabBarVisible(route) })}
+      />
+      <Tab.Screen
+        name="ContactsStack"
+        component={ContactsStackScreen}
         // options={({ route }) => ({ tabBarVisible: getTabBarVisible(route) })}
       />
       <Tab.Screen

@@ -110,7 +110,7 @@ export const WalletScreen: React.FC<Props> = (props) => {
 
   return (
     <ScreenWrapper headerBarConfig={{ type: 'value' }}>
-      <TestShowKeys />
+      {/* <TestShowKeys /> */}
       <SwipeListView
         style={{
           overflow: 'visible',
@@ -152,7 +152,6 @@ export const WalletScreen: React.FC<Props> = (props) => {
         leftOpenValue={50 + 2 * spacing.s}
         rightOpenValue={-(50 + 2 * spacing.s)}
       />
-
       {/* {assets.map((asset, index) => (
           <AssetCard
             key={index}

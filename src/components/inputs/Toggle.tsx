@@ -14,7 +14,7 @@ type Props = {
 export const Toggle: React.FC<Props> = (props) => {
   return (
     <Switch
-      trackColor={{ false: 'grey', true: colors.BLUE }}
+      trackColor={{ false: 'grey', true: colors.BLUE_TOGGLE }}
       ios_backgroundColor="grey"
       thumbColor={props.value ? colors.BLUE_TOGGLE_LIGHT : 'white'}
       style={props.style}

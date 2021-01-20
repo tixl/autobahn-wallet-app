@@ -1,4 +1,4 @@
-import React, { Children } from 'react';
+import React, { Children, useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import { BottomModal, HeaderBar, HeaderBarProps } from '../../components';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -7,7 +7,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { uiActions, UiState } from '../../redux/reducer/ui';
 import { RootState } from '../../redux/store';
 import { useBottomModal } from '../../hooks/useBottomModal';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import {
+  useFocusEffect,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native';
+import { useUpdateLegal } from '../../hooks/useUpdateLegal';
+import { Platform } from 'react-native';
 
 type Props = {
   children: React.ReactNode;
@@ -26,24 +32,42 @@ export const ScreenWrapper: React.FC<Props> = ({
 }) => {
   const insets = useSafeAreaInsets();
   const { modalEnabled, hideModal } = useBottomModal();
+  const { updateLegal } = useUpdateLegal();
   const route = useRoute();
   const navigation = useNavigation();
 
+  useFocusEffect(() => {
+    if (updateLegal) {
+      navigation.navigate('Legal');
+    }
+  });
+
   return (
-    <Container style={{ paddingTop: props.disableTopPadding ? 0 : insets.top }}>
-      {showHeaderBar && props.headerBarConfig && (
-        <HeaderBar {...props.headerBarConfig} />
-      )}
-      <ContentContainer>{props.children}</ContentContainer>
-      {/* {props.children} */}
-      <BottomModal
-        isVisible={modalEnabled}
-        type="send"
-        onClose={hideModal}
-      ></BottomModal>
-    </Container>
+    <KeyBoardAvoidingContainer
+      behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+      enabled
+      keyboardVerticalOffset={0}
+    >
+      <Container
+        style={{ paddingTop: props.disableTopPadding ? 0 : insets.top }}
+      >
+        {showHeaderBar && props.headerBarConfig && (
+          <HeaderBar {...props.headerBarConfig} />
+        )}
+        <ContentContainer>{props.children}</ContentContainer>
+        <BottomModal
+          isVisible={modalEnabled}
+          type="send"
+          onClose={hideModal}
+        ></BottomModal>
+      </Container>
+    </KeyBoardAvoidingContainer>
   );
 };
+
+const KeyBoardAvoidingContainer = styled.KeyboardAvoidingView`
+  flex: auto;
+`;
 
 const Container = styled.View`
   flex: 1;

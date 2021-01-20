@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   createStackNavigator,
   TransitionPresets,
@@ -8,30 +8,38 @@ import {
 import TabNavigator from './root/TabNavigator';
 
 // Screen imports
-import { AssetDetailScreen } from '../../screens';
+import { AssetDetailScreen, LegalScreen } from '../../screens';
 import { ExampleAsset } from '../../redux/reducer/example';
 
 export type RootStackParamList = {
   Tab: undefined;
   AssetDetail: { asset: ExampleAsset };
+  Legal: { legalInfo: string };
 };
 
 const RootStack = createStackNavigator<RootStackParamList>();
 
-const RootStackScreen = () => (
-  <RootStack.Navigator
-    mode="modal"
-    initialRouteName="Tab"
-    screenOptions={({ route, navigation }) => ({
-      headerShown: false,
-      gestureEnabled: true,
-      // Activate iOS style modal presentation (could be adapted for Android)
-      ...TransitionPresets.ModalPresentationIOS,
-    })}
-  >
-    <RootStack.Screen name="Tab" component={TabNavigator} />
-    <RootStack.Screen name="AssetDetail" component={AssetDetailScreen} />
-  </RootStack.Navigator>
-);
+const RootStackScreen = () => {
+  return (
+    <RootStack.Navigator
+      mode="modal"
+      initialRouteName="Tab"
+      screenOptions={({ route, navigation }) => ({
+        headerShown: false,
+        gestureEnabled: true,
+        // Activate iOS style modal presentation (could be adapted for Android)
+        ...TransitionPresets.ModalPresentationIOS,
+      })}
+    >
+      <RootStack.Screen name="Tab" component={TabNavigator} />
+      <RootStack.Screen name="AssetDetail" component={AssetDetailScreen} />
+      <RootStack.Screen
+        name="Legal"
+        component={LegalScreen}
+        options={{ gestureEnabled: false }}
+      />
+    </RootStack.Navigator>
+  );
+};
 
 export default RootStackScreen;

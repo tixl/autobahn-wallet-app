@@ -1,1 +1,2 @@
-// keep for later
+// Declarations for modules
+declare module 'lodash';
