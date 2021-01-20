@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { persistReducer, persistStore } from 'redux-persist';
 import thunk from 'redux-thunk';
-import { keys } from '@tixl/tixl-sdk-js/redux/reducer';
+import { keys, chains, tasks, scan } from '@tixl/tixl-sdk-js/redux/reducer';
 
 import { introReducer, exampleReducer, uiReducer } from './reducer';
 
@@ -11,6 +11,9 @@ const rootReducer = combineReducers({
   example: exampleReducer,
   ui: uiReducer,
   keys,
+  chains,
+  tasks,
+  scan,
 });
 
 const middleware = [thunk];
