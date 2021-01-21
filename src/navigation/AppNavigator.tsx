@@ -15,9 +15,17 @@ import currentVersion from '../config/legal.json';
 import LinkingConfiguration from './LinkingConfiguration';
 
 import { IntroStackScreen, RootStackScreen } from './stacks';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { getAccountChain } from '@tixl/tixl-sdk-js/redux/chains/selectors';
+import { getKeys } from '@tixl/tixl-sdk-js/redux/keys/selectors';
+import { useAccountChain } from '../hooks/useAccountChain';
+import { generateKeys } from '@tixl/tixl-sdk-js/redux/keys/actions';
+import {
+  createAccountChain,
+  updateBlockStatesNetwork,
+} from '@tixl/tixl-sdk-js/redux/chains/actions';
+import { getUnspent } from '@tixl/tixl-sdk-js/requests/getUnspent';
 
 const ProdChecker = NativeModules.ProdChecker;
 
@@ -27,31 +35,70 @@ const AppNavigator = () => {
   //   (state: RootState) => state.intro.appIntroFinished
   // );
 
-  const accountChain = useSelector(getAccountChain);
+  const dispatch = useDispatch();
+  const keySet = useSelector(getKeys);
+  const accountChain = useAccountChain();
+  const state = useSelector((state: RootState) => state);
+  const receiveTasks = useSelector((state: RootState) => state.tasks.receive);
 
-  // const [showIntroStack, setShowIntroStack] = useState(true);
-  // const [introStackInitialRoute, setIntroStackInitialRoute] = useState('Intro');
+  // initially create the wallet keyset (this will later be handled inside the intro setup)
+  React.useEffect(() => {
+    (async () => {
+      if (keySet) return;
 
-  // const [showOnboarding, setShowOnboarding] = useState(!isIntroFinished);
-  // const [initiaIntrolRoute, setInitialIntroRoute] = useState('Intro');
+      // dont call crypto immediately, usually these are user initiated anyways
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
-  // Moving this to Tab navigator
-  // useEffect(() => {
-  //   const newPrivacy = currentVersion.privacy !== agreedLegal.privacy.version;
-  //   const newTerms = currentVersion.terms !== agreedLegal.terms.version;
+      dispatch(generateKeys());
+    })();
+  }, []);
 
-  //   const showLegal = newPrivacy || newTerms;
-  //   const showIntro = !isIntroFinished;
+  // create wallet by loading account chain (for keyset)
+  React.useEffect(() => {
+    if (!keySet) return;
+    if (accountChain) return;
 
-  //   const showOnboardingStack = showLegal || showIntro;
+    // create account chain
+    dispatch(createAccountChain());
+  }, [keySet]);
 
-  //   if (showOnboardingStack) {
-  //     const initial = showLegal ? 'Legal' : 'Intro';
-  //     setInitialRoute(initial);
-  //   }
+  // update state for blocks
+  React.useEffect(() => {
+    if (!accountChain) return;
 
-  //   setShowOnboarding(showOnboardingStack);
-  // }, [isIntroFinished, agreedLegal]);
+    // lookup new block states
+    dispatch(updateBlockStatesNetwork());
+  }, [accountChain]);
+
+  // handle incoming send blocks (use task runner later)
+  React.useEffect(() => {
+    if (!keySet) return;
+
+    (async () => {
+      console.log('your AN address', keySet.sig.publicKey);
+
+      // find new blocks to receive
+      const res = await getUnspent(keySet.sig.publicKey);
+
+      // create receive tasks
+      res.blocks.forEach((send) => {
+        //dispatch(createReceiveTask(send.signature, undefined, send.symbol));
+      });
+    })();
+  }, [keySet]);
+
+  // manually handle a receive task
+  React.useEffect(() => {
+    (async () => {
+      receiveTasks.forEach((receiveTask) => {
+        // handleReceiveTask(
+        //   dispatch,
+        //   state as any,
+        //   receiveTask as ReceiveTaskData
+        // );
+      });
+    })();
+  }, [receiveTasks]);
 
   // Defindes is navigation tracking has been accepted (needs to be toogable in settings and will be asked on new device --> part of local storage)
   const trackingAccepted = false;
