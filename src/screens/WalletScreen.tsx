@@ -5,14 +5,11 @@ import { useNavigation } from '@react-navigation/native';
 import { setEnvironment } from '@tixl/tixl-sdk-js/helpers/env';
 import { AssetCard, iconName, RoundButton } from '../components';
 import { colors, spacing } from '../constants';
-import { useSelector } from 'react-redux';
-import { RootState } from '../redux/store';
-import { ExampleAsset, ExampleState } from '../redux/reducer/example';
 import { ScreenWrapper } from './wrapper/ScreenWrapper';
 import { useBottomModal } from '../hooks/useBottomModal';
 import { TestShowKeys } from '../components/TestShowKeys';
-import { ModalProps } from '../redux/reducer/modal';
 import { AssetSymbol } from '@tixl/tixl-types';
+import { useBalance } from '../hooks/useBalance';
 
 type Props = {
   children?: string;
@@ -26,18 +23,19 @@ export const WalletScreen: React.FC<Props> = (props) => {
   const navigation = useNavigation();
   const { openModal } = useBottomModal();
 
-  // Get example data from redux store
-  const { assets }: ExampleState = useSelector(
-    (state: RootState) => state.example
-  );
+  const assets: AssetSymbol[] = [AssetSymbol.TXL, AssetSymbol.BTC];
+  const balance = useBalance;
 
-  const onButtonPress = (asset: ExampleAsset) => {
+  // Get assets from redux store
+  // const assets = useSelector((state: RootState) => state.example.assets);
+
+  const onButtonPress = (asset: AssetSymbol) => {
     navigation.navigate('AssetDetail', { asset: asset });
   };
 
   return (
     <ScreenWrapper headerBarConfig={{ type: 'value' }}>
-      <TestShowKeys />
+      {/* <TestShowKeys /> */}
       <SwipeListView
         style={{
           overflow: 'visible',
@@ -47,13 +45,8 @@ export const WalletScreen: React.FC<Props> = (props) => {
         renderItem={(data, rowMap) => (
           <AssetCard
             key={data.index}
-            name={data.item.name}
-            prefix={data.item.prefix}
+            asset={data.item}
             onPress={() => onButtonPress(data.item)}
-            amount={data.item.value.toString()}
-            amountUsd={data.item.valueUsd.toString()}
-            logoName={data.item.logo}
-            // disabled={asset.prefix == 'TXL'}
           />
         )}
         renderHiddenItem={(data, rowMap) => (

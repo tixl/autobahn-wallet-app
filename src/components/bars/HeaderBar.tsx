@@ -7,6 +7,7 @@ import { Text } from '../text/Text';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { Logo } from '../Logo';
+import usePortfolioValue from '../../hooks/usePortfolioValue';
 
 type HeaderBarType = 'value' | 'back' | 'close';
 
@@ -17,9 +18,7 @@ export type HeaderBarProps = {
 };
 
 export const HeaderBar: React.FC<HeaderBarProps> = (props) => {
-  const portfolioValue = useSelector(
-    (state: RootState) => state.example.portfolioValue
-  );
+  const portfolioValue = usePortfolioValue();
 
   // Get navigation for back button usage
   const navigation = useNavigation();

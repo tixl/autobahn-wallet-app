@@ -6,10 +6,11 @@ import { iconName, Text, RoundButton, AssetValueCard } from '../components';
 
 import { colors, spacing, textSize, windowWidth } from '../constants';
 import { ScreenWrapper } from './wrapper/ScreenWrapper';
-import { useDispatch } from 'react-redux';
-import { ModalType, uiActions } from '../redux/reducer/ui';
 import { useBottomModal } from '../hooks/useBottomModal';
 import { AssetSymbol } from '@tixl/tixl-types';
+import assets from '../helpers/assets';
+import { useBalance } from '../hooks/useBalance';
+import useDollarValue from '../hooks/useDollarValue';
 
 type AssetDetailScreenRouteProp = RouteProp<RootStackParamList, 'AssetDetail'>;
 
@@ -23,6 +24,9 @@ const AssetDetailScreen: React.FC<Props> = (props) => {
   // Get route params
   const asset = props.route.params.asset;
 
+  const balance = useBalance(asset);
+  const dollarValue = useDollarValue(balance.toString(), asset);
+
   let buttonWidth: number = (windowWidth - 2 * spacing.s) / 3 - 2 * spacing.m;
   const maxButtonWidth: number = 56;
   if (buttonWidth > maxButtonWidth) {
@@ -31,7 +35,7 @@ const AssetDetailScreen: React.FC<Props> = (props) => {
 
   return (
     <ScreenWrapper
-      headerBarConfig={{ title: asset.name, type: 'close' }}
+      headerBarConfig={{ title: assets[asset].name, type: 'close' }}
       disableTopPadding
     >
       <ScrollContainer>
@@ -43,15 +47,14 @@ const AssetDetailScreen: React.FC<Props> = (props) => {
           <Spacer />
           <OverviewContainer>
             <AssetValueCard
-              name={asset.prefix}
-              value={asset.value.toString()}
-              logoName={asset.logo}
+              name={asset}
+              value={balance.toString()}
             ></AssetValueCard>
             <Spacer />
             <AssetValueCard
-              name="USD"
-              value={asset.valueUsd.toString()}
-              logoName="dollar"
+              name={asset}
+              value={dollarValue}
+              isDollar
             ></AssetValueCard>
           </OverviewContainer>
         </Section>
@@ -67,18 +70,14 @@ const AssetDetailScreen: React.FC<Props> = (props) => {
               title="Send"
               icon={iconName.arrowUp}
               color={colors.LIGHT_BLUE}
-              onPress={() =>
-                openModal({ modalType: 'send', asset: AssetSymbol.BTC })
-              }
+              onPress={() => openModal({ modalType: 'send', asset: asset })}
             />
             <RoundButton
               width={buttonWidth}
               title="Receive"
               icon={iconName.arrowDown}
               color={colors.LIGHT_BLUE}
-              onPress={() =>
-                openModal({ modalType: 'receive', asset: AssetSymbol.BTC })
-              }
+              onPress={() => openModal({ modalType: 'receive', asset: asset })}
             />
             <RoundButton
               width={buttonWidth}

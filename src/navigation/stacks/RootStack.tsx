@@ -9,11 +9,11 @@ import TabNavigator from './root/TabNavigator';
 
 // Screen imports
 import { AssetDetailScreen, LegalScreen } from '../../screens';
-import { ExampleAsset } from '../../redux/reducer/example';
+import { AssetSymbol } from '@tixl/tixl-types';
 
 export type RootStackParamList = {
   Tab: undefined;
-  AssetDetail: { asset: ExampleAsset };
+  AssetDetail: { asset: AssetSymbol };
   Legal: { legalInfo: string };
 };
 

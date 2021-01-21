@@ -3,39 +3,41 @@ import styled from 'styled-components/native';
 import { textSize, spacing, shapes } from '../../constants';
 import { Text } from '../text/Text';
 import { TouchableWrapper } from '../wrapper/TouchableWrapper';
-import { Logo, LogoName } from '../Logo';
+import { Logo } from '../Logo';
+import { AssetSymbol } from '@tixl/tixl-types';
+import { useBalance } from '../../hooks/useBalance';
+import assets from '../../helpers/assets';
+import useDollarValue from '../../hooks/useDollarValue';
 
 type Props = {
-  name: string;
-  logoName: LogoName;
-  amount: string;
-  prefix: string;
-  amountUsd: string;
+  asset: AssetSymbol;
   disabled?: boolean;
   onPress?: () => void;
 };
 
-export const AssetCard: React.FC<Props> = (props) => {
+export const AssetCard: React.FC<Props> = ({
+  asset,
+  disabled = false,
+  onPress,
+}) => {
+  const balance = useBalance(asset);
+  const balanceUsdDoller = useDollarValue(balance.toString(), asset);
+
   return (
-    <TouchableWrapper onPress={props.onPress}>
+    <TouchableWrapper onPress={onPress} disabled={disabled}>
       <Container>
         <AssetInformationContainer>
           <AssetIconContainer>
-            {/* <Icon
-              name={iconName.bug}
-              size={shapes.iconSize}
-              color={colors.DARK_GRAY}
-            ></Icon> */}
-            <Logo name={props.logoName} />
+            <Logo name={asset} />
           </AssetIconContainer>
-          <AssetName fontSize={textSize.m}>{props.name}</AssetName>
+          <AssetName fontSize={textSize.m}>{assets[asset].name}</AssetName>
         </AssetInformationContainer>
         <AssetAmountContainer>
           <AssetAmountValue fontWeight="semiBold" fontSize={textSize.s}>
-            {props.prefix} {props.amount}
+            {asset.toString()} {balance.toString()}
           </AssetAmountValue>
           <AssetAmountValueDollar fontWeight="light" fontSize={textSize.xs}>
-            USD ${props.amountUsd}
+            USD ${balanceUsdDoller}
           </AssetAmountValueDollar>
         </AssetAmountContainer>
       </Container>

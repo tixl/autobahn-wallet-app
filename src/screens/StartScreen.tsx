@@ -1,4 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
+import { AssetSymbol } from '@tixl/tixl-types';
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components/native';
@@ -18,7 +19,7 @@ const StartScreen: React.FC<Props> = (props) => {
       <Container>
         <TopContainer>
           <LogoContainer>
-            <Logo name="tixl" size={textSize.xxxxl}></Logo>
+            <Logo name={AssetSymbol.TXL} size={textSize.xxxxl}></Logo>
           </LogoContainer>
           <TitleContainer>
             <TitleText>Tixl's</TitleText>

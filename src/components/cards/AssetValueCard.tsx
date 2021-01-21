@@ -1,19 +1,17 @@
 import React, { useRef, useState, useEffect } from 'react';
 import styled from 'styled-components/native';
 import { textSize, colors, spacing, fonts, shapes } from '../../constants';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import Icon, { iconName } from '../Icon';
 import { Text } from '../text/Text';
-import { Image } from 'react-native-svg';
 import { Logo, LogoName } from '../Logo';
+import { AssetSymbol } from '@tixl/tixl-types';
 
 type Props = {
-  name: string;
+  name: AssetSymbol;
   value: string;
-  logoName: LogoName;
+  isDollar?: boolean;
 };
 
-export const AssetValueCard: React.FC<Props> = (props) => {
+export const AssetValueCard: React.FC<Props> = ({ name, value, isDollar }) => {
   return (
     <Container>
       <TextContainer>
@@ -22,13 +20,13 @@ export const AssetValueCard: React.FC<Props> = (props) => {
           fontSize={textSize.xs}
           fontColor={colors.LIGHT_BLACK}
         >
-          Amount in {props.name}
+          Amount in {isDollar ? 'USD' : name.toString()}
         </Text>
-        <Text fontSize={textSize.l}>{props.value}</Text>
+        <Text fontSize={textSize.l}>{value}</Text>
       </TextContainer>
       <LogoContainer>
         {/* <Icon name={iconName.bug} color={colors.DARK_GRAY}></Icon> */}
-        <Logo name={props.logoName} size={textSize.xl} />
+        <Logo name={isDollar ? 'USD' : name} size={textSize.xl} />
       </LogoContainer>
     </Container>
   );
