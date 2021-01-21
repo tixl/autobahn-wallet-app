@@ -18,6 +18,7 @@ import { IntroStackScreen, RootStackScreen } from './stacks';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { getAccountChain } from '@tixl/tixl-sdk-js/redux/chains/selectors';
+import { createReceiveTask } from '@tixl/tixl-sdk-js/redux/tasks/actions';
 import { getKeys } from '@tixl/tixl-sdk-js/redux/keys/selectors';
 import { useAccountChain } from '../hooks/useAccountChain';
 import { generateKeys } from '@tixl/tixl-sdk-js/redux/keys/actions';
@@ -26,20 +27,19 @@ import {
   updateBlockStatesNetwork,
 } from '@tixl/tixl-sdk-js/redux/chains/actions';
 import { getUnspent } from '@tixl/tixl-sdk-js/requests/getUnspent';
+import { useTaskRunner } from '../hooks/useTaskRunner';
 
 const ProdChecker = NativeModules.ProdChecker;
 
 const AppNavigator = () => {
-  // const isIntroFinished = false;
-  // const isIntroFinished = useSelector(
-  //   (state: RootState) => state.intro.appIntroFinished
-  // );
-
   const dispatch = useDispatch();
   const keySet = useSelector(getKeys);
   const accountChain = useAccountChain();
   const state = useSelector((state: RootState) => state);
   const receiveTasks = useSelector((state: RootState) => state.tasks.receive);
+
+  // Start task runner to scan for incoming tasks
+  useTaskRunner();
 
   // initially create the wallet keyset (this will later be handled inside the intro setup)
   React.useEffect(() => {
@@ -82,23 +82,10 @@ const AppNavigator = () => {
 
       // create receive tasks
       res.blocks.forEach((send) => {
-        //dispatch(createReceiveTask(send.signature, undefined, send.symbol));
+        dispatch(createReceiveTask(send.signature, undefined, send.symbol));
       });
     })();
   }, [keySet]);
-
-  // manually handle a receive task
-  React.useEffect(() => {
-    (async () => {
-      receiveTasks.forEach((receiveTask) => {
-        // handleReceiveTask(
-        //   dispatch,
-        //   state as any,
-        //   receiveTask as ReceiveTaskData
-        // );
-      });
-    })();
-  }, [receiveTasks]);
 
   // Defindes is navigation tracking has been accepted (needs to be toogable in settings and will be asked on new device --> part of local storage)
   const trackingAccepted = false;
