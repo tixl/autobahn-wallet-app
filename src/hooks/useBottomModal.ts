@@ -1,23 +1,22 @@
-import { State } from 'react-native-gesture-handler';
 import { useDispatch, useSelector } from 'react-redux';
-import { ModalType, uiActions } from '../redux/reducer/ui';
+import { modalActions, ModalProps } from '../redux/reducer/modal';
 import { RootState } from '../redux/store';
 
 // Get modal visibility state and control modal toggeling
 export const useBottomModal = () => {
   const dispatch = useDispatch();
 
-  const modalEnabled = useSelector((state: RootState) => state.ui.showModal);
+  const { modalVisible, modalType, asset, receiver } = useSelector(
+    (state: RootState) => state.modal
+  );
 
-  const modalType = useSelector((state: RootState) => state.ui.modalType);
-
-  const showModal = (type: ModalType) => {
-    dispatch(uiActions.openModal(type));
+  const openModal = (config: ModalProps) => {
+    dispatch(modalActions.openModal(config));
   };
 
-  const hideModal = () => {
-    dispatch(uiActions.closeModal());
+  const closeModal = () => {
+    dispatch(modalActions.closeModal());
   };
 
-  return { modalEnabled, modalType, showModal, hideModal };
+  return { modalVisible, modalType, openModal, closeModal, asset, receiver };
 };

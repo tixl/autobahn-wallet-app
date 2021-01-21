@@ -1,25 +1,20 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { ModalType } from '../../redux/reducer/ui';
+import { ModalType } from '../../redux/reducer/modal';
 import ReactNativeModal from 'react-native-modal';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { ModalContentSend } from './modal-contents';
 import { shapes, windowHeight } from '../../constants';
 import { useBottomModal } from '../../hooks/useBottomModal';
+import { AssetSymbol } from '@tixl/tixl-types';
 
-type Props = {
-  children?: React.ReactNode;
-  isVisible: boolean;
-  type?: ModalType;
-  initialStep?: string;
-  onClose: () => any;
-};
+type Props = {};
 
-export const BottomModal: React.FC<Props> = (props) => {
+export const BottomModal: React.FC<Props> = () => {
   var modalContent: React.ReactNode = null;
 
-  const { modalType } = useBottomModal();
+  const { modalType, modalVisible, closeModal } = useBottomModal();
 
   switch (modalType) {
     case 'send':
@@ -38,7 +33,7 @@ export const BottomModal: React.FC<Props> = (props) => {
 
   return (
     <ReactNativeModal
-      isVisible={props.isVisible}
+      isVisible={modalVisible}
       swipeDirection={['down']}
       style={{ justifyContent: 'flex-end', margin: 0 }}
       backdropOpacity={0.7}
@@ -47,8 +42,8 @@ export const BottomModal: React.FC<Props> = (props) => {
       animationInTiming={300}
       animationOutTiming={300}
       hideModalContentWhileAnimating={false}
-      onBackdropPress={props.onClose}
-      onSwipeComplete={props.onClose}
+      onBackdropPress={closeModal}
+      onSwipeComplete={closeModal}
     >
       <ContentContainer>{modalContent}</ContentContainer>
     </ReactNativeModal>

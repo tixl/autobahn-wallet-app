@@ -11,6 +11,8 @@ import { ExampleAsset, ExampleState } from '../redux/reducer/example';
 import { ScreenWrapper } from './wrapper/ScreenWrapper';
 import { useBottomModal } from '../hooks/useBottomModal';
 import { TestShowKeys } from '../components/TestShowKeys';
+import { ModalProps } from '../redux/reducer/modal';
+import { AssetSymbol } from '@tixl/tixl-types';
 
 type Props = {
   children?: string;
@@ -22,7 +24,7 @@ setEnvironment({
 
 export const WalletScreen: React.FC<Props> = (props) => {
   const navigation = useNavigation();
-  const { showModal } = useBottomModal();
+  const { openModal } = useBottomModal();
 
   // Get example data from redux store
   const { assets }: ExampleState = useSelector(
@@ -61,14 +63,18 @@ export const WalletScreen: React.FC<Props> = (props) => {
               title="Send"
               icon={iconName.arrowUp}
               color={colors.LIGHT_BLUE}
-              onPress={() => showModal('send')}
+              onPress={() =>
+                openModal({ modalType: 'send', asset: AssetSymbol.BTC })
+              }
             />
             <RoundButton
               width={50}
               title="Receive"
               icon={iconName.arrowDown}
               color={colors.LIGHT_BLUE}
-              onPress={() => showModal('receive')}
+              onPress={() =>
+                openModal({ modalType: 'receive', asset: AssetSymbol.BTC })
+              }
             />
           </ButtonContainer>
         )}

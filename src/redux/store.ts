@@ -11,12 +11,12 @@ import {
   scan,
 } from '@tixl/tixl-sdk-js/redux/reducer';
 
-import { introReducer, exampleReducer, uiReducer } from './reducer';
+import { introReducer, exampleReducer, modalReducer } from './reducer';
 
 const rootReducer = combineReducers({
   intro: introReducer,
   example: exampleReducer,
-  ui: uiReducer,
+  modal: modalReducer,
   chains,
   keys,
   errors,

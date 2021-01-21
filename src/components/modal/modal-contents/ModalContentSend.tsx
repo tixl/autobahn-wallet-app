@@ -1,3 +1,4 @@
+import { AssetSymbol } from '@tixl/tixl-types';
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import { colors, spacing, textSize } from '../../../constants';

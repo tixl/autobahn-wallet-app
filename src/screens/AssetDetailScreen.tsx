@@ -9,6 +9,7 @@ import { ScreenWrapper } from './wrapper/ScreenWrapper';
 import { useDispatch } from 'react-redux';
 import { ModalType, uiActions } from '../redux/reducer/ui';
 import { useBottomModal } from '../hooks/useBottomModal';
+import { AssetSymbol } from '@tixl/tixl-types';
 
 type AssetDetailScreenRouteProp = RouteProp<RootStackParamList, 'AssetDetail'>;
 
@@ -17,7 +18,7 @@ type Props = {
 };
 
 const AssetDetailScreen: React.FC<Props> = (props) => {
-  const { showModal } = useBottomModal();
+  const { openModal } = useBottomModal();
 
   // Get route params
   const asset = props.route.params.asset;
@@ -66,21 +67,27 @@ const AssetDetailScreen: React.FC<Props> = (props) => {
               title="Send"
               icon={iconName.arrowUp}
               color={colors.LIGHT_BLUE}
-              onPress={() => showModal('send')}
+              onPress={() =>
+                openModal({ modalType: 'send', asset: AssetSymbol.BTC })
+              }
             />
             <RoundButton
               width={buttonWidth}
               title="Receive"
               icon={iconName.arrowDown}
               color={colors.LIGHT_BLUE}
-              onPress={() => showModal('receive')}
+              onPress={() =>
+                openModal({ modalType: 'receive', asset: AssetSymbol.BTC })
+              }
             />
             <RoundButton
               width={buttonWidth}
               title="Deposit"
               icon={iconName.bug}
               color={colors.LIGHT_BLUE}
-              onPress={() => showModal('deposit')}
+              onPress={() =>
+                openModal({ modalType: 'deposit', asset: AssetSymbol.BTC })
+              }
             />
           </ButtonContainer>
         </Section>

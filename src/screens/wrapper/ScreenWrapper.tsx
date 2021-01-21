@@ -1,11 +1,8 @@
-import React, { Children, useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
 import { BottomModal, HeaderBar, HeaderBarProps } from '../../components';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { spacing } from '../../constants';
-import { useDispatch, useSelector } from 'react-redux';
-import { uiActions, UiState } from '../../redux/reducer/ui';
-import { RootState } from '../../redux/store';
 import { useBottomModal } from '../../hooks/useBottomModal';
 import {
   useFocusEffect,
@@ -31,7 +28,6 @@ export const ScreenWrapper: React.FC<Props> = ({
   ...props
 }) => {
   const insets = useSafeAreaInsets();
-  const { modalEnabled, hideModal } = useBottomModal();
   const { updateLegal } = useUpdateLegal();
   const route = useRoute();
   const navigation = useNavigation();
@@ -55,11 +51,7 @@ export const ScreenWrapper: React.FC<Props> = ({
           <HeaderBar {...props.headerBarConfig} />
         )}
         <ContentContainer>{props.children}</ContentContainer>
-        <BottomModal
-          isVisible={modalEnabled}
-          type="send"
-          onClose={hideModal}
-        ></BottomModal>
+        <BottomModal />
       </Container>
     </KeyBoardAvoidingContainer>
   );
