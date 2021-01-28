@@ -16,7 +16,7 @@ export const Logo: React.FC<Props> = ({
 }) => {
   return (
     <Image
-      source={assets[name].icon}
+      source={assets[name].icon as ImageSourcePropType}
       style={{ width: size, height: size, backgroundColor: backgroundColor }}
     ></Image>
   );

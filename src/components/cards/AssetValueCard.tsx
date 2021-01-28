@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import styled from 'styled-components/native';
 import { textSize, colors, spacing, fonts, shapes } from '../../constants';
 import { Text } from '../text/Text';
-import { Logo, LogoName } from '../Logo';
+import { Logo } from '../Logo';
 import { AssetSymbol } from '@tixl/tixl-types';
 
 type Props = {
