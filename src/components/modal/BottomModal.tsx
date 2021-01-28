@@ -1,9 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { ModalType } from '../../redux/reducer/modal';
 import ReactNativeModal from 'react-native-modal';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
 import { ModalContentSend } from './modal-contents';
 import { shapes, windowHeight } from '../../constants';
 import { useBottomModal } from '../../hooks/useBottomModal';
@@ -14,11 +11,17 @@ type Props = {};
 export const BottomModal: React.FC<Props> = () => {
   var modalContent: React.ReactNode = null;
 
-  const { modalType, modalVisible, closeModal } = useBottomModal();
+  const {
+    modalType,
+    modalVisible,
+    asset,
+    receiver,
+    closeModal,
+  } = useBottomModal();
 
   switch (modalType) {
     case 'send':
-      modalContent = <ModalContentSend />;
+      modalContent = <ModalContentSend asset={asset as AssetSymbol} />;
       break;
     case 'receive':
       modalContent = <PlaceholderContent></PlaceholderContent>;

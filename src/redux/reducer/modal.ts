@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AssetSymbol } from '@tixl/tixl-types';
-import { Modal } from 'react-native';
 
 /**
  * createSlice is a function that accepts an initial state,

@@ -1,15 +1,79 @@
+import { createSendTask } from '@tixl/tixl-sdk-js/redux/tasks/actions';
 import { AssetSymbol } from '@tixl/tixl-types';
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components/native';
+import { Button } from '../../buttons/Button';
 import { colors, spacing, textSize } from '../../../constants';
+import assets from '../../../helpers/assets';
+import { useBalance } from '../../../hooks/useBalance';
 import { TextInput } from '../../inputs/TextInput';
 import { Text } from '../../text/Text';
 
-type Props = {};
+import { sendBlockWaitingForNetwork } from '@tixl/tixl-sdk-js/redux/tasks/selectors';
 
-export const ModalContentSend: React.FC<Props> = (props) => {
-  const [address, setAddress] = useState('');
+type Props = {
+  asset: AssetSymbol;
+  receiver?: string;
+};
+
+export const ModalContentSend: React.FC<Props> = ({ asset, receiver = '' }) => {
+  const dispatch = useDispatch();
+
+  const symbol = assets[asset].symbol;
+  const balance = useBalance(asset);
+  const [address, setAddress] = useState(receiver);
   const [amount, setAmount] = useState('0.0');
+  const [amountValid, setAmountValid] = useState<boolean>(true);
+  const [addressValid, setAddressValid] = useState<boolean>(false);
+  const [startedTransaction, setStartedTransaction] = useState<boolean>(false);
+  const [success, setSuccess] = useState<boolean>(false);
+
+  const sendTaskWaiting = useSelector(sendBlockWaitingForNetwork);
+
+  const onAddressUpdated = (address: string, asset: AssetSymbol) => {
+    validateAddressAutobahn(address);
+    setAddress(address);
+  };
+
+  const onAmountUpdated = (amount: string, asset: AssetSymbol) => {
+    if (false) {
+      // showErrorMEssage
+    }
+    setAmount(amount);
+  };
+
+  const handleSend = useCallback(async () => {
+    setStartedTransaction(true);
+    dispatch(createSendTask(amount, address, asset));
+  }, [address, amount, dispatch, asset]);
+
+  useEffect(() => {
+    if (sendTaskWaiting) {
+      console.log('sendTaskWaiting: ', sendTaskWaiting);
+      setTimeout(() => setSuccess(true), 250);
+    }
+  }, [dispatch, sendTaskWaiting]);
+
+  const validateAddressAutobahn = useCallback(
+    (address: string, isSend: boolean = true): boolean => {
+      const recipientAddressHasValidLength = address.length > 10;
+      const showWalletAddressError =
+        address.length > 0 && !recipientAddressHasValidLength;
+
+      if (
+        showWalletAddressError ||
+        (isSend && !recipientAddressHasValidLength)
+      ) {
+        setAddressValid(false);
+        return false;
+      } else {
+        setAddressValid(true);
+        return true;
+      }
+    },
+    []
+  );
 
   return (
     <Container>
@@ -21,7 +85,7 @@ export const ModalContentSend: React.FC<Props> = (props) => {
           fontWeight="regular"
           textAlign="left"
         >
-          Send BTC
+          Send {symbol}
         </Title>
         <SubTitle
           fontColor={colors.WHITE}
@@ -29,7 +93,7 @@ export const ModalContentSend: React.FC<Props> = (props) => {
           textAlign="left"
           fontWeight="regular"
         >
-          Send your BTC tokens to a recipient within or outside of Tixl’s
+          Send your {symbol} tokens to a recipient within or outside of Tixl’s
           Autobahn Network.
         </SubTitle>
       </Header>
@@ -41,11 +105,14 @@ export const ModalContentSend: React.FC<Props> = (props) => {
             fontSize={textSize.s}
             fontColor={colors.LIGHT_BLACK}
           >
-            BTC or Autobahn Network Address
+            {symbol == 'BTC' && symbol + ' or '}Autobahn Network Address{' '}
+            {!addressValid && '(Adress not valid)'}
           </InputHeader>
           <TextInput
             value={address}
-            onChangeText={(newValue: string) => setAddress(newValue)}
+            onChangeText={(newValue: string) =>
+              onAddressUpdated(newValue, asset)
+            }
           ></TextInput>
         </InputSection>
         <InputSection>
@@ -62,14 +129,21 @@ export const ModalContentSend: React.FC<Props> = (props) => {
             fontSize={textSize.xs}
             fontWeight="semiBold"
           >
-            Balance: 0.00 BTC
+            Balance: {balance.toString()} {symbol}
           </InputHeader>
           <TextInput
             value={amount}
             placeholder="0.00"
-            onChangeText={(newValue: string) => setAmount(newValue)}
+            onChangeText={(newValue: string) =>
+              onAmountUpdated(newValue, asset)
+            }
           ></TextInput>
         </InputSection>
+        <Button
+          label="Send"
+          onPress={handleSend}
+          disabled={!amountValid || !addressValid}
+        ></Button>
       </Content>
     </Container>
   );
