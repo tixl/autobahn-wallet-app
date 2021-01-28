@@ -11,15 +11,18 @@ import { ScreenWrapper } from './wrapper/ScreenWrapper';
 import { useBottomModal } from '../hooks/useBottomModal';
 import * as Contacts from 'expo-contacts';
 import ContactsStackScreen from '../navigation/stacks/root/tabs/ContactsStack';
+import { RootState } from '../redux/store';
 
 type Props = {
   children?: string;
 };
 
 export const ContactsScreen: React.FC<Props> = (props) => {
+  const state = useSelector((state: RootState) => state);
+
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const { showModal } = useBottomModal();
+  const { openModal } = useBottomModal();
 
   // Use contacts from redux state
   const [contacts, setContacts] = useState<Contacts.Contact[]>([]);
@@ -42,11 +45,12 @@ export const ContactsScreen: React.FC<Props> = (props) => {
   return (
     <ScreenWrapper headerBarConfig={{ type: 'value' }}>
       <ContactsContainer>
-        {contacts.map((contact, index) => (
+        {/* {contacts.map((contact, index) => (
           <Contact key={index}>
             {contact.firstName} {contact.lastName}
           </Contact>
-        ))}
+        ))} */}
+        <Contact>{JSON.stringify(state)}</Contact>
       </ContactsContainer>
     </ScreenWrapper>
   );

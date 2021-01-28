@@ -2,40 +2,48 @@ import React from 'react';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import styled from 'styled-components/native';
 import { useNavigation } from '@react-navigation/native';
-import { setEnvironment } from '@tixl/tixl-sdk-js/helpers/env';
-import { AssetCard, iconName, RoundButton } from '../components';
+import { AssetCard, Button, iconName, RoundButton } from '../components';
 import { colors, spacing } from '../constants';
 import { ScreenWrapper } from './wrapper/ScreenWrapper';
 import { useBottomModal } from '../hooks/useBottomModal';
-import { TestShowKeys } from '../components/TestShowKeys';
 import { AssetSymbol } from '@tixl/tixl-types';
-import { useBalance } from '../hooks/useBalance';
+import { useAccountChain } from '../hooks/useAccountChain';
+import { useDispatch } from 'react-redux';
+import { useScanHistory } from '../hooks/useScanHistory';
+import {
+  reloadIndexedChains,
+  updateBlockStatesNetwork,
+} from '@tixl/tixl-sdk-js/redux/chains/actions';
 
 type Props = {
   children?: string;
 };
 
-setEnvironment({
-  appGateway: 'https://gateway.int.tixl.dev',
-});
-
 export const WalletScreen: React.FC<Props> = (props) => {
   const navigation = useNavigation();
   const { openModal } = useBottomModal();
 
-  const assets: AssetSymbol[] = [AssetSymbol.TXL, AssetSymbol.BTC];
-  const balance = useBalance;
+  const dispatch = useDispatch();
+  const scanHistory = useScanHistory();
+  const accountChain = useAccountChain();
 
-  // Get assets from redux store
-  // const assets = useSelector((state: RootState) => state.example.assets);
+  const assets: AssetSymbol[] = [AssetSymbol.TXL, AssetSymbol.BTC];
 
   const onButtonPress = (asset: AssetSymbol) => {
     navigation.navigate('AssetDetail', { asset: asset });
   };
 
+  const onReloadPressed = async () => {
+    if (accountChain) {
+      console.log('Reloading chains');
+      dispatch(reloadIndexedChains());
+      dispatch(updateBlockStatesNetwork());
+    }
+    scanHistory();
+  };
+
   return (
     <ScreenWrapper headerBarConfig={{ type: 'value' }}>
-      {/* <TestShowKeys /> */}
       <SwipeListView
         style={{
           overflow: 'visible',
@@ -56,9 +64,7 @@ export const WalletScreen: React.FC<Props> = (props) => {
               title="Send"
               icon={iconName.arrowUp}
               color={colors.LIGHT_BLUE}
-              onPress={() =>
-                openModal({ modalType: 'send', asset: AssetSymbol.BTC })
-              }
+              onPress={() => openModal({ modalType: 'send', asset: data.item })}
             />
             <RoundButton
               width={50}
@@ -66,7 +72,7 @@ export const WalletScreen: React.FC<Props> = (props) => {
               icon={iconName.arrowDown}
               color={colors.LIGHT_BLUE}
               onPress={() =>
-                openModal({ modalType: 'receive', asset: AssetSymbol.BTC })
+                openModal({ modalType: 'receive', asset: data.item })
               }
             />
           </ButtonContainer>
@@ -76,6 +82,7 @@ export const WalletScreen: React.FC<Props> = (props) => {
         leftOpenValue={50 + 2 * spacing.s}
         rightOpenValue={-(50 + 2 * spacing.s)}
       />
+      <Button label="Reload chains" onPress={onReloadPressed}></Button>
       {/* {assets.map((asset, index) => (
           <AssetCard
             key={index}
