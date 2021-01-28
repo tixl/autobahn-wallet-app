@@ -1,11 +1,14 @@
 import { useNavigation } from '@react-navigation/native';
+import { createAccountChain } from '@tixl/tixl-sdk-js/redux/chains/actions';
+import { generateKeys } from '@tixl/tixl-sdk-js/redux/keys/actions';
+import { getKeys } from '@tixl/tixl-sdk-js/redux/keys/selectors';
 import { AssetSymbol } from '@tixl/tixl-types';
 import * as React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components/native';
 import { Button, Logo } from '../components';
 import { colors, fonts, spacing, textSize } from '../constants';
-import { introActions } from '../redux/reducer';
+import { useAccountChain } from '../hooks/useAccountChain';
 
 type Props = {
   children?: string;
@@ -13,6 +16,24 @@ type Props = {
 
 const StartScreen: React.FC<Props> = (props) => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+
+  const accountChain = useAccountChain();
+  const keySet = useSelector(getKeys);
+
+  const onCreateNewWallet = async () => {
+    if (keySet) return;
+    // dont call crypto immediately, usually these are user initiated anyways
+    await new Promise((resolve) => setTimeout(resolve, 100));
+    dispatch(generateKeys());
+  };
+
+  React.useEffect(() => {
+    if (!keySet) return;
+    if (accountChain) return;
+    // create account chain
+    dispatch(createAccountChain());
+  }, [keySet]);
 
   return (
     <SafeAreaContainer>
@@ -37,7 +58,7 @@ const StartScreen: React.FC<Props> = (props) => {
           <Button
             type="primary"
             label="Create new wallet"
-            onPress={() => navigation.navigate('Legal')}
+            onPress={onCreateNewWallet}
           />
           <ButtonSpacer />
           <Button
