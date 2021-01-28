@@ -17,6 +17,7 @@ import { persistor, store } from './src/redux/store';
 import useCachedResources from './src/hooks/useCachedResources';
 import './src/i18n';
 import { StatusBar } from 'expo-status-bar';
+import { setEnvironment } from '@tixl/tixl-sdk-js/helpers/env';
 
 // Tixl SDK imports
 import { getAccountChain } from '@tixl/tixl-sdk-js/redux/chains/selectors';
@@ -27,9 +28,11 @@ import { getAccountChain } from '@tixl/tixl-sdk-js/redux/chains/selectors';
  */
 enableScreens();
 
-// QuickActions.clearShortcutItems();
-
 LogBox.ignoreLogs(['VirtualizedList', 'Native splash screen']);
+
+setEnvironment({
+  appGateway: 'https://gateway.int.tixl.dev',
+});
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
