@@ -30,8 +30,6 @@ function pick(list: TaskData[]) {
 }
 
 export function useTaskRunner() {
-  console.info('task runner');
-
   const keySet = useSelector(getKeys);
   const dispatch = useDispatch();
   const state = useSelector((state: RootState) => state);
@@ -42,38 +40,40 @@ export function useTaskRunner() {
   const inProgress = useSelector((state: RootState) => state.tasks.inProgress);
 
   useInterval(() => {
+    console.log('Task runner running');
+    console.log(inProgress);
     if (!keySet) return;
-
     // super basic logic to decide what to do next
     // if nothing in progress take first send task
     if (inProgress.length === 0 && toSend.length > 0) {
+      console.log(inProgress.length);
+
       const sendTask = pick(toSend);
-      if (sendTask) return handleSendTask(dispatch, sendTask as SendTaskData);
+      if (sendTask) {
+        console.log('Handling send task');
+        return handleSendTask(dispatch, sendTask as SendTaskData);
+      }
     }
 
     // then withdraws
     if (inProgress.length === 0 && toWithdraw.length > 0) {
       const withdrawTask = pick(toWithdraw);
-      if (withdrawTask)
-        return handleWithdrawTask(dispatch, withdrawTask as WithdrawTaskData);
+      if (withdrawTask) console.log('Handling withdrawal task');
+      return handleWithdrawTask(dispatch, withdrawTask as WithdrawTaskData);
     }
 
     // then receive tasks
     if (inProgress.length === 0 && toReceive.length > 0) {
       const receiveTask = pick(toReceive);
-      if (receiveTask)
-        return handleReceiveTask(
-          dispatch,
-          state,
-          receiveTask as ReceiveTaskData
-        );
+      if (receiveTask) console.log('Handling receive task');
+      return handleReceiveTask(dispatch, state, receiveTask as ReceiveTaskData);
     }
 
     // then deposits
     if (inProgress.length === 0 && toDeposit.length > 0) {
       const depositTask = pick(toDeposit);
-      if (depositTask)
-        return handleDepositTask(dispatch, depositTask as DepositTaskData);
+      if (depositTask) console.log('Handling deposit task');
+      return handleDepositTask(dispatch, depositTask as DepositTaskData);
     }
   }, 1000);
 }
