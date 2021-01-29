@@ -1437,10 +1437,10 @@
     redux-thunk "^2.3.0"
     reselect "^4.0.0"
 
-"@tixl/tixl-sdk-js@0.5.1":
-  version "0.5.1"
-  resolved "https://npm.pkg.github.com/download/@tixl/tixl-sdk-js/0.5.1/30c06402ebc725f4b8423e203a2eea6b92684229048f30ca6d4adafafafc9609#52e5b24d3fcfbee948b2e04301c9ae00d9241317"
-  integrity sha512-1GE27ZjZ2osOi7sCcu9PV9encnk3ouVDb0S/9M8V7ohE2UFPQxsqFWdSzNmfWP+htI+ZcMJJiFOUbuCy7ex8eg==
+"@tixl/tixl-sdk-js@0.5.5":
+  version "0.5.5"
+  resolved "https://npm.pkg.github.com/download/@tixl/tixl-sdk-js/0.5.5/c31bcac3c9120d25c5fa8bdfd0dfb55227fcd72564c7ed031d3cd2feb514c7ea#fee98f0acffa65be0b669d27411f4a275779f958"
+  integrity sha512-enlRVGgH6mGx1jVUzjBGmEKVmJWnEdbOJAUWSo18f2tB7zY3hGDCWP4Hi5WoRnOLmViZBV25aJ5OQT79IWh27A==
   dependencies:
     "@bitauth/libauth" "1.17.3"
     "@tixl/tixl-types" "0.7.1"
@@ -1529,6 +1529,11 @@
   version "14.14.20"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.20.tgz#f7974863edd21d1f8a494a73e8e2b3658615c340"
   integrity sha512-Y93R97Ouif9JEOWPIUyU+eyIdyRqQR0I8Ez1dzku4hDx34NWh4HbtIc3WNzwB1Y9ULvNGeu5B8h8bVL5cAk4/A==
+
+"@types/numeral@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@types/numeral/-/numeral-2.0.0.tgz#fc1ec435d46df7f3b4a50d727c319e1146724aa1"
+  integrity sha512-ibCOx5W9lj3yoBJgwbqfAGDMb5VkPDUcU+BbeEhvuFQmVI5+eT3tMxfSZFG3yO3LLNZgFXIx+QCqE5hMS/88Lw==
 
 "@types/parse-json@^4.0.0":
   version "4.0.0"
@@ -4436,7 +4441,7 @@ js-yaml@^3.13.1:
     argparse "^1.0.7"
     esprima "^4.0.0"
 
-jsbi@3.1.4:
+jsbi@3.1.4, jsbi@^3.1.4:
   version "3.1.4"
   resolved "https://registry.yarnpkg.com/jsbi/-/jsbi-3.1.4.tgz#9654dd02207a66a4911b4e4bb74265bc2cbc9dd0"
   integrity sha512-52QRRFSsi9impURE8ZUbzAMCLjPm4THO7H2fcuIvaaeFTbSysvkodbQQXIVsNgq/ypDbq6dJiuGKL0vZ/i9hUg==
@@ -5334,6 +5339,11 @@ nullthrows@^1.1.0, nullthrows@^1.1.1:
   resolved "https://registry.yarnpkg.com/nullthrows/-/nullthrows-1.1.1.tgz#7818258843856ae971eae4208ad7d7eb19a431b1"
   integrity sha512-2vPPEi+Z7WqML2jZYddDIfy5Dqb0r2fze2zTxNNknZaFpVHU3mFB3R+DWeJWGVx0ecvttSGlJTI+WG+8Z4cDWw==
 
+numeral@^2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/numeral/-/numeral-2.0.6.tgz#4ad080936d443c2561aed9f2197efffe25f4e506"
+  integrity sha1-StCAk21EPCVhrtnyGX7//iX05QY=
+
 ob1@0.58.0:
   version "0.58.0"
   resolved "https://registry.yarnpkg.com/ob1/-/ob1-0.58.0.tgz#484a1e9a63a8b79d9ea6f3a83b2a42110faac973"
@@ -5987,6 +5997,13 @@ react-native-swipe-list-view@^3.2.5:
   version "3.2.5"
   resolved "https://registry.yarnpkg.com/react-native-swipe-list-view/-/react-native-swipe-list-view-3.2.5.tgz#e10297ae53c9df79a5ef93bd01f47c47ad5dc23b"
   integrity sha512-WWXUO7rF4UD+Mu49ZKghK6wrcSREAHni6w5km5j4AqCJh8YypVvmfV2byVLTvWPzDosdxQmh/DXQHsKlnLR3uQ==
+
+react-native-switch-selector@^2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/react-native-switch-selector/-/react-native-switch-selector-2.0.6.tgz#e21cf77b8c8596a83e455b54b06f60a1267e26c3"
+  integrity sha512-noBFzh5QMf3Jp/B+kg0uLmbBPID5y9bhTpZ577ZabV3p5eErSTdYSmZHqvn0XCXPraBUDKAC73/0L4ttMv+rOQ==
+  dependencies:
+    prop-types "^15.7.2"
 
 react-native-web@~0.13.12:
   version "0.13.18"

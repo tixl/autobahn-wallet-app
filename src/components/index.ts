@@ -5,7 +5,7 @@ export { default as Icon, iconName } from './Icon';
 export * from './Logo';
 
 // QR Code
-export { default as QRCode } from './QRCode';
+export * from './QR';
 
 // Bar components
 export * from './bars/HeaderBar';
@@ -23,6 +23,7 @@ export * from './cards/AssetValueCard';
 // Switch components
 export * from './inputs/Toggle';
 export * from './inputs/TextInput';
+export * from './inputs/Selector';
 
 // Text components
 export * from './text/Text';

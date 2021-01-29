@@ -21,7 +21,7 @@ type Props = {
 
 export const WalletScreen: React.FC<Props> = (props) => {
   const navigation = useNavigation();
-  const { openModal } = useBottomModal();
+  const { openSendModal, openReceiveModal } = useBottomModal();
 
   const dispatch = useDispatch();
   const scanHistory = useScanHistory();
@@ -64,16 +64,14 @@ export const WalletScreen: React.FC<Props> = (props) => {
               title="Send"
               icon={iconName.arrowUp}
               color={colors.LIGHT_BLUE}
-              onPress={() => openModal({ modalType: 'send', asset: data.item })}
+              onPress={() => openSendModal({ asset: data.item })}
             />
             <RoundButton
               width={50}
               title="Receive"
               icon={iconName.arrowDown}
               color={colors.LIGHT_BLUE}
-              onPress={() =>
-                openModal({ modalType: 'receive', asset: data.item })
-              }
+              onPress={() => openReceiveModal({ asset: data.item })}
             />
           </ButtonContainer>
         )}

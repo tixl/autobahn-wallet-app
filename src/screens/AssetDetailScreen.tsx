@@ -19,7 +19,11 @@ type Props = {
 };
 
 const AssetDetailScreen: React.FC<Props> = (props) => {
-  const { openModal } = useBottomModal();
+  const {
+    openSendModal,
+    openReceiveModal,
+    openDepositModal,
+  } = useBottomModal();
 
   // Get route params
   const asset = props.route.params.asset;
@@ -70,23 +74,21 @@ const AssetDetailScreen: React.FC<Props> = (props) => {
               title="Send"
               icon={iconName.arrowUp}
               color={colors.LIGHT_BLUE}
-              onPress={() => openModal({ modalType: 'send', asset: asset })}
+              onPress={() => openSendModal({ asset: asset })}
             />
             <RoundButton
               width={buttonWidth}
               title="Receive"
               icon={iconName.arrowDown}
               color={colors.LIGHT_BLUE}
-              onPress={() => openModal({ modalType: 'receive', asset: asset })}
+              onPress={() => openReceiveModal({ asset: asset })}
             />
             <RoundButton
               width={buttonWidth}
               title="Deposit"
               icon={iconName.bug}
               color={colors.LIGHT_BLUE}
-              onPress={() =>
-                openModal({ modalType: 'deposit', asset: AssetSymbol.BTC })
-              }
+              onPress={() => openDepositModal({ asset: AssetSymbol.BTC })}
             />
           </ButtonContainer>
         </Section>

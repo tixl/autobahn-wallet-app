@@ -7,40 +7,77 @@ import { AssetSymbol } from '@tixl/tixl-types';
  * and automatically generates action creators, action types, and selectors ready to be used.
  */
 
-export type ModalType = 'send' | 'receive' | 'deposit';
+type ModalType = 'send' | 'sendConfirm' | 'receive' | 'deposit' | undefined;
 
-export type ModalProps = {
-  modalType: ModalType | undefined;
-  asset: AssetSymbol | undefined;
-  receiver?: string;
+type ModalBaseProps = {
+  asset: AssetSymbol;
 };
 
-export interface ModalState extends ModalProps {
+export type SendModalProps = ModalBaseProps & {
+  address?: string;
+  amount?: string;
+  isAutobahn?: boolean;
+};
+
+export type SendConfirmModalProps = ModalBaseProps & {
+  address: string;
+  amount: string;
+  isAutobahn: boolean;
+  note?: string;
+};
+
+export type ReceiveModalProps = ModalBaseProps & {};
+
+export type DepositModalProps = ModalBaseProps & {};
+
+export type ModalState = {
   modalVisible: boolean;
-}
+  type: ModalType;
+  props:
+    | SendModalProps
+    | SendConfirmModalProps
+    | ReceiveModalProps
+    | DepositModalProps
+    | null;
+};
 
 // Define initial state
 const initialState: ModalState = {
   modalVisible: false,
-  modalType: undefined,
-  asset: undefined,
-  receiver: undefined,
+  type: undefined,
+  props: null,
 };
 
 const modal = createSlice({
   name: 'modal',
   initialState,
   reducers: {
-    openModal: (state, action: PayloadAction<ModalProps>) => {
-      state.modalType = action.payload.modalType;
-      state.asset = action.payload.asset;
-      state.receiver = action.payload.receiver;
+    openSendModal: (state, action: PayloadAction<SendModalProps>) => {
+      state.type = 'send';
+      state.props = action.payload;
+      state.modalVisible = true;
+    },
+    openSendConfirmModal: (
+      state,
+      action: PayloadAction<SendConfirmModalProps>
+    ) => {
+      state.type = 'sendConfirm';
+      state.props = action.payload;
+      state.modalVisible = true;
+    },
+    openReceiveModal: (state, action: PayloadAction<ReceiveModalProps>) => {
+      state.type = 'receive';
+      state.props = action.payload;
+      state.modalVisible = true;
+    },
+    openDepositModal: (state, action: PayloadAction<DepositModalProps>) => {
+      state.type = 'deposit';
+      state.props = action.payload;
       state.modalVisible = true;
     },
     closeModal: (state) => {
-      state.modalType = undefined;
-      state.asset = undefined;
-      state.receiver = undefined;
+      state.type = undefined;
+      state.props = null;
       state.modalVisible = false;
     },
   },
