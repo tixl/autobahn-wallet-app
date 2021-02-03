@@ -1,7 +1,6 @@
 import React from 'react';
 import JSBI from 'jsbi';
 import N from 'numeral';
-
 import assets from '../helpers/assets';
 import { AssetSymbol } from '@tixl/tixl-types';
 
@@ -95,12 +94,12 @@ interface Props {
   symbol: AssetSymbol | string;
 }
 
-const CurrencyValue: React.FC<Props> = ({
-  amount,
-  symbol = AssetSymbol.TXL,
-}) => {
+export const asset2Usd = (
+  amount: string | number | JSBI | undefined,
+  symbol: string
+) => {
   if (amount === undefined) {
-    return <React.Fragment>?</React.Fragment>;
+    return '?';
   }
 
   let num: JSBI;
@@ -108,11 +107,10 @@ const CurrencyValue: React.FC<Props> = ({
   try {
     num = JSBI.BigInt(amount);
   } catch (error) {
-    return <React.Fragment>?</React.Fragment>;
+    return '?';
   }
 
-  if (JSBI.EQ(JSBI.BigInt(0), num))
-    return <React.Fragment>0.00</React.Fragment>;
+  if (JSBI.EQ(JSBI.BigInt(0), num)) return '0.00';
 
   const divisor = JSBI.BigInt(assets[symbol].divisor);
   const decimals = assets[symbol].decimals;
@@ -143,7 +141,7 @@ const CurrencyValue: React.FC<Props> = ({
         usdNumber = N(usdNumber).format(`0,0.00[000000]`);
       }
     }
-    return <React.Fragment>{usdNumber}</React.Fragment>;
+    return `${usdNumber}`;
   }
 
   if (JSBI.LT(num, divisor)) {
@@ -156,17 +154,18 @@ const CurrencyValue: React.FC<Props> = ({
     // JS default transformation to string is something like "1e-7"
     // this is the reason why we need a special rendering
     if (numberFormat === 'NaN') {
-      return (
-        <React.Fragment>{`0.${num
-          .toString()
-          .padStart(decimals, '0')}`}</React.Fragment>
-      );
+      return `0.${num.toString().padStart(decimals, '0')}`;
     }
-
-    return <React.Fragment>{numberFormat}</React.Fragment>;
+    return `${numberFormat}`;
   }
+  return '?';
+};
 
-  return <React.Fragment>?</React.Fragment>;
+const CurrencyValue: React.FC<Props> = ({
+  amount,
+  symbol = AssetSymbol.TXL,
+}) => {
+  return <React.Fragment>{asset2Usd(amount, symbol)}</React.Fragment>;
 };
 
 export default CurrencyValue;

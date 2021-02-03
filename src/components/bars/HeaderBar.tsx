@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { Logo } from '../Logo';
 import usePortfolioValue from '../../hooks/usePortfolioValue';
+import CurrencyValue from '../../smartComponents/CurrencyValue';
 
 type HeaderBarType = 'value' | 'back' | 'close';
 
@@ -49,7 +50,7 @@ export const HeaderBar: React.FC<HeaderBarProps> = (props) => {
               fontSize={textSize.m}
               alignToBottom
             >
-              ${portfolioValue}
+              $<CurrencyValue amount={portfolioValue} symbol="USD" />
             </PortfolioValueAmount>
           </PortfolioValueContainer>
         )}

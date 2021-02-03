@@ -8,6 +8,7 @@ import { AssetSymbol } from '@tixl/tixl-types';
 import { useBalance } from '../../hooks/useBalance';
 import assets from '../../helpers/assets';
 import useDollarValue from '../../hooks/useDollarValue';
+import CurrencyValue from '../../smartComponents/CurrencyValue';
 
 type Props = {
   asset: AssetSymbol;
@@ -21,7 +22,7 @@ export const AssetCard: React.FC<Props> = ({
   onPress,
 }) => {
   const balance = useBalance(asset);
-  const balanceUsdDoller = useDollarValue(balance.toString(), asset);
+  const balanceUsdDollar = useDollarValue(balance.toString(), asset);
 
   return (
     <TouchableWrapper onPress={onPress} disabled={disabled}>
@@ -34,10 +35,10 @@ export const AssetCard: React.FC<Props> = ({
         </AssetInformationContainer>
         <AssetAmountContainer>
           <AssetAmountValue fontWeight="semiBold" fontSize={textSize.s}>
-            {asset.toString()} {balance.toString()}
+           {asset} <CurrencyValue amount={balance} symbol={asset} />
           </AssetAmountValue>
           <AssetAmountValueDollar fontWeight="light" fontSize={textSize.xs}>
-            USD ${balanceUsdDoller}
+            USD $<CurrencyValue amount={balanceUsdDollar} symbol="USD" />
           </AssetAmountValueDollar>
         </AssetAmountContainer>
       </Container>

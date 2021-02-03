@@ -4,6 +4,7 @@ import { textSize, colors, spacing, fonts, shapes } from '../../constants';
 import { Text } from '../text/Text';
 import { Logo } from '../Logo';
 import { AssetSymbol } from '@tixl/tixl-types';
+import CurrencyValue from '../../smartComponents/CurrencyValue';
 
 type Props = {
   name: AssetSymbol;
@@ -22,7 +23,9 @@ export const AssetValueCard: React.FC<Props> = ({ name, value, isDollar }) => {
         >
           Amount in {isDollar ? 'USD' : name.toString()}
         </Text>
-        <Text fontSize={textSize.l}>{value}</Text>
+        <Text fontSize={textSize.l}>
+          <CurrencyValue amount={value} symbol={isDollar ? 'USD' : name} />
+        </Text>
       </TextContainer>
       <LogoContainer>
         {/* <Icon name={iconName.bug} color={colors.DARK_GRAY}></Icon> */}

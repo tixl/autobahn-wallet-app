@@ -14,6 +14,10 @@ export const getUsdValue = async (
   try {
     console.info('call wallet backend for usd price', asset);
 
+    console.log(
+      `${process.env.REACT_APP_BACKEND}/backend/asset2dollars?asset=${asset}&balance=${balance}`
+    );
+
     const { data } = await axios.get<{ usd: string }>(
       `${process.env.REACT_APP_BACKEND}/backend/asset2dollars?asset=${asset}&balance=${balance}`
     );
