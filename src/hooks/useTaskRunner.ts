@@ -40,8 +40,8 @@ export function useTaskRunner() {
   const inProgress = useSelector((state: RootState) => state.tasks.inProgress);
 
   useInterval(() => {
-    console.log('Task runner running');
-    console.log(inProgress);
+    // console.log('Task runner running');
+    // console.log(inProgress);
     if (!keySet) return;
     // super basic logic to decide what to do next
     // if nothing in progress take first send task

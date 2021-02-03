@@ -25,6 +25,7 @@ import {
 } from '@tixl/tixl-sdk-js/redux/chains/actions';
 import { useTaskRunner } from '../hooks/useTaskRunner';
 import { useScanHistory } from '../hooks/useScanHistory';
+import { useSocket } from '../hooks/useSocket';
 
 const ProdChecker = NativeModules.ProdChecker;
 
@@ -34,9 +35,11 @@ const AppNavigator = () => {
   const accountChain = useAccountChain();
   const state = useSelector((state: RootState) => state);
   const scanHistory = useScanHistory();
+  const socketPaused = accountChain === null;
 
   // Start task runner to scan for incoming tasks
   useTaskRunner();
+  useSocket(socketPaused);
 
   React.useEffect(() => {
     if (!keySet) return;
