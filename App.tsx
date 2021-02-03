@@ -31,7 +31,7 @@ enableScreens();
 LogBox.ignoreLogs(['VirtualizedList', 'Native splash screen']);
 
 setEnvironment({
-  appGateway: 'https://gateway.int.tixl.dev',
+  appGateway: process.env.REACT_APP_GATEWAY,
 });
 
 export default function App() {
