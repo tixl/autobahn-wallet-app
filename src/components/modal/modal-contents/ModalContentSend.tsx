@@ -161,8 +161,8 @@ export const ModalContentSend: React.FC<SendModalProps> = ({
         </InputHeader>
         <Selector
           options={[
-            { label: 'Autobahn', value: 'autobahn' },
-            { label: 'BTC', value: 'btc' },
+            { label: 'Telegram Contact', value: 'telegram' },
+            { label: 'Address', value: 'address' },
           ]}
           initial={isNetworkAutobahn ? 0 : 1}
           onPress={handleSelectorChange}
@@ -175,7 +175,7 @@ export const ModalContentSend: React.FC<SendModalProps> = ({
             fontSize={textSize.s}
             fontColor={colors.LIGHT_BLACK}
           >
-            {isNetworkAutobahn ? 'Autobahn' : 'BTC'} network address
+            {asset == 'TXL' ? 'Autobahn' : 'BTC or Autobahn'} network address
           </InputHeader>
           <TextInput
             value={address}
