@@ -44,67 +44,28 @@ export const WalletScreen: React.FC<Props> = (props) => {
 
   return (
     <ScreenWrapper headerBarConfig={{ type: 'value' }}>
-      <SwipeListView
-        style={{
-          overflow: 'visible',
-          paddingTop: spacing.viewTopPadding,
-        }}
-        data={assets}
-        renderItem={(data, rowMap) => (
-          <AssetCard
-            key={data.index}
-            asset={data.item}
-            onPress={() => onButtonPress(data.item)}
-          />
-        )}
-        renderHiddenItem={(data, rowMap) => (
-          <ButtonContainer key={data.index}>
-            <RoundButton
-              width={50}
-              title="Send"
-              icon={iconName.arrowUp}
-              color={colors.LIGHT_BLUE}
-              onPress={() => openSendModal({ asset: data.item })}
-            />
-            <RoundButton
-              width={50}
-              title="Receive"
-              icon={iconName.arrowDown}
-              color={colors.LIGHT_BLUE}
-              onPress={() => openReceiveModal({ asset: data.item })}
-            />
-          </ButtonContainer>
-        )}
-        closeOnRowOpen
-        closeOnRowBeginSwipe
-        leftOpenValue={50 + 2 * spacing.s}
-        rightOpenValue={-(50 + 2 * spacing.s)}
-      />
-      <Button label="Reload chains" onPress={onReloadPressed}></Button>
-      {/* {assets.map((asset, index) => (
+      <Container>
+        {assets.map((asset, index) => (
           <AssetCard
             key={index}
-            name={asset.name}
-            prefix={asset.prefix}
+            asset={asset}
             onPress={() => onButtonPress(asset)}
-            amount={asset.value.toString()}
-            amountUsd={asset.valueUsd.toString()}
-            // disabled={asset.prefix == 'TXL'}
           />
-        ))} */}
+        ))}
+        <Button label="Reload chains" onPress={onReloadPressed}></Button>
+      </Container>
     </ScreenWrapper>
   );
 };
 
-const ButtonContainer = styled.View`
-  padding: ${spacing.s}px;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+const Container = styled.ScrollView`
+  flex: 1;
+  overflow: visible;
+  padding-top: ${spacing.viewTopPadding}px;
 `;
 
-const Container = styled.View`
-  /* padding: ${spacing.m}px ${spacing.s}px 0px; */
-`;
+// const Container = styled.View`
+//   /* padding: ${spacing.m}px ${spacing.s}px 0px; */
+// `;
 
 export default WalletScreen;
