@@ -18,9 +18,9 @@ import QRCode, { QRCodeProps } from 'react-native-qrcode-svg';
 export const ModalContentReceive: React.FC<ReceiveModalProps> = ({ asset }) => {
   const accountChain = useSelector(getAccountChain);
 
-  let address = accountChain!.publicSig;
+  let address = accountChain?.publicSig;
 
-  return (
+  return address ? (
     <Container>
       <Title fontSize={textSize.l} fontWeight="semiBold">
         Receive {asset}
@@ -46,7 +46,7 @@ export const ModalContentReceive: React.FC<ReceiveModalProps> = ({ asset }) => {
         ></Button>
       </ButtonContainer>
     </Container>
-  );
+  ) : null;
 };
 
 const Container = styled.View`
